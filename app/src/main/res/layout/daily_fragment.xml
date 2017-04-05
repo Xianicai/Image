@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.example.lenovo.kuaikan.widget.XRecyclerview
+        android:id="@+id/sun_xRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:id="@+id/imge_data_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg_recommend_empty_icon"
+        android:scaleType="center"
+        android:background="@color/blue"
+        android:visibility="gone"/>
+</LinearLayout>

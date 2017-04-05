@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+            android:id="@+id/imge_topic_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            app:placeholderImage="@mipmap/ic_personal_headportrait"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_v_comic_detail_avatar"/>
+
+        <TextView
+            android:id="@+id/tv_nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/imge_topic_avatar"
+            android:gravity="center"
+            android:textColor="@color/orange"
+            tools:text="夏尼采"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_subscribe_button_normal"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"/>
+
+    <GridLayout
+        android:id="@+id/gridlayout_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:columnCount="3">
+
+        <com.example.lenovo.kuaikan.widget.SquareImageView
+            android:id="@+id/imge_topic"
+            android:layout_width="0dp"
+            android:layout_margin="4dp"
+            android:scaleType="centerCrop"
+            android:layout_columnWeight="1"
+            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
+
+        <com.example.lenovo.kuaikan.widget.SquareImageView
+            android:layout_width="0dp"
+            android:layout_margin="4dp"
+            android:scaleType="centerCrop"
+            android:layout_columnWeight="1"
+            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
+
+        <com.example.lenovo.kuaikan.widget.SquareImageView
+            android:layout_width="0dp"
+            android:layout_margin="4dp"
+            android:scaleType="centerCrop"
+            android:layout_columnWeight="1"
+            app:placeholderImage="@mipmap/ic_common_placeholder_l_750" />
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_updateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray"
+            tools:text="03-31 21:46"/>
+
+        <ImageView
+            android:id="@+id/img_likeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/tv_likes_topic"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_common_praise_normal"/>
+
+        <TextView
+            android:id="@+id/tv_likes_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/img_commentNumber"
+            android:gravity="center_vertical"
+            android:text="20万"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:id="@+id/img_commentNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/tv_comments_topic"
+            android:src="@mipmap/ic_common_detail_normal"/>
+
+        <TextView
+            android:id="@+id/tv_comments_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="3554"
+            android:textSize="12sp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+</LinearLayout>
+

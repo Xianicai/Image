@@ -1,0 +1,31 @@
+<android.support.design.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll|enterAlways">
+        <com.example.lenovo.kuaikan.widget.TabAcionBar
+            android:id="@+id/dis_tabActionBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tabLeftText="推荐"
+            app:tabRightText="分类"
+            app:imgeLeft="@mipmap/found_change_boy"
+            app:imgeRight="@mipmap/ic_find_nav_search_normal"
+            app:selectTabLeft="true"/>
+    </android.support.design.widget.CollapsingToolbarLayout>
+</android.support.design.widget.AppBarLayout>
+<android.support.v4.view.ViewPager
+    android:id="@+id/dis_viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--SwitchView-->
+    <declare-styleable name="SwitchView">
+        <attr name="tvLeft" format="string" />
+        <attr name="tvRight" format="string" />
+        <attr name="selectLeft" format="boolean" />
+        <attr name="selectRight" format="boolean" />
+    </declare-styleable>
+    <!--TabAcionBar-->
+    <declare-styleable name="TabAcionBar">
+        <attr name="imgeLeft" format="reference" />
+        <attr name="imgeRight" format="reference" />
+        <attr name="tabLeftText" format="string" />
+        <attr name="tabRightText" format="string" />
+        <attr name="selectTabLeft" format="boolean" />
+        <attr name="selectTabRight" format="boolean" />
+    </declare-styleable>
+    <!--GlideImageView-->
+    <declare-styleable name="GlideImageView">
+        <attr name="placeholderImage" format="reference"></attr>
+    </declare-styleable>
+    <!--Minilayout-->
+    <declare-styleable name="Minilayout">
+        <attr name="miniName" format="string"></attr>
+        <attr name="miniLeftImge" format="reference"></attr>
+        <attr name="miniRightImge" format="reference"></attr>
+        <attr name="showBottomView" format="boolean"></attr>
+
+    </declare-styleable>
+</resources>

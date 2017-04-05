@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/linearLayout"
+              android:layout_width="90dp"
+              android:layout_height="30dp"
+    android:background="@drawable/bg_selector_top">
+
+  <TextView
+      android:id="@+id/tv_top_left"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:text="关注"
+      android:gravity="center"/>
+
+  <TextView
+      android:id="@+id/tv_top_right"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:text="热门"
+      android:gravity="center"
+      android:background="@drawable/bg_selector_selected"/>
+</LinearLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:toos="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:paddingBottom="10dp"
+              android:paddingLeft="15dp"
+              android:paddingRight="15dp">
+
+    <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+        android:id="@+id/image_vertical"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            toos:text="有梦想的人不睡觉，夏尼采"
+            />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            toos:text="有梦想的人不睡觉，夏尼采"/>
+
+        <RelativeLayout
+            android:id="@+id/rec_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_likeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_common_praise_normal"/>
+
+            <TextView
+                android:id="@+id/tv_likes_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/img_likeNumber"
+                android:gravity="center_vertical"
+                android:text="20万"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/img_commentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/tv_likes_content"
+                android:src="@mipmap/ic_common_detail_normal"/>
+
+            <TextView
+                android:id="@+id/tv_comments_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/img_commentNumber"
+                android:gravity="center_vertical"
+                android:text="3554"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hot_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_view_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_category_hot_normal"/>
+
+            <TextView
+                android:id="@+id/tv_view_count"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/img_view_count"
+                toos:text="123亿"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/latest_comic_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/gray"
+            android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

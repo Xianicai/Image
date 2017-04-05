@@ -1,0 +1,111 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.example.lenovo.kuaikan.MineFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/yellow">
+
+            <ImageView
+                android:id="@+id/img_headportrait"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_personal_headportrait"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_headportrait"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="登录"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_my_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_me_item_message"
+            app:miniName="我的消息"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_my_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_me_item_follow"
+            app:miniName="我的关注"
+            app:showBottomView="false"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_my_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:miniLeftImge="@mipmap/ic_me_item_collection"
+            app:miniName="我的收藏"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_kuaikan_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_game_center"
+            app:miniName="快看游戏"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_kuaikan_mall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_me_item_mall"
+            app:miniName="快看商城"
+            app:showBottomView="false"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_my_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:miniLeftImge="@mipmap/ic_me_item_order"
+            app:miniName="我的订单"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_kuaikan_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_topic_history"
+            app:miniName="浏览历史"
+            app:showBottomView="false"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_my_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:miniLeftImge="@mipmap/ic_me_item_download_comic"
+            app:miniRightImge="@mipmap/ic_cache_progressbar_pausing"
+            app:miniName="智能缓存"/>
+
+        <com.example.lenovo.kuaikan.widget.Minilayout
+            android:id="@+id/layout_kuaikan_setup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:miniLeftImge="@mipmap/ic_me_item_setup"
+            app:miniName="设置"/>
+    </LinearLayout>
+</ScrollView>
