@@ -40,8 +40,6 @@ public class HotFragment extends BaseFragment {
                 new FragmentPagerAdapter(getChildFragmentManager()) {
                     @Override
                     public Fragment getItem(int position) {
-
-                        Fragment fragment = new Fragment();
                          String tabId = "";
                         switch (position) {
                             case 0:
