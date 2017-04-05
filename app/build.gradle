@@ -45,4 +45,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.30'
     //Bga-banner
     compile 'cn.bingoogolapple:bga-banner:2.1.7'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

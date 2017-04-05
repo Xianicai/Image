@@ -23,36 +23,41 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
         <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+            android:id="@+id/tv_rank"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"/>
         <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+            android:id="@+id/tv_new"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layout_marginLeft="15dp"/>
         <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+            android:id="@+id/tv_finish"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layout_marginLeft="15dp"/>
         <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+            android:id="@+id/tv_classify"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:layout_marginLeft="15dp"/>
     </LinearLayout>
     <com.example.lenovo.kuaikan.widget.XRecyclerview
+        android:id="@+id/recomm_xrecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:paddingRight="15dp"
         android:paddingLeft="15dp"/>

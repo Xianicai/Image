@@ -70,7 +70,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         private final GridLayout mGridlayoutPost;
         private final GlideImageView mImgeTopicAvatar;
         private final TextView mTvContent;
-//        private final SquareImageView mImgeTopic;
+        private final SquareImageView mImgeTopic;
         private final TextView mTvUpdateTime;
         private final TextView mLikesCount;
         private final TextView mCommentsCount;
@@ -81,7 +81,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             nickName = (TextView) itemView.findViewById(R.id.tv_nickName);
             mImgeTopicAvatar = (GlideImageView) itemView.findViewById(R.id.imge_topic_avatar);
             mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
-//            mImgeTopic = (SquareImageView) itemView.findViewById(R.id.imge_topic);
+            mImgeTopic = (SquareImageView) itemView.findViewById(R.id.imge_topic);
             mTvUpdateTime = (TextView) itemView.findViewById(R.id.tv_updateTime);
             mLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_topic);
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_topic);

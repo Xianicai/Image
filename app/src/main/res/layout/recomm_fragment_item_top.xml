@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:id="@+id/tv_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="17dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/ic_listitem_next"
+            android:gravity="center"
+            android:text="全集   "
+            android:textColor="@color/gray"
+            android:textSize="16dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.lenovo.kuaikan.widget.ImgTvlayout
+            android:id="@+id/top_top_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:imge="@mipmap/ic_common_placeholder_l_750"
+            app:tvInfo="有梦想的人不睡觉"
+            app:tvName="夏尼采"/>
+
+        <com.example.lenovo.kuaikan.widget.ImgTvlayout
+            android:id="@+id/top_top_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:imge="@mipmap/ic_common_placeholder_l_750"
+            app:tvInfo="有梦想的人不睡觉"
+            app:tvName="夏尼采"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <com.example.lenovo.kuaikan.widget.ImgTvlayout
+            android:id="@+id/top_buttom_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:imge="@mipmap/ic_common_placeholder_l_750"
+            app:tvInfo="有梦想的人不睡觉"
+            app:tvName="夏尼采"/>
+
+        <com.example.lenovo.kuaikan.widget.ImgTvlayout
+            android:id="@+id/top_buttom_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            app:imge="@mipmap/ic_common_placeholder_l_750"
+            app:tvInfo="有梦想的人不睡觉"
+            app:tvName="夏尼采"/>
+    </LinearLayout>
+
+</LinearLayout>

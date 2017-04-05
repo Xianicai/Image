@@ -26,6 +26,11 @@
         <attr name="miniLeftImge" format="reference"></attr>
         <attr name="miniRightImge" format="reference"></attr>
         <attr name="showBottomView" format="boolean"></attr>
-
+    </declare-styleable>
+    <!--ImgTvlayout-->
+    <declare-styleable name="ImgTvlayout" >
+        <attr name="imge" format="reference"></attr>
+        <attr name="tvName" format="string"></attr>
+        <attr name="tvInfo" format="string"></attr>
     </declare-styleable>
 </resources>
