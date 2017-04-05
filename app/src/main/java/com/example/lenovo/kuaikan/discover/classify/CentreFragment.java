@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.base.BaseFragment;
+import com.example.lenovo.kuaikan.base.LazyFragmen;
 import com.example.lenovo.kuaikan.utils.ToastUtil;
 import com.example.lenovo.kuaikan.utils.Urls;
 import com.example.lenovo.kuaikan.utils.netutil.NetAsynTask;
@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * Created by Zhanglibin on 2017/4/2.
  */
 
-public class CentreFragment extends BaseFragment {
+public class CentreFragment extends LazyFragmen {
     @BindView(R.id.tv_recommend)
     TextView mTvRecommend;
     @BindView(R.id.tv_hot)
@@ -41,6 +41,7 @@ public class CentreFragment extends BaseFragment {
     private int mPageSize;
     private List<BeanContent.DataBean.TopicsBean> mTopicsBeen;
     private CentreAdapter mCentreAdapter;
+    private boolean mIsPrepared;
 
     public static CentreFragment newInstance(String tag) {
         CentreFragment fragment = new CentreFragment();
@@ -53,6 +54,14 @@ public class CentreFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.centre_fragment;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if (!mIsPrepared || !isVisible) {
+            return;
+        }
+        getServerData(false, false);
     }
 
     @Override
@@ -83,7 +92,8 @@ public class CentreFragment extends BaseFragment {
         mContentXRecyclerview.setAdapter(mCentreAdapter);
         //初始化选中第一个tab
         setTabBackgroud(mTvRecommend);
-        getServerData(false, false);
+        mIsPrepared = true;
+        lazyLoad();
 
     }
 
