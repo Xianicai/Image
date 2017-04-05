@@ -110,7 +110,7 @@ public class DailyFragment extends LazyFragmen {
                         mXRecyclerview.loadMoreFinish();
                     }
                     //初始化一个bean用保存本次请求下来的数据
-                    List<BeanHomeHot.DataBean.ComicsBean> bean = new ArrayList<>();
+                    List<BeanHomeHot.DataBean.ComicsBean> bean ;
                     BeanHomeHot beanHomeHot = req.getT();
                     bean = beanHomeHot.getData()
                             .getComics();
