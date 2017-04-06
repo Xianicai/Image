@@ -49,8 +49,6 @@ public class RecommendFragment extends BaseFragment {
         });
 
         mInfosBeen = new ArrayList<>();
-        mRecommAdapter = new RecommAdapter(getActivity(), mInfosBeen);
-        mRecommXrecyclerview.setAdapter(mRecommAdapter);
         getServerData();
 
     }
@@ -67,7 +65,9 @@ public class RecommendFragment extends BaseFragment {
                     reqRecomm.getNetData(ServerData.DISCOVER_RECOMMEND);
                     BeanRecomm beanRecomm = reqRecomm.getT();
                     mInfosBeen = beanRecomm.getData().getInfos();
-                    mRecommAdapter.notifyDataSetChanged();
+                    mRecommAdapter = new RecommAdapter(getActivity(), mInfosBeen);
+                    mRecommXrecyclerview.setAdapter(mRecommAdapter);
+//                    mRecommAdapter.notifyDataSetChanged();
 
                 }
             }

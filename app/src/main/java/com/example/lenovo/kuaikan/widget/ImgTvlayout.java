@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class ImgTvlayout extends LinearLayout {
     private int mImge;
     private String mName;
     private String mInfo;
+    private int mPlaceholderImage;
 
     public ImgTvlayout(Context context) {
         this(context,null);
@@ -56,7 +58,16 @@ public class ImgTvlayout extends LinearLayout {
     public void setTextNmae(String info){
         mTextInfo.setText(info);
     }
-    public void setImge(String url){
+    public void setDefaultImage(int placeholder){
+        mImageView.setDefaultImage(placeholder);
+    }
+    public void setImage(String url){
         mImageView.setImage(url);
+    }
+    public void setScaleType(int type){
+        if (type == 1) {
+            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        }
     }
 }

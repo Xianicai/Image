@@ -9,7 +9,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="110dp"
                 app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitXY"/>
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"

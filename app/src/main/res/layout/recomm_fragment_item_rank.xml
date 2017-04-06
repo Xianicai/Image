@@ -3,35 +3,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/gridlayout_post"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginTop="5dp"
             android:columnCount="4">
 
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:id="@+id/imge_topic"
-            android:layout_width="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_ss"/>
-
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:layout_width="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_ss"/>
-
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:layout_width="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_ss" />
-    <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-        android:layout_width="0dp"
-        android:layout_margin="4dp"
-        android:scaleType="centerCrop"
-        android:layout_columnWeight="1"
-        app:placeholderImage="@mipmap/ic_common_placeholder_ss" />
     </GridLayout>
