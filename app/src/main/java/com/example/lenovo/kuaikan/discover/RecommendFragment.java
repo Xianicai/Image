@@ -64,6 +64,7 @@ public class RecommendFragment extends BaseFragment {
         mRecommAdapter = new RecommAdapter(getActivity(),mInfosBeen);
         mRecommXrecyclerview.setAdapter(mRecommAdapter);
         getServerData();
+
     }
 
     private void getServerData() {

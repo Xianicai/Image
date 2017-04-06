@@ -49,5 +49,6 @@ public class Urls {
             "iIsIiRvcyI6IkFuZHJvaWQiLCIkb3NfdmVyc2lvbiI6IjYuMC4xIiwiJHNjcmVlbl9oZWlnaHQiOjE5MjAsIiRzY3JlZW5fd2lkdGg" +
             "iOjEwODAsIiR3aWZpIjp0cnVlLCIkY2FycmllciI6IkNITi1VTklDT00iLCIkbmV0d29ya190eXBlIjoiV0lGSSJ9LCJ0aW1lIjoxN" +
             "DkxMTEwNzMxOTczLCJ0eXBlIjoidHJhY2sifQ%3D%3D ";
-    public static String DISCOVER_RECOMMEND = "https://api.kkmh.com/v1/topic_new/discovery_list?time_type=15";
+
+    public static String DISCOVER_RECOMMEND="https://api.kkmh.com/v1/topic_new/discovery_list?action_type=9";
 }
