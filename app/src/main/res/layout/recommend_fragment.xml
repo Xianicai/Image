@@ -2,63 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
-    <cn.bingoogolapple.bgabanner.BGABanner
-        android:id="@+id/banner_guide_content"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:banner_indicatorGravity="bottom"
-        app:banner_pageChangeDuration="1000"
-        app:banner_placeholderDrawable="@mipmap/ic_common_placeholder_l_750"
-        app:banner_pointAutoPlayAble="true"
-        app:banner_pointAutoPlayInterval="5000"
-        app:banner_pointContainerBackground="@android:color/transparent"
-        app:banner_pointDrawable="@color/white"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:id="@+id/tv_rank"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-        android:scaleType="fitXY"/>
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:id="@+id/tv_new"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="15dp"/>
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:id="@+id/tv_finish"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="15dp"/>
-        <com.example.lenovo.kuaikan.widget.glide.GlideImageView
-            android:id="@+id/tv_classify"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="15dp"/>
-    </LinearLayout>
+              android:layout_height="match_parent">
     <com.example.lenovo.kuaikan.widget.XRecyclerview
         android:id="@+id/recomm_xrecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

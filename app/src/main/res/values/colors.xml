@@ -11,5 +11,7 @@
     <color name="blue">#c6d7f7</color>
     <color name="background">#f8faf9</color>
     <color name="orange">#FFA500</color>
+    <!--分割线-->
+    <color name="linear_divider">#e3e3e3</color>
 
 </resources>

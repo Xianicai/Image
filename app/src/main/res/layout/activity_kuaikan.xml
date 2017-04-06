@@ -16,7 +16,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#bebebe" />
+        android:background="@color/linear_divider" />
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottomNavigationBar"
         android:layout_width="wrap_content"

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentTop="true"
-        android:background="@color/gray"/>
+        android:background="@color/linear_divider"/>
 
     <ImageView
         android:id="@+id/img_left"
@@ -47,5 +47,5 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:background="@color/gray"/>
+        android:background="@color/linear_divider"/>
 </RelativeLayout>
