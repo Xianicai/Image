@@ -66,6 +66,27 @@ public class SquareFragment extends BaseFragment {
         //将TabLayout与ViewPager绑定在一起
         mSquarTabLayout.setupWithViewPager(mSquarViewpager);
         mSquarViewpager.setCurrentItem(0);
+        mSquarViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    TopicsFragment.newInstance("2");
+                }else {
+                    TopicsFragment.newInstance("1");
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 

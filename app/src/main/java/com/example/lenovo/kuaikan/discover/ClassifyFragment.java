@@ -108,7 +108,7 @@ public class ClassifyFragment extends BaseFragment {
     private void getServerData() {
         final ReqContent req = new ReqContent();
         String url = Urls.parse(Urls.DISCOVER_CLASSIFY,"0","0","1");
-        NetAsynTask.connectByGet(url + Urls.CLASSIFY, null, req, new NetAsynTask.CallBack() {
+        NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (req.code == 200) {

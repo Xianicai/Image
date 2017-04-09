@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,5 +70,11 @@ public class ImgTvlayout extends LinearLayout {
             mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }
+    }
+    public void setImageWidthHeight(int width ,int height ){
+        ViewGroup.LayoutParams layoutParams = mImageView.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = height;
+        mImageView.setLayoutParams(layoutParams);
     }
 }

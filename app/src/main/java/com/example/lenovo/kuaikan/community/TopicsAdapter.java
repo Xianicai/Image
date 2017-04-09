@@ -1,6 +1,7 @@
 package com.example.lenovo.kuaikan.community;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.SquareImageView;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +27,11 @@ import java.util.List;
 public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsViewHolder> {
     Context mContext;
     List<BeanFeeds.DataBean.FeedsBean> mFeedsBeen;
+    ImageClickListener mImageClickListener;
+
+    public void setImageClickListener(ImageClickListener imageClickListener) {
+        mImageClickListener = imageClickListener;
+    }
 
     public TopicsAdapter(Context context, List<BeanFeeds.DataBean.FeedsBean> mFeedsBeen) {
         mContext = context;
@@ -97,7 +104,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
      *
      * @param mGridlayoutPost 图片集合
      */
-    private void updateViewGroup(GridLayout mGridlayoutPost, String imageBase, List<String> images) {
+    private void updateViewGroup(GridLayout mGridlayoutPost, final String imageBase, final List<String> images) {
         mGridlayoutPost.removeAllViews();//清空子视图 防止原有的子视图影响
         int columnCount=mGridlayoutPost.getColumnCount();//得到列数
         if (images.size()==1) {
@@ -111,6 +118,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             layoutParams.setMargins(5, 5, 5, 5);
             mGridlayoutPost.addView(imageView, layoutParams);
             imageView.setImage(imageBase+images.get(0));
+            setListener(imageBase, (ArrayList<String>) images, imageView, 0);
         }else if (images.size()==2||images.size()==4){
             //重新设置mGridlayoutPost的宽高
             ViewGroup.LayoutParams params;
@@ -134,6 +142,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase+images.get(i));
+                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         }else {
             //遍历集合 动态添加
@@ -150,9 +159,30 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase+images.get(i));
+                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         }
         }
 
+    private void setListener(final String imageBase, final ArrayList<String> images, SquareImageView imageView, final int finalI) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, BrowseImageActivity.class);
+                intent.putExtra("imageBase",imageBase);
+                intent.putStringArrayListExtra("images", images);
+                intent.putExtra("position", finalI);
+                mContext.startActivity(intent);
+//                        if (mImageClickListener != null) {
+//                            mImageClickListener.imageClickListener();
+//                        }
+            }
+        });
+    }
+
+    public interface ImageClickListener{
+    void imageClickListener();
+
+}
 }
 

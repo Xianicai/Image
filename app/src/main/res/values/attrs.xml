@@ -33,4 +33,17 @@
         <attr name="tvName" format="string"></attr>
         <attr name="tvInfo" format="string"></attr>
     </declare-styleable>
+    <!--AcrossImageTv-->
+    <declare-styleable name="AcrossImageTv">
+        <attr name="image" format="reference"></attr>
+        <attr name="addLayout" format="enum">
+            <enum name="addLayoutLabe" value="1"/>
+            <enum name="addLayoutComment" value="2"/>
+        </attr>
+    </declare-styleable>
+    <!--ReadActionBar-->
+    <declare-styleable name="ReadActionBar" >
+        <attr name="readTitle" format="string"></attr>
+        <attr name="rightText" format="string"></attr>
+    </declare-styleable>
 </resources>

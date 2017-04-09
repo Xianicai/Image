@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.widget.AcrossImageTv;
 import com.example.lenovo.kuaikan.widget.ImgTvlayout;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
@@ -25,12 +26,54 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<BeanRecomm.DataBean.InfosBean> mInfosBeen;
-    public final static int TYPE_ONE = 0;//Item的第一种布局
-    public final static int TYPE_TWO = 1;//Item的第二种布局
 
     public RecommAdapter(Context context, List<BeanRecomm.DataBean.InfosBean> mInfosBeen) {
         mContext = context;
         this.mInfosBeen = mInfosBeen;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        int mView = 0;
+        switch (position) {
+            case 0:
+                mView = 0;
+                break;
+            case 1:
+                mView = 1;
+                break;
+            case 2:
+                mView = 2;
+                break;
+            case 3:
+                mView = 1;
+                break;
+            case 4:
+                mView = 2;
+                break;
+            case 5:
+                mView = 2;
+                break;
+            case 6:
+                mView = 3;
+                break;
+            case 7:
+                mView = 2;
+                break;
+            case 8:
+                mView = 2;
+                break;
+            case 9:
+                mView = 2;
+                break;
+            case 10:
+                mView = 3;
+                break;
+            case 11:
+                mView = 2;
+                break;
+        }
+        return mView;
     }
 
     @Override
@@ -43,6 +86,11 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recomm_fragment_item_rank, parent, false);
                 return new RecommAdapter.RecommRankViewHolder(view);
+            case 3:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recom_item_across_imgtv, parent, false);
+                return new RecommAdapter.RecommAcrossImgTvViewHolder(view);
+
+
         }
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recomm_fragment_item_imgtv, parent, false);
         return new RecommAdapter.RecommImgTvViewHolder(view);
@@ -64,33 +112,86 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 initImgTv(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
                 break;
             case 3:
+                initBusiness(((RecommRankViewHolder) holder).mGridlayout, mInfosBeen.get(position).getBanners());
                 break;
             case 4:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTvThree(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
                 break;
             case 5:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTv(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
                 break;
             case 6:
+                ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                break;
+            case 7:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTv(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                break;
+            case 8:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTvThree(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                break;
+            case 9:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTvThree(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                break;
+            case 10:
+                ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                break;
+            case 11:
+                ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
+                initImgTvThree(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
                 break;
         }
 
 
     }
 
-    private void initImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
+    private void initAcrossImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         int columnCount = gridlayout.getColumnCount();//得到列数
         //遍历集合 动态添加
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < topics.size(); i++) {
+            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
+            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount);//列数 列宽的比例 weight=1
+            AcrossImageTv acrossImageTv = new AcrossImageTv(mContext);
+            acrossImageTv.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
+            acrossImageTv.addLayout(1);
+            //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600));
+            layoutParams.rowSpec = rowSpec;
+            layoutParams.columnSpec = columnSpec;
+            layoutParams.setMargins(15, 15, 15, 15);
+            gridlayout.addView(acrossImageTv, layoutParams);
+            acrossImageTv.setImage(topics.get(i).getPic());
+            acrossImageTv.setLayoutLabeName(topics.get(i).getTitle());
+            acrossImageTv.setLayoutLabeLable(topics.get(i).getLabel_text());
+            acrossImageTv.setLayoutLabeFrome(topics.get(i).getRecommended_text());
+        }
+    }
+
+    //三张上图下文
+    private void initImgTvThree(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
+        gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
+        gridlayout.setColumnCount(3);
+        int columnCount = 3;//得到列数
+        //遍历集合 动态添加
+        for (int i = 0; i < beanList.size(); i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             ImgTvlayout imgTvlayout = new ImgTvlayout(mContext);
             imgTvlayout.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             imgTvlayout.setScaleType(1);
+            imgTvlayout.setImageWidthHeight(400,530);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
-            layoutParams.setMargins(15,15, 15, 15);
+            layoutParams.setMargins(0, 0, 0, 0);
             gridlayout.addView(imgTvlayout, layoutParams);
             imgTvlayout.setImage(beanList.get(i).getPic());
             imgTvlayout.setTextNmae(beanList.get(i).getDescription());
@@ -98,12 +199,12 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    //第二个item
-    private void initRank(GridLayout mGridlayout, List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
+    //电商banner
+    private void initBusiness(GridLayout mGridlayout, List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
         mGridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         int columnCount = mGridlayout.getColumnCount();//得到列数
         //遍历集合 动态添加
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             GlideImageView imageView = new GlideImageView(mContext);
@@ -119,28 +220,55 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    private void initImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
+        gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
+        int columnCount = gridlayout.getColumnCount();//得到列数
+        //遍历集合 动态添加
+        for (int i = 0; i < beanList.size(); i++) {
+            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
+            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
+            ImgTvlayout imgTvlayout = new ImgTvlayout(mContext);
+            imgTvlayout.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
+            imgTvlayout.setScaleType(1);
+            //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
+            layoutParams.rowSpec = rowSpec;
+            layoutParams.columnSpec = columnSpec;
+            layoutParams.setMargins(20, 20, 20, 20);
+            gridlayout.addView(imgTvlayout, layoutParams);
+            imgTvlayout.setImage(beanList.get(i).getPic());
+            imgTvlayout.setTextNmae(beanList.get(i).getDescription());
+            imgTvlayout.setTextInfo(beanList.get(i).getTitle());
+        }
+    }
+
+    //排行榜
+    private void initRank(GridLayout mGridlayout, List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
+        mGridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
+        int columnCount = mGridlayout.getColumnCount();//得到列数
+        //遍历集合 动态添加
+        for (int i = 0; i < 4; i++) {
+            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
+            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
+            GlideImageView imageView = new GlideImageView(mContext);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
+            //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0,255));
+            layoutParams.rowSpec = rowSpec;
+            layoutParams.columnSpec = columnSpec;
+            layoutParams.setMargins(20, 20, 20, 20);
+            mGridlayout.addView(imageView, layoutParams);
+            imageView.setImage(bannerUrls.get(i).getPic());
+        }
+    }
+
 
     @Override
     public int getItemCount() {
         return mInfosBeen.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        int mView = 0;
-        switch (position) {
-            case 0:
-                mView = 0;
-                break;
-            case 1:
-                mView = 1;
-                break;
-            case 2:
-                mView = 2;
-                break;
-        }
-        return mView;
-    }
 
     class RecommBannerViewHolder extends RecyclerView.ViewHolder {
         private final BGABanner mBanner;
@@ -163,6 +291,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
     }
+
     class RecommImgTvViewHolder extends RecyclerView.ViewHolder {
         private final GridLayout mGridlayout;
         private final TextView mTvTitle;
@@ -171,7 +300,20 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView);
             //第三个item
             mGridlayout = (GridLayout) itemView.findViewById(R.id.gridlayout);
-            mTvTitle = (TextView)itemView.findViewById(R.id.tv_title);
+            mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+
+        }
+    }
+
+    class RecommAcrossImgTvViewHolder extends RecyclerView.ViewHolder {
+        private final GridLayout mGridlayout;
+        private final TextView mTvTitle;
+
+        public RecommAcrossImgTvViewHolder(View itemView) {
+            super(itemView);
+            //第三个item
+            mGridlayout = (GridLayout) itemView.findViewById(R.id.gridlayout);
+            mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
 
         }
     }

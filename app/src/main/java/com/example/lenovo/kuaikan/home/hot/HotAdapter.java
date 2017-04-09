@@ -24,13 +24,25 @@ import java.util.List;
 public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
 
 
+    private List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen;//要显示的数据
+    private Context context;//创建视图时需要
+
+    public void setHotAdapterEvent(HotAdapterEvent hotAdapterEvent) {
+        mHotAdapterEvent = hotAdapterEvent;
+    }
+
+    HotAdapterEvent mHotAdapterEvent;
+    //定义接口
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
     public HotAdapter(List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen, Context context) {
         this.mComicsBeen = mComicsBeen;
         this.context = context;
     }
-
-    private List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen;//要显示的数据
-    private Context context;//创建视图时需要
 
     @Override
     public HotViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -58,8 +70,17 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         hotViewHolder.mComicsTitle.setText(comicsTitle);
         hotViewHolder.mLikesCount.setText(NumberUtil.buildTenThousand(likesCount));
         hotViewHolder.mCommentsCount.setText(NumberUtil.buildTenThousand(commentsCount));
-        GradientDrawable myGrad = (GradientDrawable)hotViewHolder.mTvLabe.getBackground();
+        GradientDrawable myGrad = (GradientDrawable) hotViewHolder.mTvLabe.getBackground();
         myGrad.setColor(Color.parseColor(mComicsBeen.get(i).getLabel_color()));
+         //监听事件
+        hotViewHolder.imgeCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mHotAdapterEvent != null) {
+                    mHotAdapterEvent.event();
+                }
+            }
+        });
     }
 
 
@@ -97,10 +118,13 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
             mTvLabe = (TextView) itemView.findViewById(R.id.tv_labe);
             mTitle = (TextView) itemView.findViewById(R.id.tv_title);
             imgeCover = (GlideImageView) itemView.findViewById(R.id.imge_cover);
-            mComicsTitle = (TextView)itemView.findViewById(R.id.tv_comicsTitle);
-            mLikesCount = (TextView)itemView.findViewById(R.id.tv_likes_count);
+            mComicsTitle = (TextView) itemView.findViewById(R.id.tv_comicsTitle);
+            mLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
 
         }
+    }
+    public interface HotAdapterEvent{
+        void event();
     }
 }

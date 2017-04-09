@@ -1,5 +1,6 @@
 package com.example.lenovo.kuaikan.home.hot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.LazyFragmen;
+import com.example.lenovo.kuaikan.business.read.mvp.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.hot.bean.BeanHomeHot;
 import com.example.lenovo.kuaikan.home.hot.reqhot.ReqHot;
 import com.example.lenovo.kuaikan.utils.ListUtil;
@@ -91,6 +93,13 @@ public class DailyFragment extends LazyFragmen {
         });
         mComicsBeen = new ArrayList<>();
         mHotAdapter = new HotAdapter(mComicsBeen, getActivity());
+        mHotAdapter.setHotAdapterEvent(new HotAdapter.HotAdapterEvent() {
+            @Override
+            public void event() {
+                Intent intent = new Intent(getActivity(), ReadActivity.class);
+                startActivity(intent);
+            }
+        });
         mXRecyclerview.setAdapter(mHotAdapter);
     }
 

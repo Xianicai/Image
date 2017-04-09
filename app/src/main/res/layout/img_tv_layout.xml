@@ -7,8 +7,8 @@
             <com.example.lenovo.kuaikan.widget.glide.GlideImageView
                 android:id="@+id/img"
                 android:layout_width="wrap_content"
-                android:layout_height="110dp"
-                app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
+                android:layout_height="141dp"
+                app:placeholderImage="@mipmap/ic_common_placeholder_s_115"
                 android:scaleType="fitXY"/>
             <TextView
                 android:id="@+id/tv_name"

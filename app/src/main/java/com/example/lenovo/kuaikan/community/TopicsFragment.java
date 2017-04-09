@@ -61,7 +61,7 @@ public class TopicsFragment extends BaseFragment {
 
             @Override
             public void onLoadMore() {
-                if (mPageSize == 20) {
+                if (mPageSize >17) {
                     ToastUtil.showMessage("正在拼命加载n(*≧▽≦*)n");
                     getServerData(false, true);
                 }
@@ -69,6 +69,16 @@ public class TopicsFragment extends BaseFragment {
         });
         mFeedsBeen = new ArrayList<>();
         mTopicsAdapter = new TopicsAdapter(getActivity(),mFeedsBeen);
+//        mTopicsAdapter.setImageClickListener(new TopicsAdapter.ImageClickListener() {
+//            @Override
+//            public void imageClickListener() {
+//                Intent intent = new Intent(getActivity(), BrowseImageActivity.class);
+//                intent.putExtra("imageBase",imageBase)
+//                intent.putStringArrayListExtra("images",images);
+//                intent.putExtra("position",position);
+//                startActivity(intent);
+//            }
+//        });
         mTopicsXRecyclerview.setAdapter(mTopicsAdapter);
         getServerData(false,false);
     }
@@ -77,7 +87,7 @@ public class TopicsFragment extends BaseFragment {
         mTopicsXRecyclerview.showLoading(true);
         final ReqFeeds req = new ReqFeeds();
         String url = Urls.parse(Urls.COMMUNITY_SQUARE_FEEDS, mPageNumber,mCatalogType);
-        NetAsynTask.connectByGet(url+Urls.FEEDS, null, req, new NetAsynTask.CallBack() {
+        NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (req.code == 200) {
@@ -87,7 +97,7 @@ public class TopicsFragment extends BaseFragment {
                     feeds = beanFeeds.getData().getFeeds();
                     //是否有下一页
                     mPageSize = feeds.size();
-                    if (mPageSize == 20) {
+                    if (mPageSize > 17) {
                         mPageNumber++;
                     }
                     // 将每次网络请求的数据添加到总的List

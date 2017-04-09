@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:gravity="center">
+<com.example.lenovo.kuaikan.widget.glide.GlideImageView
+    android:id="@+id/glideimageview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="center"
+    app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
+</LinearLayout>
