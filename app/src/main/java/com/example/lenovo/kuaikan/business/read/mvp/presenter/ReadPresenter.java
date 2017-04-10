@@ -25,7 +25,7 @@ public class ReadPresenter extends BasePresenter<IReadView> {
         mHandler = new Handler(Looper.getMainLooper());
     }
 
-    public void getSeverData() {
+    public void getSeverData(String comicsId) {
         mModel.getSeverData(new Callback<BeanRead>() {
             @Override
             public void execute(BeanRead beanRead) {
@@ -33,7 +33,7 @@ public class ReadPresenter extends BasePresenter<IReadView> {
                     ((IReadView) getMvpView()).getServerDataSuccess(beanRead);
                 }
             }
-        });
+        },comicsId);
 
 
     }

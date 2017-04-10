@@ -7,12 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.base.basemvp.BaseReq;
 import com.example.lenovo.kuaikan.home.hot.bean.BeanHomeHot;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
+import com.example.lenovo.kuaikan.utils.ToastUtil;
+import com.example.lenovo.kuaikan.utils.Urls;
+import com.example.lenovo.kuaikan.utils.netutil.NetAsynTask;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import java.util.List;
@@ -26,12 +31,14 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
 
     private List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen;//要显示的数据
     private Context context;//创建视图时需要
+    private String comicsId;
 
     public void setHotAdapterEvent(HotAdapterEvent hotAdapterEvent) {
         mHotAdapterEvent = hotAdapterEvent;
     }
 
     HotAdapterEvent mHotAdapterEvent;
+
     //定义接口
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -54,7 +61,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(HotViewHolder hotViewHolder, int i) {
+    public void onBindViewHolder(HotViewHolder hotViewHolder, final int i) {
         //获取要填充的值
         String labelText = mComicsBeen.get(i).getLabel_text();
         String coverImageUrl = mComicsBeen.get(i).getCover_image_url();
@@ -72,13 +79,43 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         hotViewHolder.mCommentsCount.setText(NumberUtil.buildTenThousand(commentsCount));
         GradientDrawable myGrad = (GradientDrawable) hotViewHolder.mTvLabe.getBackground();
         myGrad.setColor(Color.parseColor(mComicsBeen.get(i).getLabel_color()));
-         //监听事件
+        //监听事件
         hotViewHolder.imgeCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mHotAdapterEvent != null) {
+                    comicsId = mComicsBeen.get(i).getId() + "";
                     mHotAdapterEvent.event();
                 }
+            }
+        });
+        hotViewHolder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final BaseReq req = new BaseReq();
+                String url = Urls.parse(Urls.COMICSID_LIKE, mComicsBeen.get(i).getId() + "");
+                NetAsynTask.connectByPost(url, null, req, new NetAsynTask.CallBack() {
+                    @Override
+                    public void onGetSucc() {
+                        if (req.code == 200) {
+                            ToastUtil.showMessage("点赞成功n(*≧▽≦*)n");
+                        }
+                    }
+
+                    @Override
+                    public void onGetFinished() {
+                    }
+
+                    @Override
+                    public void onGetFaild() {
+
+                    }
+
+                    @Override
+                    public void onGetError() {
+
+                    }
+                });
             }
         });
     }
@@ -109,6 +146,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         private final TextView mComicsTitle;
         private final TextView mLikesCount;
         private final TextView mCommentsCount;
+        private final ImageView mImgLikeNumber;
 
 
         public HotViewHolder(View itemView) {
@@ -121,10 +159,17 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
             mComicsTitle = (TextView) itemView.findViewById(R.id.tv_comicsTitle);
             mLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
+            mImgLikeNumber = (ImageView)itemView.findViewById(R.id.img_likeNumber);
+
 
         }
     }
-    public interface HotAdapterEvent{
+
+    public interface HotAdapterEvent {
         void event();
+    }
+
+    public String getComicsId() {
+        return comicsId;
     }
 }

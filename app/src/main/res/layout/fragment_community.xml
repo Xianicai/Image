@@ -15,7 +15,6 @@
                 android:id="@+id/com_tabActionBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:imgeLeft="@mipmap/found_change_boy"
                 app:imgeRight="@mipmap/ic_find_nav_search_normal"
                 app:selectTabRight="true"
                 app:tabLeftText="关注"

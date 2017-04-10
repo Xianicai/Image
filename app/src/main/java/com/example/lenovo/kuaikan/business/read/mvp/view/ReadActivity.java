@@ -25,6 +25,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     private ReadPresenter mReadPresenter;
     private List<String> mImages;
     private ReadAdapter mReadAdapter;
+    private String mComicsId;
 
 
     @Override
@@ -34,6 +35,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        mComicsId = getIntent().getStringExtra("comicsId");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mReadRecyclerview.setLayoutManager(linearLayoutManager);
         mImages = new ArrayList<>();
@@ -41,8 +43,18 @@ public class ReadActivity extends BaseActivity implements IReadView {
         mReadRecyclerview.setAdapter(mReadAdapter);
         mReadPresenter = new ReadPresenter();
         mReadPresenter.attachView(this);
-        mReadPresenter.getSeverData();
+        mReadPresenter.getSeverData(mComicsId);
+        mReadActionBar.setOnReadActionBarListener(new ReadActionBar.OnReadActionBarListener() {
+            @Override
+            public void setLeftClickListener() {
+                onBackPressed();
+            }
 
+            @Override
+            public void setRightClickListener() {
+
+            }
+        });
     }
 
 
@@ -64,6 +76,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     @Override
     public void getServerDataSuccess(BeanRead data) {
         if (data != null) {
+            mReadActionBar.setActionBarTitle(data.getData().getTitle());
             mImages.addAll(data.getData().getImages());
             mReadAdapter.notifyDataSetChanged();
         }
@@ -73,5 +86,10 @@ public class ReadActivity extends BaseActivity implements IReadView {
     @Override
     public void getServerDataFail() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

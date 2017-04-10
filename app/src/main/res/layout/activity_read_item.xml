@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.lenovo.kuaikan.widget.glide.GlideImageView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/glideimageview"
-    android:layout_width="320dp"
-    android:layout_height="250dp"
-    app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
-    android:scaleType="fitXY"/>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+        android:id="@+id/glideimageview"
+        android:layout_width="320dp"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        app:placeholderImage="@mipmap/ic_common_placeholder_l_750"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

@@ -10,5 +10,5 @@ import com.example.lenovo.kuaikan.utils.Callback;
 public interface IReadModel {
 
 //    void getSeverData();
-    void getSeverData( Callback<BeanRead> callback);
+    void getSeverData( Callback<BeanRead> callback ,String comicsId);
 }

@@ -16,10 +16,10 @@ public class ReadModel implements IReadModel {
 
 
     @Override
-    public void getSeverData(final Callback<BeanRead> callback) {
+    public void getSeverData(final Callback<BeanRead> callback ,String comicsId) {
         final ReqRead req = new ReqRead();
 
-        String url = Urls.parse(Urls.HOME_READ);
+        String url = Urls.parse(Urls.HOME_READ,comicsId);
         NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
 
             @Override

@@ -3,15 +3,16 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="50dp"
-              android:paddingLeft="15dp"
-              android:paddingRight="15dp">
+              android:background="@color/white"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp">
 
     <ImageView
         android:id="@+id/image_left"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:src="@mipmap/ic_nav_back_normal"/>
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_weight="10"
         android:gravity="center|center_horizontal"
         android:textColor="@color/black"
+        android:textSize="18sp"
         tools:text="有梦想的人不睡觉"/>
 
     <TextView

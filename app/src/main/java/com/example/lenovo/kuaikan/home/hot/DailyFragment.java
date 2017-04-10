@@ -97,6 +97,7 @@ public class DailyFragment extends LazyFragmen {
             @Override
             public void event() {
                 Intent intent = new Intent(getActivity(), ReadActivity.class);
+                intent.putExtra("comicsId",mHotAdapter.getComicsId());
                 startActivity(intent);
             }
         });
