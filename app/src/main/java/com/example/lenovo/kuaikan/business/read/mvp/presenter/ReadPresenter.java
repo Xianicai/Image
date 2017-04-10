@@ -8,12 +8,13 @@ import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 import com.example.lenovo.kuaikan.business.read.mvp.model.IReadModel;
 import com.example.lenovo.kuaikan.business.read.mvp.model.ReadModel;
 import com.example.lenovo.kuaikan.business.read.mvp.view.IReadView;
+import com.example.lenovo.kuaikan.utils.Callback;
 
 /**
  * Created by Zhanglibin on 2017/4/8.
  */
 
-public class ReadPresenter extends BasePresenter<IReadView>{
+public class ReadPresenter extends BasePresenter<IReadView> {
 
     private IReadModel mModel;
 
@@ -25,38 +26,15 @@ public class ReadPresenter extends BasePresenter<IReadView>{
     }
 
     public void getSeverData() {
-        mModel.getSeverData(new ReadModel.GetDataListener() {
+        mModel.getSeverData(new Callback<BeanRead>() {
             @Override
-            public void success(final BeanRead beanRead) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((IReadView)getMvpView()).getServerDataSuccess(beanRead);
-                    }
-                });
-            }
-
-            @Override
-            public void fail() {
-
+            public void execute(BeanRead beanRead) {
+                if (beanRead != null) {
+                    ((IReadView) getMvpView()).getServerDataSuccess(beanRead);
+                }
             }
         });
 
-//        Observable.just("")
-//                .map(new Function<String, BeanRead>() {
-//                    @Override
-//                    public BeanRead apply(@NonNull String s) throws Exception {
-//                        return mModel.getSeverData();
-//                    }
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<BeanRead>() {
-//                    @Override
-//                    public void accept(@NonNull BeanRead o) throws Exception {
-//                        ((IReadView)getMvpView()).getServerDataSuccess(o);
-//                    }
-//                });
 
     }
 
