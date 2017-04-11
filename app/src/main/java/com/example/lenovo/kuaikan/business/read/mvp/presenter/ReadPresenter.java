@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.lenovo.kuaikan.base.basemvp.BasePresenter;
+import com.example.lenovo.kuaikan.business.read.data.BeanComments;
 import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 import com.example.lenovo.kuaikan.business.read.mvp.model.IReadModel;
 import com.example.lenovo.kuaikan.business.read.mvp.model.ReadModel;
@@ -35,6 +36,14 @@ public class ReadPresenter extends BasePresenter<IReadView> {
             }
         },comicsId);
 
+        mModel.getCommentData(new Callback<BeanComments>() {
+            @Override
+            public void execute(BeanComments beanComments) {
+                if (beanComments != null) {
+                    ((IReadView) getMvpView()).getCommentDataSuccss(beanComments);
+                }
+            }
+        });
 
     }
 

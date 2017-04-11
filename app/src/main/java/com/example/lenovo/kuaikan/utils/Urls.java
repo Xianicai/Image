@@ -30,6 +30,7 @@ public class Urls {
      * 点赞（漫画）
      */
     public static String COMICSID_LIKE = "http://api.kuaikanmanhua.com/v1/comics/%1$s/like";
+    public static String COMICSID_COMMENTS = "http://api.kuaikanmanhua.com/v1/comics/23583/hot_comments";
     public static String parse(String url, Object... args) {
         return String.format(url, args);
     }

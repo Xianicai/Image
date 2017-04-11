@@ -62,13 +62,11 @@ public class RecommendFragment extends BaseFragment {
             @Override
             public void onGetSucc() {
                 if (req.code == 200) {
-
                     ReqRecomm reqRecomm = new ReqRecomm();
                     reqRecomm.getNetData(ServerData.DISCOVER_RECOMMEND);
                     BeanRecomm beanRecomm = reqRecomm.getT();
                     mInfosBeen.addAll(beanRecomm.getData().getInfos());
                     mRecommAdapter.notifyDataSetChanged();
-
                 }
             }
 

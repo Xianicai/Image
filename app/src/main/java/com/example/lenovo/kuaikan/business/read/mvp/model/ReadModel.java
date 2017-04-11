@@ -1,6 +1,8 @@
 package com.example.lenovo.kuaikan.business.read.mvp.model;
 
+import com.example.lenovo.kuaikan.business.read.data.BeanComments;
 import com.example.lenovo.kuaikan.business.read.data.BeanRead;
+import com.example.lenovo.kuaikan.business.read.data.ReqComments;
 import com.example.lenovo.kuaikan.business.read.data.ReqRead;
 import com.example.lenovo.kuaikan.utils.Callback;
 import com.example.lenovo.kuaikan.utils.Urls;
@@ -12,6 +14,7 @@ import com.example.lenovo.kuaikan.utils.netutil.NetAsynTask;
 
 public class ReadModel implements IReadModel {
     private BeanRead mBeanRead;
+    private BeanComments mBeanComments;
 
 
 
@@ -28,6 +31,41 @@ public class ReadModel implements IReadModel {
                     //初始化一个bean用保存本次请求下来的数据
                     mBeanRead = req.getT();
                     callback.execute(mBeanRead);
+//                    打印线程
+//                    Log.e("TAG",Thread.currentThread().getName());
+
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
+    }
+
+    @Override
+    public void getCommentData(final Callback<BeanComments> callback) {
+        final ReqComments req = new ReqComments();
+
+        String url = Urls.parse(Urls.COMICSID_COMMENTS);
+        NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
+
+            @Override
+            public void onGetSucc() {
+                if (req.code == 200) {
+                    //初始化一个bean用保存本次请求下来的数据
+                    mBeanComments = req.getT();
+                    callback.execute(mBeanComments);
 //                    打印线程
 //                    Log.e("TAG",Thread.currentThread().getName());
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import java.util.List;
@@ -17,10 +18,12 @@ import java.util.List;
 
 public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder> {
     List<String> mImages;
+    List<BeanRead.DataBean.ImageInfosBean> imageInfos;
 
-    public ReadAdapter(List<String> mImages, Context context) {
+    public ReadAdapter(List<String> mImages, Context context, List<BeanRead.DataBean.ImageInfosBean> imageInfos) {
         this.mImages = mImages;
         mContext = context;
+        this.imageInfos = imageInfos;
     }
 
     private Context mContext;
@@ -34,7 +37,13 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder
 
     @Override
     public void onBindViewHolder(ReadViewHolder holder, int position) {
-      holder.mImageView.setImage(mImages.get(position));
+        ViewGroup.LayoutParams layoutParams = holder.mImageView.getLayoutParams();
+        if (imageInfos != null) {
+            layoutParams.height = (int) (imageInfos.get(position).getHeight()/1.31);
+            layoutParams.width = (int) (imageInfos.get(position).getWidth()/1.31);
+            holder.mImageView.setLayoutParams(layoutParams);
+        }
+        holder.mImageView.setImage(mImages.get(position));
     }
 
     @Override

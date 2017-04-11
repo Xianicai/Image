@@ -1,6 +1,7 @@
 package com.example.lenovo.kuaikan.business.read.mvp.view;
 
 import com.example.lenovo.kuaikan.base.basemvp.BaseView;
+import com.example.lenovo.kuaikan.business.read.data.BeanComments;
 import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 
 /**
@@ -10,7 +11,7 @@ import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 public interface IReadView extends BaseView{
 
     void getServerDataSuccess(BeanRead data);
-
+    void getCommentDataSuccss(BeanComments beanComments);
     void getServerDataFail();
 
 }

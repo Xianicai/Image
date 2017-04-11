@@ -1,187 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content">
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <com.example.lenovo.kuaikan.widget.ReadActionBar
+                android:id="@+id/readActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <com.example.lenovo.kuaikan.widget.ReadActionBar
-                    android:id="@+id/readActionBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:rightText="全集"/>
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <com.example.lenovo.kuaikan.widget.XRecyclerview
-            android:id="@+id/read_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </android.support.design.widget.CoordinatorLayout>
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/linear_divider"/>
+                app:rightText="全集"
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="15dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_like"
-                android:layout_width="0dp"
+            <com.example.lenovo.kuaikan.widget.XRecyclerview
+                android:id="@+id/read_recyclerview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@mipmap/ic_comic_like_normal"
-                android:gravity="center"
-                android:text="赞 0"/>
-
-            <TextView
-                android:id="@+id/tv_comment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@mipmap/ic_comic_comment_normal"
-                android:gravity="center"
-                android:text="评论"/>
-
-            <TextView
-                android:id="@+id/tv_subscribe"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@mipmap/ic_comic_subscribe_normal"
-                android:gravity="center"
-                android:text="关注"/>
-
-            <TextView
-                android:id="@+id/tv_share"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@mipmap/ic_comic_share_normal"
-                android:gravity="center"
-                android:text="分享"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/linear_divider"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@mipmap/ic_collection_pre_normal"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="上一篇"/>
+                android:nestedScrollingEnabled="false"/>
 
             <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
                 android:background="@color/linear_divider"/>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableRight="@mipmap/ic_collection_next_normal"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="下一篇"/>
-        </LinearLayout>
+                android:background="@color/white"
+                android:padding="15dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_like"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/ic_comic_like_normal"
+                    android:gravity="center"
+                    android:text="赞 0"/>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:src="@mipmap/ic_personal_headportrait"/>
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/ic_comic_comment_normal"
+                    android:gravity="center"
+                    android:text="评论"/>
+
+                <TextView
+                    android:id="@+id/tv_subscribe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/ic_comic_subscribe_normal"
+                    android:gravity="center"
+                    android:text="关注"/>
+
+                <TextView
+                    android:id="@+id/tv_share"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/ic_comic_share_normal"
+                    android:gravity="center"
+                    android:text="分享"/>
+            </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"/>
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/linear_divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_collection_pre_normal"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="上一篇"/>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/linear_divider"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/ic_collection_next_normal"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="下一篇"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ic_personal_headportrait"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/ic_collection_next_normal"
+                    android:gravity="center"
+                    android:text="TA的主页"/>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:drawableRight="@mipmap/ic_collection_next_normal"
-                android:gravity="center"
-                android:text="TA的主页"/>
+                android:background="@color/white"
+                android:drawableLeft="@mipmap/bg_rounded_corner_topic_list_tag"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="   评论"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/linear_divider"/>
+            <com.example.lenovo.kuaikan.widget.XRecyclerview
+                android:id="@+id/comment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:nestedScrollingEnabled="false"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:text="查看更多评论"
+                android:textSize="16sp"/>
+
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:drawableLeft="@mipmap/bg_rounded_corner_topic_list_tag"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:text="   评论"
-            android:textSize="16sp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/linear_divider"/>
-
-        <com.example.lenovo.kuaikan.widget.XRecyclerview
-            android:id="@+id/subscribe_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:paddingTop="15dp"
-            android:text="查看更多评论"
-            android:textSize="16sp"/>
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-    <!--</LinearLayout>-->
-</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
