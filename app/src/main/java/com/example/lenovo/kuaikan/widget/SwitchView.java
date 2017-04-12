@@ -2,6 +2,7 @@ package com.example.lenovo.kuaikan.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -124,7 +125,12 @@ public class SwitchView extends LinearLayout {
         this.selectedRight = selectedRight;
         checkTabSelected(context);
     }
-
+public  void setTabBackgroud(int leftBackgroud,int rightBackgroud){
+    GradientDrawable leftGrad = (GradientDrawable) mTvLeft.getBackground();
+    leftGrad.setColor(leftBackgroud);
+    GradientDrawable rightGrad = (GradientDrawable) mTvRight.getBackground();
+    rightGrad.setColor(rightBackgroud);
+}
     //设置tab选中的样式
     private void checkTabSelected(Context context) {
         if (selectedLeft) {
@@ -140,4 +146,5 @@ public class SwitchView extends LinearLayout {
 
         }
     }
+
 }

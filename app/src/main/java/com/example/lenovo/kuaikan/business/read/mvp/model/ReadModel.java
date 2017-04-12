@@ -54,10 +54,10 @@ public class ReadModel implements IReadModel {
     }
 
     @Override
-    public void getCommentData(final Callback<BeanComments> callback) {
+    public void getCommentData(final Callback<BeanComments> callback,String comicsId) {
         final ReqComments req = new ReqComments();
 
-        String url = Urls.parse(Urls.COMICSID_COMMENTS);
+        String url = Urls.parse(Urls.COMICSID_COMMENTS,comicsId);
         NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
 
             @Override

@@ -29,6 +29,7 @@ public class XRecyclerview extends LinearLayout {
     RecyclerView.Adapter mAdapter;
     LinearLayoutManager mManager;
 
+
     public XRecyclerview(Context context) {
         this(context, null);
     }
@@ -52,6 +53,8 @@ public class XRecyclerview extends LinearLayout {
         }
     }
 
+
+
     //下拉刷新 上拉加载
     private void setRefreshLoadMore() {
         //下拉刷新
@@ -64,17 +67,22 @@ public class XRecyclerview extends LinearLayout {
             }
         });
 
+
         //上拉加载
         mRecyclerView.addOnScrollListener(new EndLessOnScrollListener(mManager) {
             @Override
             public void onLoadMore(int currentPage) {
+
                 if (mOnRefreshLoadMore != null) {
                     mOnRefreshLoadMore.onLoadMore();
                 }
             }
         });
     }
-
+//    获取ReclerView
+    public RecyclerView getReclerView(){
+        return mRecyclerView;
+    }
     public interface OnRefreshLoadMore {
         void onRefresh();
 
@@ -123,4 +131,5 @@ public class XRecyclerview extends LinearLayout {
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
+
 }

@@ -61,8 +61,9 @@ public class GlideImageView extends ImageView {
     }
     public void setDefaultImage(int backgroud){
         mDefaultImageResId = backgroud;
-//        setImage(null);
+
     }
+    //        设置圆角图片
     public void setRounImage(String url) {
         if (mDefaultImageResId != 0) {
             Glide.with(mCon)

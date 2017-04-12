@@ -1,8 +1,13 @@
 package com.example.lenovo.kuaikan.business.read.mvp.view;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
@@ -13,6 +18,7 @@ import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 import com.example.lenovo.kuaikan.business.read.mvp.presenter.ReadPresenter;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
 import com.example.lenovo.kuaikan.widget.XRecyclerview;
+import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,24 @@ public class ReadActivity extends BaseActivity implements IReadView {
     XRecyclerview mReadRecyclerview;
     @BindView(R.id.comment_recyclerview)
     XRecyclerview mCommentRecyclerview;
+    @BindView(R.id.tv_like)
+    TextView mTvLike;
+    @BindView(R.id.tv_comment)
+    TextView mTvComment;
+    @BindView(R.id.tv_subscribe)
+    TextView mTvSubscribe;
+    @BindView(R.id.tv_share)
+    TextView mTvShare;
+    @BindView(R.id.image_author_head)
+    GlideImageView mImageAuthorHead;
+    @BindView(R.id.tv_author_name)
+    TextView mTvAuthorName;
+    @BindView(R.id.image_share)
+    ImageView mImageShare;
+    @BindView(R.id.tv_comment_num)
+    TextView mTvCommentNum;
+    @BindView(R.id.layout_comment)
+    ConstraintLayout mLayoutComment;
     private ReadPresenter mReadPresenter;
     private List<String> mImages;
     private ReadAdapter mReadAdapter;
@@ -35,6 +59,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     private List<BeanRead.DataBean.ImageInfosBean> mImageInfos;
     private List<BeanComments.DataBean.CommentsBean> mComments;
     private CommentAdapter mCommentAdapter;
+    private LinearLayoutManager mCommentlayoutManager;
 
 
     @Override
@@ -63,12 +88,13 @@ public class ReadActivity extends BaseActivity implements IReadView {
 
 
         //评论的Recyclerview
-        mCommentRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+        mCommentlayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
-        });
+        };
+        mCommentRecyclerview.setLayoutManager(mCommentlayoutManager);
         mComments = new ArrayList<>();
         mCommentAdapter = new CommentAdapter(mComments, this);
         mCommentRecyclerview.setAdapter(mCommentAdapter);
@@ -82,6 +108,40 @@ public class ReadActivity extends BaseActivity implements IReadView {
             @Override
             public void setRightClickListener() {
 
+            }
+        });
+        //漫画列表的滑动监听
+        mReadRecyclerview.getReclerView().addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int mScrollThreshold = 4;
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                boolean isSignificantDelta = Math.abs(dy) > mScrollThreshold;
+                if (isSignificantDelta) {
+                    if (dy > 0) {
+                        mLayoutComment.setVisibility(View.VISIBLE);
+                    } else {
+                        mLayoutComment.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+        });
+      //评论列表的滑动监听
+        RecyclerView reclerView = mCommentRecyclerview.getReclerView();
+        reclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+                layoutParams.height = (int) (mCommentAdapter.getItemAllHight() / 1.4);
+                recyclerView.setLayoutParams(layoutParams);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+//                mLayoutComment.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -105,19 +165,21 @@ public class ReadActivity extends BaseActivity implements IReadView {
     @Override
     public void getServerDataSuccess(BeanRead data) {
         if (data != null) {
+            mImageAuthorHead.setRounImage(data.getData().getTopic().getUser().getAvatar_url());
+            mTvAuthorName.setText(data.getData().getTopic().getUser().getNickname());
+            mTvCommentNum.setText(data.getData().getComments_count() + "");
             int mhight = 0;
             mReadActionBar.setActionBarTitle(data.getData().getTitle());
             mImageInfos.addAll(data.getData().getImage_infos());
             mImages.addAll(data.getData().getImages());
-
             for (int i = 0; i < data.getData().getImage_infos().size(); i++) {
                 mhight += data.getData().getImage_infos().get(i).getHeight();
             }
-
             ViewGroup.LayoutParams layoutParams = mReadRecyclerview.getLayoutParams();
             layoutParams.height = (int) ((mhight + mReadActionBar.getLayoutParams().height) / 1.31);
             mReadRecyclerview.setLayoutParams(layoutParams);
             mReadAdapter.notifyDataSetChanged();
+
         }
 
     }

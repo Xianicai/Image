@@ -43,7 +43,7 @@ public class ReadPresenter extends BasePresenter<IReadView> {
                     ((IReadView) getMvpView()).getCommentDataSuccss(beanComments);
                 }
             }
-        });
+        },comicsId);
 
     }
 

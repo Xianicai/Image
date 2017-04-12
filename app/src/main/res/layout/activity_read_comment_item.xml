@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout">
     <com.example.lenovo.kuaikan.widget.glide.GlideImageView
         android:id="@+id/head_glideimageview"
         android:layout_width="60dp"
@@ -18,11 +19,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="夏尼采"
-    android:textSize="18sp"
-    android:textColor="@color/black"
+    android:textSize="16sp"
+    android:textColor="@color/gray"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toRightOf="@+id/head_glideimageview"
-    android:layout_marginTop="10dp"/>
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="0dp"/>
     <TextView
         android:id="@+id/tv_creat_time"
         android:layout_width="wrap_content"
@@ -79,13 +81,13 @@
         android:src="@mipmap/ic_details_toolbar_praise_normal"
         app:layout_constraintTop_toBottomOf="@+id/tv_creat_details"
         app:layout_constraintRight_toLeftOf="@+id/tv_like_num"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"/>
     <View
-        android:layout_width="368dp"
+        android:layout_width="0dp"
         android:layout_height="1px"
         android:background="@color/linear_divider"
         app:layout_constraintTop_toBottomOf="@+id/tv_reply"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"/>
 </android.support.constraint.ConstraintLayout>

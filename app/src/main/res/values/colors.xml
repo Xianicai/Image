@@ -13,5 +13,6 @@
     <color name="orange">#FFA500</color>
     <!--分割线-->
     <color name="linear_divider">#e3e3e3</color>
+    <color name="red">#f43737</color>
 
 </resources>
