@@ -28,6 +28,7 @@ public class TabAcionBar extends RelativeLayout {
     private String tabRightText;
     private boolean tabLeftSelected;
     private boolean tabRightSelected;
+    private RelativeLayout mLayout;
 
     public void setOnAcionBarClickListener(OnAcionBarClickListener mOnAcionBarClickListener) {
         this.mOnAcionBarClickListener = mOnAcionBarClickListener;
@@ -64,6 +65,7 @@ public class TabAcionBar extends RelativeLayout {
 
     private void initView(Context context) {
         inflate(context, R.layout.tab_acionbar, this);
+        mLayout = (RelativeLayout) findViewById(R.id.layout);
         imageTopLeft = (ImageView) findViewById(R.id.image_actionBar_left);
         imageTopRight = (ImageView) findViewById(R.id.image_actionBar_right);
         switchView = (SwitchView) findViewById(R.id.switchView);
@@ -100,17 +102,17 @@ public class TabAcionBar extends RelativeLayout {
             }
         });
         //设置初始化属性
-        if (acionBarLeftImge !=0) {
+        if (acionBarLeftImge != 0) {
             imageTopLeft.setImageResource(acionBarLeftImge);
         }
         if (acionBarRightImge != 0) {
             imageTopRight.setImageResource(acionBarRightImge);
         }
         if (StringUtil.isNotEmpty(tabLeftText) && StringUtil.isNotEmpty(tabRightText)) {
-            switchView.setTabText(tabLeftText,tabRightText);
+            switchView.setTabText(tabLeftText, tabRightText);
         }
-        switchView.setTabLeftSelected(context,tabLeftSelected);
-        switchView.setTabRightSelected(context,tabRightSelected);
+        switchView.setTabLeftSelected(context, tabLeftSelected);
+        switchView.setTabRightSelected(context, tabRightSelected);
     }
 
     public interface OnAcionBarClickListener {
@@ -119,8 +121,13 @@ public class TabAcionBar extends RelativeLayout {
         void onRightImgAcionbarClick();
     }
 
+    public void setTabActionBarBackgroud(int barBackgroud) {
+        mLayout.setBackgroundResource(barBackgroud);
+    }
+
     public interface OnTabClickListener {
         void onLeftTabClicked();
+
         void onRightTabClicked();
     }
 
@@ -136,17 +143,21 @@ public class TabAcionBar extends RelativeLayout {
         imageTopLeft.setImageResource(leftImg);
         imageTopRight.setImageResource(rightImg);
     }
-    public void setTabText(@NonNull String leftText, @NonNull String rightText){
-        if (StringUtil.isNotEmpty(leftText)&&StringUtil.isNotEmpty(rightText)) {
-            switchView.setTabText(leftText,rightText);
+
+    public void setTabText(@NonNull String leftText, @NonNull String rightText) {
+        if (StringUtil.isNotEmpty(leftText) && StringUtil.isNotEmpty(rightText)) {
+            switchView.setTabText(leftText, rightText);
         }
     }
-    public void setTabLeftSelected(Context context,boolean tabLeftSelected){
-        switchView.setTabLeftSelected(context,tabLeftSelected);
+
+    public void setTabLeftSelected(Context context, boolean tabLeftSelected) {
+        switchView.setTabLeftSelected(context, tabLeftSelected);
     }
-    public void setTabRightSelected(Context context,boolean tabRightSelected){
-        switchView.setTabRightSelected(context,tabRightSelected);
+
+    public void setTabRightSelected(Context context, boolean tabRightSelected) {
+        switchView.setTabRightSelected(context, tabRightSelected);
     }
+
     // mTabActionBar和mViewpager的监听事件
     public void SetTabActionBarListener(final Context context, final TabAcionBar tabAcionBar, final ViewPager viewPager) {
         tabAcionBar.setOnTabClickListener(new TabAcionBar.OnTabClickListener() {
