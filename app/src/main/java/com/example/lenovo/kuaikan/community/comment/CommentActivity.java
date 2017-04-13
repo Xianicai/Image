@@ -11,10 +11,10 @@ import android.widget.TextView;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
 import com.example.lenovo.kuaikan.community.comment.view.HotCommentFragment;
-import com.example.lenovo.kuaikan.community.comment.view.NewCommentFragment;
 import com.example.lenovo.kuaikan.widget.TabAcionBar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class CommentActivity extends BaseActivity {
 
@@ -49,9 +49,9 @@ public class CommentActivity extends BaseActivity {
                     @Override
                     public Fragment getItem(int position) {
                         if (position == 0) {
-                            return new NewCommentFragment();
+                            return HotCommentFragment.newInstantac();
                         } else {
-                            return new HotCommentFragment();
+                            return HotCommentFragment.newInstantac();
                         }
                     }
                 };
@@ -61,4 +61,13 @@ public class CommentActivity extends BaseActivity {
         mTabactionbar.SetTabActionBarListener(this, mTabactionbar, mCommentViewpager);
     }
 
+    @OnClick(R.id.image_back)
+    public void onViewClicked() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

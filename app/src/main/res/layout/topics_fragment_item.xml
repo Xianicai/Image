@@ -56,32 +56,32 @@
         android:id="@+id/gridlayout_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
         android:columnCount="3">
 
         <com.example.lenovo.kuaikan.widget.SquareImageView
             android:id="@+id/imge_topic"
             android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
             app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
 
         <com.example.lenovo.kuaikan.widget.SquareImageView
             android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
             app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
 
         <com.example.lenovo.kuaikan.widget.SquareImageView
             android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:scaleType="centerCrop"
-            android:layout_columnWeight="1"
-            app:placeholderImage="@mipmap/ic_common_placeholder_l_750" />
+            app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
     </GridLayout>
 
     <RelativeLayout
@@ -113,41 +113,39 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="15dp"
-            android:layout_toStartOf="@+id/img_commentNumber"
+            android:layout_toStartOf="@+id/layout_comment"
             android:gravity="center"
             android:text="20万"
             android:textSize="12sp"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/img_commentNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_likeNumber"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toStartOf="@+id/tv_comments_topic"
-            android:src="@mipmap/ic_common_detail_normal"/>
-
-        <TextView
-            android:id="@+id/tv_comments_topic"
+            android:id="@+id/layout_comment"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="1dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="15dp"
-            android:gravity="center"
-            android:text="3554"
-            android:textSize="12sp"/>
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:id="@+id/img_commentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_common_detail_normal"/>
+
+            <TextView
+                android:id="@+id/tv_comments_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="3554"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <View

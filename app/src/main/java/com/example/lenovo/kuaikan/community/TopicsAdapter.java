@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
@@ -63,14 +64,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         holder.mTvUpdateTime.setText(date);
         holder.mLikesCount.setText(mFeedsBeen.get(position).getLikes_count() + "");
         holder.mCommentsCount.setText(mFeedsBeen.get(position).getComments_count() + "");
-        holder.mCommentsCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, CommentActivity.class);
-                mContext.startActivity(intent);
-            }
-        });
-        holder.mImgCommentNumber.setOnClickListener(new View.OnClickListener() {
+        holder.mLayoutComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, CommentActivity.class);
@@ -97,6 +91,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         private final TextView mLikesCount;
         private final TextView mCommentsCount;
         private final ImageView mImgCommentNumber;
+        private final LinearLayout mLayoutComment;
 
         public TopicsViewHolder(View itemView) {
             super(itemView);
@@ -110,6 +105,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_topic);
             mGridlayoutPost = (GridLayout) itemView.findViewById(R.id.gridlayout_post);
             mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
+            mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
         }
     }
 
