@@ -153,7 +153,8 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void initAcrossImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
-        int columnCount = gridlayout.getColumnCount();//得到列数
+        gridlayout.setColumnCount(1);
+        int columnCount = 1;//得到列数
         //遍历集合 动态添加
         for (int i = 0; i < topics.size(); i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
@@ -162,10 +163,10 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             acrossImageTv.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             acrossImageTv.addLayout(1);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
-            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600));
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
-            layoutParams.setMargins(15, 15, 15, 15);
+            layoutParams.setMargins(30, 10, 30, 10);
             gridlayout.addView(acrossImageTv, layoutParams);
             acrossImageTv.setImage(topics.get(i).getPic());
             acrossImageTv.setLayoutLabeName(topics.get(i).getTitle());
@@ -186,15 +187,15 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ImgTvlayout imgTvlayout = new ImgTvlayout(mContext);
             imgTvlayout.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             imgTvlayout.setScaleType(1);
-            imgTvlayout.setImageWidthHeight(400,530);
+            imgTvlayout.setImageWidthHeight(400, 530);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
-            layoutParams.setMargins(0, 0, 0, 0);
+            layoutParams.setMargins(0, 20, 0, 0);
             gridlayout.addView(imgTvlayout, layoutParams);
             imgTvlayout.setImage(beanList.get(i).getPic());
-            imgTvlayout.setTextNmae(beanList.get(i).getDescription());
+            imgTvlayout.setTextNmae(beanList.get(i).getRecommended_text());
             imgTvlayout.setTextInfo(beanList.get(i).getTitle());
         }
     }
@@ -208,7 +209,8 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             GlideImageView imageView = new GlideImageView(mContext);
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(320,105));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -222,7 +224,8 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void initImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
-        int columnCount = gridlayout.getColumnCount();//得到列数
+        gridlayout.setColumnCount(2);
+        int columnCount = 2;//得到列数
         //遍历集合 动态添加
         for (int i = 0; i < beanList.size(); i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
@@ -234,7 +237,12 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
-            layoutParams.setMargins(20, 20, 20, 20);
+            if (i == 0 || i == 2) {
+                layoutParams.setMargins(45, 5, 0, 10);
+            } else {
+                layoutParams.setMargins(10, 5, 0, 10);
+            }
+
             gridlayout.addView(imgTvlayout, layoutParams);
             imgTvlayout.setImage(beanList.get(i).getPic());
             imgTvlayout.setTextNmae(beanList.get(i).getDescription());
@@ -254,7 +262,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
-            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0,255));
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, 255));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
             layoutParams.setMargins(20, 20, 20, 20);

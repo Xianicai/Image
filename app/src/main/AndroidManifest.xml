@@ -47,7 +47,8 @@
         </activity>
         <activity android:name=".community.comment.CommentActivity">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustPan|adjustUnspecified|stateHidden">
         </activity>
     </application>
 

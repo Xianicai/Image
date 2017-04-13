@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.home.HotFragment;
-import com.example.lenovo.kuaikan.home.SubscribeFragmen;
+import com.example.lenovo.kuaikan.community.comment.view.HotCommentFragment;
+import com.example.lenovo.kuaikan.community.comment.view.NewCommentFragment;
 import com.example.lenovo.kuaikan.widget.TabAcionBar;
 
 import butterknife.BindView;
@@ -49,9 +49,9 @@ public class CommentActivity extends BaseActivity {
                     @Override
                     public Fragment getItem(int position) {
                         if (position == 0) {
-                            return new SubscribeFragmen();
+                            return new NewCommentFragment();
                         } else {
-                            return new HotFragment();
+                            return new HotCommentFragment();
                         }
                     }
                 };

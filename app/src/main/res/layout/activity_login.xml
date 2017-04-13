@@ -9,6 +9,7 @@
     tools:context="com.example.lenovo.kuaikan.LoginActivity">
 
     <ImageView
+        android:id="@+id/image_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -33,10 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:src="@mipmap/ic_login_visible"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/ed_phone"
@@ -45,21 +46,25 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/bg_loglin_phone"
+        android:hint="支持中国大陆"
+        android:inputType="number"
+        android:paddingLeft="40dp"
+        android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_top"
-        android:hint="支持中国大陆"
-        android:textSize="14sp"
-        android:paddingLeft="40dp"
         />
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@mipmap/ic_login_phone_normal"
-    app:layout_constraintTop_toTopOf="@+id/ed_phone"
-    app:layout_constraintBottom_toBottomOf="@+id/ed_phone"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_marginLeft="95dp"/>
+
+    <ImageView
+        android:id="@+id/image_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:src="@mipmap/ic_login_phone_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_phone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ed_phone"/>
+
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -78,20 +83,23 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/bg_loglin_password"
+        android:hint="8-30位数字或英文"
+        android:paddingLeft="40dp"
+        android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        android:hint="8-30位数字或英文"
-        android:textSize="14sp"
-        android:paddingLeft="40dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/view"/>
+
     <ImageView
+        android:id="@+id/image_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
         android:src="@mipmap/ic_login_pwd_normal"
-        app:layout_constraintTop_toTopOf="@+id/ed_password"
         app:layout_constraintBottom_toBottomOf="@+id/ed_password"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="95dp"/>
+        app:layout_constraintTop_toTopOf="@+id/ed_password"/>
+
     <TextView
         android:id="@+id/tv_tips"
         android:layout_width="wrap_content"
@@ -121,49 +129,53 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="立即注册"
         android:textColor="@color/brown"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        android:gravity="center"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"/>
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="—  其他登录方式  —"
+        android:layout_marginBottom="100dp"
         android:gravity="center"
+        android:text="—  其他登录方式  —"
         android:textColor="@color/gray"
-        android:layout_marginBottom="100dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <ImageView
         android:id="@+id/img_QQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/img_WB"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
         android:src="@mipmap/ic_login_qq_pressed"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/img_WB"/>
+
     <ImageView
         android:id="@+id/img_WB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/img_QQ"
-        app:layout_constraintRight_toLeftOf="@+id/img_WX"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
         android:src="@mipmap/ic_login_weibo_pressed"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/img_QQ"
+        app:layout_constraintRight_toLeftOf="@+id/img_WX"/>
+
     <ImageView
         android:id="@+id/img_WX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/img_WB"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
         android:src="@mipmap/ic_login_weixin_pressed"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/img_WB"
+        app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>

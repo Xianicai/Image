@@ -4,14 +4,15 @@
               android:layout_height="match_parent"
     android:orientation="vertical">
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/bg_attention_comic_empty"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/bg_attention_not_login"
+        android:layout_marginTop="50dp"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_home_empty_random_normal"
+        android:src="@mipmap/bg_attention_comic_empty_desc"
         android:layout_gravity="center_horizontal"/>
-
 </LinearLayout>

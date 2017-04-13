@@ -103,39 +103,53 @@
             android:id="@+id/img_likeNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/tv_likes_topic"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_likes_topic"
             android:src="@mipmap/ic_common_praise_normal"/>
 
         <TextView
             android:id="@+id/tv_likes_topic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/img_commentNumber"
-            android:gravity="center_vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="15dp"
+            android:layout_toStartOf="@+id/img_commentNumber"
+            android:gravity="center"
             android:text="20万"
             android:textSize="12sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/img_commentNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/tv_comments_topic"
+            android:layout_alignTop="@+id/img_likeNumber"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@+id/tv_comments_topic"
             android:src="@mipmap/ic_common_detail_normal"/>
 
         <TextView
             android:id="@+id/tv_comments_topic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
             android:text="3554"
-            android:textSize="12sp"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"

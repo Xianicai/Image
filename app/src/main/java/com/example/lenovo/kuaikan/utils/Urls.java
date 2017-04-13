@@ -31,6 +31,11 @@ public class Urls {
      */
     public static String COMICSID_LIKE = "http://api.kuaikanmanhua.com/v1/comics/%1$s/like";
     public static String COMICSID_COMMENTS = "http://api.kuaikanmanhua.com/v1/comics/%1$s/hot_comments";
+    /**
+     * 社区评论
+     */
+    public static String COMMUNITY_COMMENT = "http://api.kuaikanmanhua.com/v1/comments/feed/115313175482105856/order/time?offset=0&limit=20";
+
     public static String parse(String url, Object... args) {
         return String.format(url, args);
     }

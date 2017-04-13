@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="150dp"
+              android:layout_height="wrap_content"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools">
     <com.example.lenovo.kuaikan.widget.glide.GlideImageView
         android:id="@+id/image"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:placeholderImage="@mipmap/ic_common_placeholder_ss"/>
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        app:placeholderImage="@mipmap/ic_common_placeholder_ss"
+        android:scaleType="fitXY"/>
     <LinearLayout
         android:id="@+id/layout_labe"
         android:layout_width="wrap_content"
@@ -25,30 +26,42 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             tools:text="有梦想的人不睡觉"/>
-        <TextView
-            android:id="@+id/tv_label"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="有梦想的人不睡觉"/>
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:background="@drawable/bg_discaver_labe"
+                tools:text="有梦想的人不睡觉"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_frome"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:textSize="12sp"
+            android:layout_marginRight="15dp"
             tools:text="有梦想的人不睡觉"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:ellipsize="end"/>
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/layout_comment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:visibility="gone">
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -84,6 +97,5 @@
             android:layout_toLeftOf="@+id/tv_comment_num"
             android:src="@mipmap/ic_common_detail_normal"
             android:layout_alignParentBottom="true"/>
-
     </RelativeLayout>
 </LinearLayout>

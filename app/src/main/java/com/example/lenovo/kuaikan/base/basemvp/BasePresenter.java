@@ -12,7 +12,7 @@ public class BasePresenter<T extends BaseView> {
         this.view = (T) view;
     }
 
-    public BaseView getMvpView(){
+    public T getMvpView(){
         return view;
     }
 
