@@ -41,13 +41,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.tvUseName.setText(mComments.get(position).getUser().getNickname());
         holder.mImageView.setRounImage(mComments.get(position).getUser().getAvatar_url());
         //转化时间格式 MM-dd HH:mm
-        String date = DateUtil.formatLongToDates(mComments.get(position).getCreated_at());
+        String date = DateUtil.formatLongToDates(mComments.get(position).getCreated_at() * 1000);
         holder.mTvCreatTime.setText(date);
         holder.mTvCreatDetails.setText(mComments.get(position).getContent());
         holder.mTvLikeNum.setText(mComments.get(position).getLikes_count() + "");
-        if (position < 10) {
-            mHeight += holder.mConstraintLayout.getLayoutParams().height;
-        }
+        mHeight += holder.mConstraintLayout.getLayoutParams().height;
 
     }
 

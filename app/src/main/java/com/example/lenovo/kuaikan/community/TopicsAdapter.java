@@ -48,7 +48,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
     }
 
     @Override
-    public void onBindViewHolder(TopicsViewHolder holder, int position) {
+    public void onBindViewHolder(TopicsViewHolder holder, final int position) {
         holder.nickName.setText(mFeedsBeen.get(position).getUser().getNickname());
         holder.mImgeTopicAvatar.setRounImage(mFeedsBeen.get(position).getUser().getAvatar_url());
         holder.mTvContent.setText(mFeedsBeen.get(position).getContent().getText());
@@ -68,6 +68,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, CommentActivity.class);
+                intent.putExtra("feedId",mFeedsBeen.get(position).getFeed_id()+"");
                 mContext.startActivity(intent);
             }
         });

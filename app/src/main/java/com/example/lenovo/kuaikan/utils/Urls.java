@@ -34,7 +34,7 @@ public class Urls {
     /**
      * 社区评论
      */
-    public static String COMMUNITY_COMMENT = "http://api.kuaikanmanhua.com/v1/comments/feed/115313175482105856/order/time?offset=0&limit=20";
+    public static String COMMUNITY_COMMENT = "http://api.kuaikanmanhua.com/v1/comments/feed/%1$s/order/%2$s?offset=%3$s&limit=20";
 
     public static String parse(String url, Object... args) {
         return String.format(url, args);

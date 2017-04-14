@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.widget.AcrossImageTv;
 import com.example.lenovo.kuaikan.widget.ImgTvlayout;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -124,7 +125,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 break;
             case 6:
                 ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
-                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(),position);
                 break;
             case 7:
                 ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
@@ -140,7 +141,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 break;
             case 10:
                 ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
-                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(),position);
                 break;
             case 11:
                 ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
@@ -151,7 +152,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     }
 
-    private void initAcrossImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics) {
+    private void initAcrossImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics,int position) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         gridlayout.setColumnCount(1);
         int columnCount = 1;//得到列数
@@ -161,7 +162,11 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount);//列数 列宽的比例 weight=1
             AcrossImageTv acrossImageTv = new AcrossImageTv(mContext);
             acrossImageTv.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
-            acrossImageTv.addLayout(1);
+            if (position ==10) {
+                acrossImageTv.addLayout(2);
+            }else {
+                acrossImageTv.addLayout(1);
+            }
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
@@ -169,9 +174,17 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             layoutParams.setMargins(30, 10, 30, 10);
             gridlayout.addView(acrossImageTv, layoutParams);
             acrossImageTv.setImage(topics.get(i).getPic());
-            acrossImageTv.setLayoutLabeName(topics.get(i).getTitle());
-            acrossImageTv.setLayoutLabeLable(topics.get(i).getLabel_text());
-            acrossImageTv.setLayoutLabeFrome(topics.get(i).getRecommended_text());
+
+            if (position ==10) {
+                acrossImageTv.setLayoutCommentTitle(topics.get(i).getRecommended_text());
+                acrossImageTv.setLayoutCommentStyle(topics.get(i).getTitle());
+                acrossImageTv.setLayoutCommentCommentNum(NumberUtil.buildTenThousand(topics.get(i).getLikes_count()));
+            }else {
+                acrossImageTv.setLayoutLabeName(topics.get(i).getTitle());
+                acrossImageTv.setLayoutLabeLable(topics.get(i).getLabel_text());
+                acrossImageTv.setLayoutLabeFrome(topics.get(i).getRecommended_text());
+            }
+
         }
     }
 

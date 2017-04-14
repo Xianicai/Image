@@ -1,5 +1,6 @@
 package com.example.lenovo.kuaikan.community.comment.view;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -8,6 +9,8 @@ import com.example.lenovo.kuaikan.base.BaseFragment;
 import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.presenter.CommentPresenter;
 import com.example.lenovo.kuaikan.community.comment.view.adpater.CommentHotAdapter;
+import com.example.lenovo.kuaikan.utils.StringUtil;
+import com.example.lenovo.kuaikan.utils.ToastUtil;
 import com.example.lenovo.kuaikan.widget.XRecyclerview;
 
 import java.util.ArrayList;
@@ -26,9 +29,17 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
     private CommentPresenter mPresenter;
     private List<CommentBean.DataBean.CommentsBean> mComments;
     private CommentHotAdapter mCommentAdapter;
+    private int firstId;
+    private boolean mRefresh;
+    private boolean mLoadMore;
+    private int mPageSize;
 
-    public static HotCommentFragment newInstantac() {
+    public static HotCommentFragment newInstantac(String type,String feedId) {
         HotCommentFragment fragment = new HotCommentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("type",type);
+        bundle.putString("feedId",feedId);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -39,14 +50,44 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
 
     @Override
     protected void initView(View view) {
+        final String type = getArguments().getString("type");
+        final String feedId = getArguments().getString("feedId");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mHotCommentRecyclerview.setLayoutManager(layoutManager);
         mComments = new ArrayList<>();
         mCommentAdapter = new CommentHotAdapter(mComments,getActivity());
         mHotCommentRecyclerview.setAdapter(mCommentAdapter);
+        mHotCommentRecyclerview.setOnRefreshLoadMore(new XRecyclerview.OnRefreshLoadMore() {
+            @Override
+            public void onRefresh() {
+                mPageSize = 0;
+                mRefresh = true;
+                mLoadMore = false;
+
+                firstId = 0;
+                mPresenter.getServerData(type,feedId,firstId);
+            }
+
+            @Override
+            public void onLoadMore() {
+                if (mPageSize>=17) {
+                    ToastUtil.showMessage("正在拼命加载n(*≧▽≦*)n");
+                    mRefresh = false;
+                    mLoadMore = true;
+//                    此处俩个页面是俩中分页方法 （最新评论是每次拿上一次请求的最后一条数据的id）（最热评论是每次+20）
+                    if (StringUtil.equals("time",type)) {
+                        firstId = mComments.get(mComments.size()-1).getId();
+                    }else {
+                        firstId +=20;
+                    }
+                    mPresenter.getServerData(type,feedId,firstId);
+                }
+            }
+        });
         mPresenter = new CommentPresenter();
         mPresenter.attachView(this);
-        mPresenter.getServerData();
+        firstId = 0;
+        mPresenter.getServerData(type,feedId,firstId);
     }
 
 
@@ -69,6 +110,14 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
     @Override
     public void getServerDataSuccess(CommentBean data) {
         if (data != null) {
+            if (mRefresh) {
+                mComments.clear();
+                mHotCommentRecyclerview.refreshFinish();
+            }
+            if (mLoadMore) {
+                mHotCommentRecyclerview.loadMoreFinish();
+            }
+            mPageSize = data.getData().getComments().size();
             mComments.addAll(data.getData().getComments());
             mCommentAdapter.notifyDataSetChanged();
         }

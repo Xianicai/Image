@@ -39,8 +39,12 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder
     public void onBindViewHolder(ReadViewHolder holder, int position) {
         ViewGroup.LayoutParams layoutParams = holder.mImageView.getLayoutParams();
         if (imageInfos != null) {
-            layoutParams.height = (int) (imageInfos.get(position).getHeight()/1.31);
-            layoutParams.width = (int) (imageInfos.get(position).getWidth()/1.31);
+//            layoutParams.height =  DensityUtil.sp2px(mContext,imageInfos.get(position).getHeight());
+//            layoutParams.width =  DensityUtil.sp2px(mContext,imageInfos.get(position).getWidth());
+//            layoutParams.height =  imageInfos.get(position).getHeight();
+            layoutParams.width =  imageInfos.get(position).getWidth();
+            layoutParams.height = (int) (imageInfos.get(position).getHeight()/1.2);
+            layoutParams.width = (int) (imageInfos.get(position).getWidth()/1.2);
             holder.mImageView.setLayoutParams(layoutParams);
         }
         holder.mImageView.setImage(mImages.get(position));

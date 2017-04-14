@@ -38,6 +38,7 @@ public class CommentActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        final String feedId = getIntent().getStringExtra("feedId");
         mTabactionbar.setTabActionBarBackgroud(R.color.white);
         FragmentPagerAdapter fragmentPagerAdapter =
                 new FragmentPagerAdapter(this.getSupportFragmentManager()) {
@@ -49,14 +50,14 @@ public class CommentActivity extends BaseActivity {
                     @Override
                     public Fragment getItem(int position) {
                         if (position == 0) {
-                            return HotCommentFragment.newInstantac();
+                            return HotCommentFragment.newInstantac("time",feedId);
                         } else {
-                            return HotCommentFragment.newInstantac();
+                            return HotCommentFragment.newInstantac("score",feedId);
                         }
                     }
                 };
         mCommentViewpager.setAdapter(fragmentPagerAdapter);
-        mCommentViewpager.setCurrentItem(1);
+        mCommentViewpager.setCurrentItem(0);
         // mTabActionBar和mViewpager的监听事件
         mTabactionbar.SetTabActionBarListener(this, mTabactionbar, mCommentViewpager);
     }

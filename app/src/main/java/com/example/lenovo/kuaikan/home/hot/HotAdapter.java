@@ -1,6 +1,7 @@
 package com.example.lenovo.kuaikan.home.hot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.basemvp.BaseReq;
+import com.example.lenovo.kuaikan.community.comment.CommentActivity;
 import com.example.lenovo.kuaikan.home.hot.bean.BeanHomeHot;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.ToastUtil;
@@ -89,6 +91,14 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
                 }
             }
         });
+        hotViewHolder.mImgCommentNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("feedId",mComicsBeen.get(i).getId()+"");
+                context.startActivity(intent);
+            }
+        });
         hotViewHolder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +157,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         private final TextView mLikesCount;
         private final TextView mCommentsCount;
         private final ImageView mImgLikeNumber;
+        private final ImageView mImgCommentNumber;
 
 
         public HotViewHolder(View itemView) {
@@ -160,6 +171,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
             mLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
             mImgLikeNumber = (ImageView)itemView.findViewById(R.id.img_likeNumber);
+            mImgCommentNumber = (ImageView)itemView.findViewById(R.id.img_commentNumber);
 
 
         }

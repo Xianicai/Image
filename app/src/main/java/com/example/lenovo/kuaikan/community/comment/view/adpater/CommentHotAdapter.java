@@ -40,7 +40,7 @@ public class CommentHotAdapter extends RecyclerView.Adapter<CommentHotAdapter.Co
         holder.tvUseName.setText(mComments.get(i).getUser().getNickname());
         holder.mImageView.setRounImage(mComments.get(i).getUser().getAvatar_url());
         //转化时间格式 MM-dd HH:mm
-        String date = DateUtil.formatLongToDates(mComments.get(i).getCreated_at());
+        String date = DateUtil.formatLongToDates(mComments.get(i).getCreated_at()*1000);
         holder.mTvCreatTime.setText(date);
         holder.mTvCreatDetails.setText(mComments.get(i).getContent());
         holder.mTvLikeNum.setText(mComments.get(i).getLikes_count() + "");

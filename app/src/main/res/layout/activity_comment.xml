@@ -14,8 +14,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabLeftText="最热评论"
-        app:tabRightText="最新评论"
+        app:tabLeftText="最新评论"
+        app:tabRightText="最热评论"
         app:selectTabLeft="true"/>
 
     <ImageView

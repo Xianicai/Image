@@ -16,8 +16,8 @@ public class CommentPresenter extends BasePresenter<ICommentView> {
     public CommentPresenter() {
         mModel = new CommentModel();
     }
-    public void getServerData(){
-        mModel.getServerData("",new Callback<CommentBean>() {
+    public void getServerData(String type,String feedId,int limit){
+        mModel.getServerData(feedId,type,limit,new Callback<CommentBean>() {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {

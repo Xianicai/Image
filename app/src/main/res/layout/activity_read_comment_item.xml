@@ -27,7 +27,7 @@
         android:gravity="left"
         android:text="夏尼采"
         android:textColor="@color/gray"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/head_glideimageview"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -54,7 +54,7 @@
         android:textColor="@color/black"
         android:maxLines="5"
         android:ellipsize="end"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@+id/head_glideimageview"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_creat_time"/>

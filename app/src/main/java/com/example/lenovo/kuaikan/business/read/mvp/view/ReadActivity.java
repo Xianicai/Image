@@ -134,7 +134,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
-                layoutParams.height = (int) (mCommentAdapter.getItemAllHight() / 1.4);
+                layoutParams.height = (int) (mCommentAdapter.getItemAllHight()/2);
                 recyclerView.setLayoutParams(layoutParams);
             }
 
@@ -176,7 +176,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
                 mhight += data.getData().getImage_infos().get(i).getHeight();
             }
             ViewGroup.LayoutParams layoutParams = mReadRecyclerview.getLayoutParams();
-            layoutParams.height = (int) ((mhight + mReadActionBar.getLayoutParams().height) / 1.31);
+            layoutParams.height = (int) ((mhight + mReadActionBar.getLayoutParams().height) / 1.2);
             mReadRecyclerview.setLayoutParams(layoutParams);
             mReadAdapter.notifyDataSetChanged();
 
