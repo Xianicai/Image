@@ -45,10 +45,13 @@
         </activity>
         <activity android:name=".community.BrowseImageActivity">
         </activity>
-        <activity android:name=".community.comment.CommentActivity">
+        <activity android:name=".community.comment.view.CommentActivity">
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:windowSoftInputMode="adjustPan|adjustUnspecified|stateHidden">
+        </activity>
+        <activity android:name=".home.comicdetails.view.ComicDetailActivity">
         </activity>
     </application>
 

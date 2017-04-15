@@ -11,6 +11,7 @@
         android:layout_height="5dp"
         android:background="#f7f6f6"/>
     <RelativeLayout
+        android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="45dp">
         <TextView

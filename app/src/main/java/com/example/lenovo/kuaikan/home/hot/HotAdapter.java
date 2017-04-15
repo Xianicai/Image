@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.basemvp.BaseReq;
-import com.example.lenovo.kuaikan.community.comment.CommentActivity;
+import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
+import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
 import com.example.lenovo.kuaikan.home.hot.bean.BeanHomeHot;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.ToastUtil;
@@ -91,11 +93,28 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
                 }
             }
         });
+        hotViewHolder.mCommentsCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra(CommentActivity.COMMENT_TYPE, 1);
+                intent.putExtra("feedId", mComicsBeen.get(i).getId() + "");
+                context.startActivity(intent);
+            }
+        });
         hotViewHolder.mImgCommentNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra("feedId",mComicsBeen.get(i).getId()+"");
+                intent.putExtra(CommentActivity.COMMENT_TYPE, 1);
+                intent.putExtra("feedId", mComicsBeen.get(i).getId() + "");
+                context.startActivity(intent);
+            }
+        });
+        hotViewHolder.mLayoutTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ComicDetailActivity.class);
                 context.startActivity(intent);
             }
         });
@@ -158,6 +177,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         private final TextView mCommentsCount;
         private final ImageView mImgLikeNumber;
         private final ImageView mImgCommentNumber;
+        private final RelativeLayout mLayoutTop;
 
 
         public HotViewHolder(View itemView) {
@@ -170,8 +190,9 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
             mComicsTitle = (TextView) itemView.findViewById(R.id.tv_comicsTitle);
             mLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
             mCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
-            mImgLikeNumber = (ImageView)itemView.findViewById(R.id.img_likeNumber);
-            mImgCommentNumber = (ImageView)itemView.findViewById(R.id.img_commentNumber);
+            mImgLikeNumber = (ImageView) itemView.findViewById(R.id.img_likeNumber);
+            mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
+            mLayoutTop = (RelativeLayout) itemView.findViewById(R.id.layout_top);
 
 
         }

@@ -43,8 +43,33 @@ public class CommentModel implements ICommentModel {
     }
 
     @Override
-    public void getComicsComment(String feedId, String type, int firstId, Callback<CommentBean> beanCallback) {
+    public void getComicsComment(String feedId, String type, int firstId, final Callback<CommentBean> beanCallback) {
+        final ReqComment req = new ReqComment();
+        String url = Urls.parse(Urls.COMIC_COMMENT, feedId,firstId,type);
+        NetAsynTask.connectByGet(url,null,req, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (req.code == 200) {
+                    CommentBean commentBean = req.getT();
+                    beanCallback.execute(commentBean);
+                }
+            }
 
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
     }
 
 }

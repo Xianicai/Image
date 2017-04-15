@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lenovo.kuaikan.community.comment.CommentActivity">
+    tools:context="com.example.lenovo.kuaikan.community.comment.view.CommentActivity">
 
     <com.example.lenovo.kuaikan.widget.TabAcionBar
         android:id="@+id/tabactionbar"

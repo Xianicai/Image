@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.community.comment;
+package com.example.lenovo.kuaikan.community.comment.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.community.comment.view.HotCommentFragment;
 import com.example.lenovo.kuaikan.widget.TabAcionBar;
 
 import butterknife.BindView;
@@ -30,6 +29,10 @@ public class CommentActivity extends BaseActivity {
     EditText mEdComment;
     @BindView(R.id.tv_send)
     TextView mTvSend;
+    /**
+     * 评论的TYPE  1：漫画评论，2;动态评论
+     */
+    public static String COMMENT_TYPE;
 
     @Override
     public int getlayoutId() {
@@ -39,6 +42,7 @@ public class CommentActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         final String feedId = getIntent().getStringExtra("feedId");
+        final int commentType = getIntent().getIntExtra(COMMENT_TYPE, 0);
         mTabactionbar.setTabActionBarBackgroud(R.color.white);
         FragmentPagerAdapter fragmentPagerAdapter =
                 new FragmentPagerAdapter(this.getSupportFragmentManager()) {
@@ -49,10 +53,18 @@ public class CommentActivity extends BaseActivity {
 
                     @Override
                     public Fragment getItem(int position) {
-                        if (position == 0) {
-                            return HotCommentFragment.newInstantac("time",feedId);
+                        if (commentType == 1) {
+                            if (position == 0) {
+                                return HotCommentFragment.newInstantac("", feedId, commentType);
+                            } else {
+                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+                            }
                         } else {
-                            return HotCommentFragment.newInstantac("score",feedId);
+                            if (position == 0) {
+                                return HotCommentFragment.newInstantac("time", feedId, commentType);
+                            } else {
+                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+                            }
                         }
                     }
                 };

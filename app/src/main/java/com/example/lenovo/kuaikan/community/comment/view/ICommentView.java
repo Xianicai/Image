@@ -9,4 +9,5 @@ import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 
 public interface ICommentView extends BaseView {
     void getServerDataSuccess(CommentBean data);
+    void getComicsCommentDataSucess(CommentBean data);
 }

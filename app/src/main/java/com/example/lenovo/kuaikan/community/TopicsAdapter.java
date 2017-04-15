@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.community.comment.CommentActivity;
+import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;

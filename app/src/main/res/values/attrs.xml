@@ -45,5 +45,6 @@
     <declare-styleable name="ReadActionBar" >
         <attr name="readTitle" format="string"></attr>
         <attr name="rightText" format="string"></attr>
+        <attr name="rightImage" format="reference"></attr>
     </declare-styleable>
 </resources>

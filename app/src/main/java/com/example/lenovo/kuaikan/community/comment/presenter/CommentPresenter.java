@@ -16,8 +16,10 @@ public class CommentPresenter extends BasePresenter<ICommentView> {
     public CommentPresenter() {
         mModel = new CommentModel();
     }
-    public void getServerData(String type,String feedId,int limit){
-        mModel.getServerData(feedId,type,limit,new Callback<CommentBean>() {
+
+    //    获取状态的评论
+    public void getServerData(String type, String feedId, int limit) {
+        mModel.getServerData(feedId, type, limit, new Callback<CommentBean>() {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
@@ -25,6 +27,19 @@ public class CommentPresenter extends BasePresenter<ICommentView> {
                 }
             }
         });
+
     }
 
+    //    获取漫画的评论
+    public void getComicsComment(String type, String feedId, int limit) {
+        mModel.getComicsComment(feedId, type, limit, new Callback<CommentBean>() {
+            @Override
+            public void execute(CommentBean obj) {
+                if (obj != null) {
+                    getMvpView().getServerDataSuccess(obj);
+                }
+            }
+        });
+
+    }
 }

@@ -35,6 +35,14 @@ public class Urls {
      * 社区评论
      */
     public static String COMMUNITY_COMMENT = "http://api.kuaikanmanhua.com/v1/comments/feed/%1$s/order/%2$s?offset=%3$s&limit=20";
+    /**
+     * 漫画评论
+     */
+    public static String COMIC_COMMENT = "http://api.kuaikanmanhua.com/v1/comics/%1$s/comments/%2$s?order=%3$s";
+    /**
+     * 漫画详情选集
+     */
+    public static String COMIC_DETAIL = "http://api.kuaikanmanhua.com/v1/topics/698?sort=0";
 
     public static String parse(String url, Object... args) {
         return String.format(url, args);
