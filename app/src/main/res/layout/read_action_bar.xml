@@ -58,9 +58,9 @@
         android:layout_marginTop="12dp"
         android:visibility="gone"/>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1px"
-        android:background="@color/linear_divider"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1px"-->
+        <!--android:background="@color/linear_divider"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"/>-->
 </android.support.constraint.ConstraintLayout>

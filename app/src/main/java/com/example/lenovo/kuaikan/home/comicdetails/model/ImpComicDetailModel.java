@@ -8,5 +8,5 @@ import com.example.lenovo.kuaikan.utils.Callback;
  */
 
 public interface ImpComicDetailModel {
-    void getComicsData(Callback<ComicDetailBean> callback);
+    void getComicsData(String comicId ,Callback<ComicDetailBean> callback);
 }

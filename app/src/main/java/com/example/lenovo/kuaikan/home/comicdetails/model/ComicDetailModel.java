@@ -12,9 +12,9 @@ import com.example.lenovo.kuaikan.utils.netutil.NetAsynTask;
 
 public class ComicDetailModel implements ImpComicDetailModel {
     @Override
-    public void getComicsData(final Callback<ComicDetailBean> callback) {
+    public void getComicsData(String comicId,final Callback<ComicDetailBean> callback) {
             final ReqComicDetail req = new ReqComicDetail();
-            String url = Urls.parse(Urls.COMIC_DETAIL);
+            String url = Urls.parse(Urls.COMIC_DETAIL,comicId);
             NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
                 @Override
                 public void onGetSucc() {

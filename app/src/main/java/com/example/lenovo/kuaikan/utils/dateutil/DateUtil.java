@@ -20,4 +20,11 @@ public class DateUtil {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm");
         return dateFormat.format(new Date(date));
     }
+    public static String formatIntToDates(int date){
+        if (date <= 0) {
+            return null;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(new Date(date));
+    }
 }

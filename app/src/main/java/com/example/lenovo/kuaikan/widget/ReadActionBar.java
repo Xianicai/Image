@@ -92,8 +92,13 @@ public class ReadActionBar extends LinearLayout {
     public void setActionBarTvRight(String tvRight) {
         mTvTitle.setText(tvRight);
     }
-    public void setReadActionBarBackgroud(int backgroud){
+
+    public void setReadActionBarBackgroud(int backgroud) {
         mLayoutReadActionBar.setBackgroundResource(backgroud);
+    }
+
+    public void setTitleTextColor(int color) {
+        mTvTitle.setTextColor(color);
     }
 
     public void setActionBarTitle(String title) {

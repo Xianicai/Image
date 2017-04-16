@@ -42,7 +42,7 @@ public class Urls {
     /**
      * 漫画详情选集
      */
-    public static String COMIC_DETAIL = "http://api.kuaikanmanhua.com/v1/topics/698?sort=0";
+    public static String COMIC_DETAIL = "http://api.kuaikanmanhua.com/v1/topics/%1$s?sort=0";
 
     public static String parse(String url, Object... args) {
         return String.format(url, args);

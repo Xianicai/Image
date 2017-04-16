@@ -16,8 +16,8 @@ public class ComicDetailPresenter extends BasePresenter<ImpComicDatailView> {
     public ComicDetailPresenter() {
         mModel = new ComicDetailModel();
     }
-    public void getComicDetaiData(){
-        mModel.getComicsData(new Callback<ComicDetailBean>() {
+    public void getComicDetaiData(String comicId){
+        mModel.getComicsData(comicId,new Callback<ComicDetailBean>() {
             @Override
             public void execute(ComicDetailBean obj) {
                 if (obj != null) {

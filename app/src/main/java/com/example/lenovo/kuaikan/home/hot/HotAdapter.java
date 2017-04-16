@@ -115,6 +115,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ComicDetailActivity.class);
+                intent.putExtra("comicId",mComicsBeen.get(i).getTopic().getId() + "");
                 context.startActivity(intent);
             }
         });
