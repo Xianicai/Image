@@ -86,7 +86,7 @@ public class ComicDetailBean {
         private int comics_count;
         private int comments_count;
         private int likes_count;
-        private int fav_count;
+        private long fav_count;
         private boolean is_favourite;
         private int sort;
         private UserBean user;
@@ -217,11 +217,11 @@ public class ComicDetailBean {
             this.likes_count = likes_count;
         }
 
-        public int getFav_count() {
+        public long getFav_count() {
             return fav_count;
         }
 
-        public void setFav_count(int fav_count) {
+        public void setFav_count(long fav_count) {
             this.fav_count = fav_count;
         }
 

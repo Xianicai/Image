@@ -11,13 +11,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:text="作品简介"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="15dp"/>
 
     <TextView
         android:id="@+id/tv_info"
@@ -25,34 +27,114 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:lineSpacingMultiplier="1.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_info_name"
-        />
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="作者"
+        android:layout_height="0dp"
+        android:text="作者:"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_info"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/image_author_head"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"/>
     <com.example.lenovo.kuaikan.widget.glide.GlideImageView
         android:id="@+id/image_author_head"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_info"
-        android:layout_marginLeft="55dp"/>
+        android:layout_marginLeft="55dp"
+        app:placeholderImage="@mipmap/ic_personal_headportrait"
+        android:layout_marginStart="55dp"/>
     <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info"
+        android:layout_marginLeft="55dp"
+        android:src="@mipmap/ic_v_comic_detail_avatar"
+        android:layout_marginStart="55dp"/>
+
+    <TextView
         android:id="@+id/tv_author_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/tv_info"
         app:layout_constraintLeft_toRightOf="@+id/image_author_head"
-        android:layout_marginTop="10dp"
-        tools:text="夏尼采"/>
+        app:layout_constraintBottom_toBottomOf="@+id/image_author_head"
+        tools:text="夏尼采"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/tv_hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_comic_item_top"
+        app:layout_constraintTop_toBottomOf="@+id/image_author_head"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="  总热度2.46亿"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:drawableLeft="@mipmap/ic_topic_detail_about_hot"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/tv_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_comic_item_top"
+        app:layout_constraintTop_toBottomOf="@+id/image_author_head"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="  总热度2.46亿"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:drawableLeft="@mipmap/ic_topic_detail_about_follow"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"/>
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hot"
+        android:background="@color/background"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="精彩点评"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_topic_detail_review_contribute"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"/>
 </android.support.constraint.ConstraintLayout>

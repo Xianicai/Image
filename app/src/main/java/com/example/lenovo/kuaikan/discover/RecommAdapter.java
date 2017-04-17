@@ -1,6 +1,7 @@
 package com.example.lenovo.kuaikan.discover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.business.read.mvp.view.ReadActivity;
+import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
+import com.example.lenovo.kuaikan.utils.js.OutWebActivity;
 import com.example.lenovo.kuaikan.widget.AcrossImageTv;
 import com.example.lenovo.kuaikan.widget.ImgTvlayout;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -152,7 +156,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     }
 
-    private void initAcrossImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics,int position) {
+    private void initAcrossImgTv(GridLayout gridlayout, final List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics, int position) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         gridlayout.setColumnCount(1);
         int columnCount = 1;//得到列数
@@ -184,12 +188,18 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 acrossImageTv.setLayoutLabeLable(topics.get(i).getLabel_text());
                 acrossImageTv.setLayoutLabeFrome(topics.get(i).getRecommended_text());
             }
-
+            final int finalI = i;
+            acrossImageTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ComicDetailActivity.toDetail(mContext,topics.get(finalI).getTarget_id()+"");
+                }
+            });
         }
     }
 
     //三张上图下文
-    private void initImgTvThree(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
+    private void initImgTvThree(GridLayout gridlayout, final List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         gridlayout.setColumnCount(3);
         int columnCount = 3;//得到列数
@@ -210,6 +220,13 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imgTvlayout.setImage(beanList.get(i).getPic());
             imgTvlayout.setTextNmae(beanList.get(i).getRecommended_text());
             imgTvlayout.setTextInfo(beanList.get(i).getTitle());
+            final int finalI = i;
+            imgTvlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ComicDetailActivity.toDetail(mContext,beanList.get(finalI).getTarget_id()+"");
+                }
+            });
         }
     }
 
@@ -235,7 +252,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private void initImgTv(GridLayout gridlayout, List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
+    private void initImgTv(GridLayout gridlayout, final List<BeanRecomm.DataBean.InfosBean.TopicsBean> beanList) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         gridlayout.setColumnCount(2);
         int columnCount = 2;//得到列数
@@ -260,11 +277,18 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imgTvlayout.setImage(beanList.get(i).getPic());
             imgTvlayout.setTextNmae(beanList.get(i).getDescription());
             imgTvlayout.setTextInfo(beanList.get(i).getTitle());
+            final int finalI = i;
+            imgTvlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ComicDetailActivity.toDetail(mContext,beanList.get(finalI).getTarget_id()+"");
+                }
+            });
         }
     }
 
     //排行榜
-    private void initRank(GridLayout mGridlayout, List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
+    private void initRank(GridLayout mGridlayout, final List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
         mGridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         int columnCount = mGridlayout.getColumnCount();//得到列数
         //遍历集合 动态添加
@@ -281,6 +305,16 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             layoutParams.setMargins(20, 20, 20, 20);
             mGridlayout.addView(imageView, layoutParams);
             imageView.setImage(bannerUrls.get(i).getPic());
+            final int finalI = i;
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (finalI == 3) {
+                        new ClassifyFragment();
+                    }
+                    OutWebActivity.toOutWeb(mContext,bannerUrls.get(finalI).getTarget_web_url(),bannerUrls.get(finalI).getTarget_title());
+                }
+            });
         }
     }
 
@@ -339,7 +373,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private void initBanner(BGABanner banner, List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
+    private void initBanner(BGABanner banner, final List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
         List<String> mBannerUrls;
         mBannerUrls = new ArrayList<String>();
         for (int i = 0; i < bannerUrls.size(); i++) {
@@ -359,7 +393,12 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         banner.setDelegate(new BGABanner.Delegate() {
             @Override
             public void onBannerItemClick(BGABanner bgaBanner, View view, Object o, int i) {
-
+//                Intent intent = new Intent(mContext, ComicDetailActivity.class);
+//                intent.putExtra("comicId",bannerUrls.get(i).getTarget_id()+ "");
+//                mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, ReadActivity.class);
+                intent.putExtra("comicsId", bannerUrls.get(i).getTarget_id()+ "");
+                mContext.startActivity(intent);
             }
         });
     }

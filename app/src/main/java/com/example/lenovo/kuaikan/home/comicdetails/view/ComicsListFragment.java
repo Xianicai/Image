@@ -1,13 +1,13 @@
 package com.example.lenovo.kuaikan.home.comicdetails.view;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseFragment;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
 import com.example.lenovo.kuaikan.home.comicdetails.view.adapter.ComicListAdapter;
-import com.example.lenovo.kuaikan.widget.XRecyclerview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import butterknife.BindView;
 
 public class ComicsListFragment extends BaseFragment {
     @BindView(R.id.comic_list_recyclerview)
-    XRecyclerview mComicListRecyclerview;
+    RecyclerView mComicListRecyclerview;
     private ComicListAdapter mAdapter;
     private List<ComicDetailBean.DataBean.ComicsBean> mComics;
 

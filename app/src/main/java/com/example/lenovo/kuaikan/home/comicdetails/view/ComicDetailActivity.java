@@ -1,5 +1,7 @@
 package com.example.lenovo.kuaikan.home.comicdetails.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,16 +13,15 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
+import com.example.lenovo.kuaikan.business.read.mvp.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
 import com.example.lenovo.kuaikan.home.comicdetails.presenter.ComicDetailPresenter;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ComicDetailActivity extends BaseActivity implements ImpComicDatailView {
-
-
     @BindView(R.id.imge_cover)
     GlideImageView mImgeCover;
     @BindView(R.id.tv_comic_name)
@@ -43,9 +44,13 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     TextView mTvTitle;
     @BindView(R.id.image_right)
     ImageView mImageRight;
+    @BindView(R.id.view_tab)
+    View mViewTab;
     private String[] mTitles = new String[]{"详情", "选集"};
     private ComicDetailFragment mComicDetailFragment;
     private ComicsListFragment mComicsListFragment;
+    private String mComicId;
+
     @Override
     public int getlayoutId() {
         return R.layout.activity_comic_detail;
@@ -53,7 +58,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        String comicId = getIntent().getStringExtra("comicId");
+        mComicId = getIntent().getStringExtra("comicId");
         //给TabLayout添加标签
         for (int i = 0; i < mTitles.length; i++) {
             mComicTablayout.addTab(mComicTablayout.newTab().setText(mTitles[i]));
@@ -97,7 +102,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
         mComicViewpager.setCurrentItem(1);
         ComicDetailPresenter presenter = new ComicDetailPresenter();
         presenter.attachView(this);
-        presenter.getComicDetaiData(comicId);
+        presenter.getComicDetaiData(mComicId);
     }
 
     @Override
@@ -120,6 +125,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
         if (detailBean != null) {
             ComicDetailBean.DataBean data = detailBean.getData();
             mComicsListFragment.setData(data);
+            mComicDetailFragment.setData(data);
             mTvTitle.setText(data.getTitle());
             mTvComicName.setText(data.getTitle());
             mTvLabel.setText(data.getCategory().get(0));
@@ -134,10 +140,34 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
         super.onBackPressed();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
+    @OnClick({R.id.image_back, R.id.tv_comic_title, R.id.tv_read})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.image_back:
+                onBackPressed();
+                break;
+            case R.id.tv_comic_title:
+//                toRaed();
+                break;
+            case R.id.tv_read:
+//                toRaed();
+                break;
+        }
     }
+
+
+    private void toRaed() {
+        Intent intent = new Intent(this, ReadActivity.class);
+        intent.putExtra("comicsId", mComicId);
+        startActivity(intent);
+
+    }
+
+    public static void toDetail(Context context,String comicId ) {
+        Intent intent = new Intent(context, ComicDetailActivity.class);
+        intent.putExtra("comicId",comicId);
+        context.startActivity(intent);
+    }
+
 }

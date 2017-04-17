@@ -39,7 +39,7 @@ public class RecommendFragment extends BaseFragment {
         mRecommXrecyclerview.setOnRefreshLoadMore(new XRecyclerview.OnRefreshLoadMore() {
             @Override
             public void onRefresh() {
-
+                getServerData(true);
             }
 
             @Override
@@ -51,17 +51,21 @@ public class RecommendFragment extends BaseFragment {
         mInfosBeen = new ArrayList<>();
         mRecommAdapter = new RecommAdapter(getActivity(), mInfosBeen);
         mRecommXrecyclerview.setAdapter(mRecommAdapter);
-        getServerData();
+        getServerData(false);
 
     }
 
-    private void getServerData() {
+    private void getServerData(final boolean isRefresh) {
         mRecommXrecyclerview.showLoading(true);
         final ReqRecomm req = new ReqRecomm();
         NetAsynTask.connectByGet(Urls.DISCOVER_RECOMMEND, null, req, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (req.code == 200) {
+                    if (isRefresh) {
+                        mRecommXrecyclerview.refreshFinish();
+                    }
+
                     ReqRecomm reqRecomm = new ReqRecomm();
                     reqRecomm.getNetData(ServerData.DISCOVER_RECOMMEND);
                     BeanRecomm beanRecomm = reqRecomm.getT();

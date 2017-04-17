@@ -1,15 +1,16 @@
 package com.example.lenovo.kuaikan.home.comicdetails.view;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseFragment;
 import com.example.lenovo.kuaikan.base.ServerData;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicCommentBean;
+import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ReqComicComment;
 import com.example.lenovo.kuaikan.home.comicdetails.view.adapter.ComicDetailAdapter;
-import com.example.lenovo.kuaikan.widget.XRecyclerview;
 
 import java.util.List;
 
@@ -21,8 +22,9 @@ import butterknife.BindView;
 
 public class ComicDetailFragment extends BaseFragment {
     @BindView(R.id.comic_detial_recyclerview)
-    XRecyclerview mComicDetialRecyclerview;
+    RecyclerView mComicDetialRecyclerview;
     private ComicCommentBean mComicCommentBean;
+    private ComicDetailAdapter mAdapter;
 
     @Override
     public int getLayoutId() {
@@ -35,8 +37,8 @@ public class ComicDetailFragment extends BaseFragment {
         mComicDetialRecyclerview.setLayoutManager(layoutManager);
         getData();
         List<ComicCommentBean.DataBean.ReviewsBean> reviews = mComicCommentBean.getData().getReviews();
-        ComicDetailAdapter adapter = new ComicDetailAdapter(getActivity(),reviews);
-        mComicDetialRecyclerview.setAdapter(adapter);
+        mAdapter = new ComicDetailAdapter(getActivity(),reviews);
+        mComicDetialRecyclerview.setAdapter(mAdapter);
     }
 
     private void getData() {
@@ -45,5 +47,8 @@ public class ComicDetailFragment extends BaseFragment {
         mComicCommentBean = req.getT();
     }
 
-
+    public void setData(ComicDetailBean.DataBean dataBean) {
+        mAdapter.setTopData(dataBean);
+        mAdapter.notifyDataSetChanged();
+    }
 }

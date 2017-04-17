@@ -10,18 +10,19 @@ public class NumberUtil {
     public static String buildTenThousand(int number) {
         int n;
         if (number >= 10000) {
-            n =  number / 10000;
+            n = number / 10000;
             return n + "万";
         } else {
             n = number;
         }
-        return n+"";
+        return n + "";
     }
+
     //    转化为以亿为单位
     public static String buildHundredMillion(long number) {
         float n;
         if (number >= 100000000) {
-            n =number / 100000000;
+            n = number / 100000000;
             return n + "亿";
 
         } else {
@@ -30,4 +31,18 @@ public class NumberUtil {
         return n + "";
     }
 
+    public static String buildNumber(long number) {
+        float n;
+        if (number >= 100000000) {
+            n = number / 100000000;
+            return n + "亿";
+
+        } else if (number >= 10000 && 100000000 > number) {
+            n = number / 10000;
+            return n + "万";
+        } else {
+            n = number;
+        }
+        return n + "";
+    }
 }

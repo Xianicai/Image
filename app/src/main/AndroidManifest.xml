@@ -53,6 +53,8 @@
         </activity>
         <activity android:name=".home.comicdetails.view.ComicDetailActivity">
         </activity>
+        <activity android:name=".utils.js.OutWebActivity">
+        </activity>
     </application>
 
 </manifest>

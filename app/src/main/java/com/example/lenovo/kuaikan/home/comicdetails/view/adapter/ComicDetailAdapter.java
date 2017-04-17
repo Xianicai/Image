@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicCommentBean;
+import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
+import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
@@ -19,8 +21,15 @@ import java.util.List;
  */
 
 public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.ComicDetailHV> {
-    Context mContext;
-    List<ComicCommentBean.DataBean.ReviewsBean> reviews;
+    private Context mContext;
+    private List<ComicCommentBean.DataBean.ReviewsBean> reviews;
+    private ComicDetailBean.DataBean dataBean = new ComicDetailBean.DataBean();
+    private String mDescription;
+    private String mAvatarUrl;
+    private String mNickname;
+    private String mFollowNum;
+    private String mHotNum;
+
     public ComicDetailAdapter(Context context, List<ComicCommentBean.DataBean.ReviewsBean> reviews) {
         mContext = context;
         this.reviews = reviews;
@@ -28,9 +37,9 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        if (position ==0) {
+        if (position == 0) {
             return 0;
-        }else {
+        } else {
             return position;
 
         }
@@ -38,11 +47,11 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
 
     @Override
     public ComicDetailHV onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (parent != null) {
-//            View view = LayoutInflater.from(mContext).inflate(R.layout.comic_detail_top_info, parent, false);
-//            ComicDetailHV vh = new ComicDetailHV(view);
-//            return vh;
-//        }
+        if (viewType == 0) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.comic_detail_top_info, parent, false);
+            ComicDetailHV vh = new ComicDetailHV(view);
+            return vh;
+        }
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_comic_detial_item, parent, false);
         ComicDetailHV vh = new ComicDetailHV(view);
         return vh;
@@ -51,11 +60,20 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
 
     @Override
     public void onBindViewHolder(ComicDetailHV holder, int position) {
-        holder.mImageAuthor.setRounImage(reviews.get(position).getUser().getAvatar_url());
-        holder.mTvName.setText(reviews.get(position).getUser().getNickname());
-        holder.mTvCreatTime.setText(DateUtil.formatLongToDates(reviews.get(position).getCreated_at()));
-        holder.mTvlikeNum.setText("   "+reviews.get(position).getLikes_count()+"");
-        holder.mTvDetail.setText(reviews.get(position).getContent());
+        if (position == 0) {
+            holder.mTvInfo.setText(mDescription);
+            holder.mImageAuthorHead.setRounImage(mAvatarUrl);
+            holder.mTvAuthorName.setText(mNickname);
+            holder.mTvFollow.setText("   "+mFollowNum+"人已关注");
+            holder.mTvHot.setText("   总热度"+mHotNum);
+        } else {
+            holder.mImageAuthor.setRounImage(reviews.get(position).getUser().getAvatar_url());
+            holder.mTvName.setText(reviews.get(position).getUser().getNickname());
+            holder.mTvCreatTime.setText(DateUtil.formatLongToDates(reviews.get(position).getCreated_at()));
+            holder.mTvlikeNum.setText("   " + reviews.get(position).getLikes_count() + "");
+            holder.mTvDetail.setText(reviews.get(position).getContent());
+        }
+
     }
 
     @Override
@@ -70,6 +88,11 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
         private final TextView mTvName;
         private final TextView mTvlikeNum;
         private final TextView mTvDetail;
+        private final TextView mTvInfo;
+        private final GlideImageView mImageAuthorHead;
+        private final TextView mTvAuthorName;
+        private final TextView mTvFollow;
+        private final TextView mTvHot;
 
         public ComicDetailHV(View itemView) {
             super(itemView);
@@ -78,6 +101,22 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
             mTvName = (TextView) itemView.findViewById(R.id.tv_name);
             mTvlikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
             mTvDetail = (TextView) itemView.findViewById(R.id.tv_detail);
+//            作者简介
+            mTvInfo = (TextView) itemView.findViewById(R.id.tv_info);
+            mImageAuthorHead = (GlideImageView) itemView.findViewById(R.id.image_author_head);
+            mTvAuthorName = (TextView) itemView.findViewById(R.id.tv_author_name);
+            mTvFollow = (TextView) itemView.findViewById(R.id.tv_follow);
+            mTvHot = (TextView) itemView.findViewById(R.id.tv_hot);
+
         }
+    }
+
+    public void setTopData(ComicDetailBean.DataBean dataBean) {
+        this.dataBean = dataBean;
+        mDescription = dataBean.getDescription();
+        mAvatarUrl = dataBean.getUser().getAvatar_url();
+        mNickname = dataBean.getUser().getNickname();
+        mHotNum = NumberUtil.buildNumber(dataBean.getView_count());
+        mFollowNum = NumberUtil.buildNumber(dataBean.getFav_count());
     }
 }
