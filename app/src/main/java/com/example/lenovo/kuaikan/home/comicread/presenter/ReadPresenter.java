@@ -1,14 +1,14 @@
-package com.example.lenovo.kuaikan.business.read.mvp.presenter;
+package com.example.lenovo.kuaikan.home.comicread.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
 
 import com.example.lenovo.kuaikan.base.basemvp.BasePresenter;
-import com.example.lenovo.kuaikan.business.read.data.BeanComments;
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
-import com.example.lenovo.kuaikan.business.read.mvp.model.IReadModel;
-import com.example.lenovo.kuaikan.business.read.mvp.model.ReadModel;
-import com.example.lenovo.kuaikan.business.read.mvp.view.IReadView;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
+import com.example.lenovo.kuaikan.home.comicread.model.IReadModel;
+import com.example.lenovo.kuaikan.home.comicread.model.ReadModel;
+import com.example.lenovo.kuaikan.home.comicread.view.IReadView;
 import com.example.lenovo.kuaikan.utils.Callback;
 
 /**

@@ -1,5 +1,8 @@
 package com.example.lenovo.kuaikan.community;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -75,7 +78,7 @@ public class BeanFeeds {
             this.feeds = feeds;
         }
 
-        public static class FeedsBean {
+        public static class FeedsBean implements Parcelable {
 
 
             private int likes_count;
@@ -205,7 +208,7 @@ public class BeanFeeds {
                 this.topic_id = topic_id;
             }
 
-            public static class UserBean {
+            public static class UserBean implements Parcelable {
 
 
                 private int pub_feed;
@@ -262,9 +265,48 @@ public class BeanFeeds {
                 public void setId(int id) {
                     this.id = id;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeInt(this.pub_feed);
+                    dest.writeString(this.avatar_url);
+                    dest.writeInt(this.grade);
+                    dest.writeString(this.nickname);
+                    dest.writeString(this.reg_type);
+                    dest.writeInt(this.id);
+                }
+
+                public UserBean() {
+                }
+
+                protected UserBean(Parcel in) {
+                    this.pub_feed = in.readInt();
+                    this.avatar_url = in.readString();
+                    this.grade = in.readInt();
+                    this.nickname = in.readString();
+                    this.reg_type = in.readString();
+                    this.id = in.readInt();
+                }
+
+                public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
+                    @Override
+                    public UserBean createFromParcel(Parcel source) {
+                        return new UserBean(source);
+                    }
+
+                    @Override
+                    public UserBean[] newArray(int size) {
+                        return new UserBean[size];
+                    }
+                };
             }
 
-            public static class ContentBean {
+            public static class ContentBean implements Parcelable {
 
                 private String identity;
                 private String image_base;
@@ -302,7 +344,97 @@ public class BeanFeeds {
                 public void setImages(List<String> images) {
                     this.images = images;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.identity);
+                    dest.writeString(this.image_base);
+                    dest.writeString(this.text);
+                    dest.writeStringList(this.images);
+                }
+
+                public ContentBean() {
+                }
+
+                protected ContentBean(Parcel in) {
+                    this.identity = in.readString();
+                    this.image_base = in.readString();
+                    this.text = in.readString();
+                    this.images = in.createStringArrayList();
+                }
+
+                public static final Creator<ContentBean> CREATOR = new Creator<ContentBean>() {
+                    @Override
+                    public ContentBean createFromParcel(Parcel source) {
+                        return new ContentBean(source);
+                    }
+
+                    @Override
+                    public ContentBean[] newArray(int size) {
+                        return new ContentBean[size];
+                    }
+                };
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(this.likes_count);
+                dest.writeLong(this.updated_at);
+                dest.writeInt(this.comments_count);
+                dest.writeString(this.share_url);
+                dest.writeByte(this.following ? (byte) 1 : (byte) 0);
+                dest.writeLong(this.created_at);
+                dest.writeInt(this.shared_count);
+                dest.writeInt(this.feed_type);
+                dest.writeParcelable(this.user, flags);
+                dest.writeParcelable( this.content, flags);
+                dest.writeLong(this.feed_id);
+                dest.writeByte(this.is_liked ? (byte) 1 : (byte) 0);
+                dest.writeString(this.topic_title);
+                dest.writeInt(this.topic_id);
+            }
+
+            public FeedsBean() {
+            }
+
+            protected FeedsBean(Parcel in) {
+                this.likes_count = in.readInt();
+                this.updated_at = in.readLong();
+                this.comments_count = in.readInt();
+                this.share_url = in.readString();
+                this.following = in.readByte() != 0;
+                this.created_at = in.readLong();
+                this.shared_count = in.readInt();
+                this.feed_type = in.readInt();
+                this.user = in.readParcelable(UserBean.class.getClassLoader());
+                this.content = in.readParcelable(ContentBean.class.getClassLoader());
+                this.feed_id = in.readLong();
+                this.is_liked = in.readByte() != 0;
+                this.topic_title = in.readString();
+                this.topic_id = in.readInt();
+            }
+
+            public static final Parcelable.Creator<FeedsBean> CREATOR = new Parcelable.Creator<FeedsBean>() {
+                @Override
+                public FeedsBean createFromParcel(Parcel source) {
+                    return new FeedsBean(source);
+                }
+
+                @Override
+                public FeedsBean[] newArray(int size) {
+                    return new FeedsBean[size];
+                }
+            };
         }
     }
 }

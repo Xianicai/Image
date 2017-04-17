@@ -2,7 +2,6 @@ package com.example.lenovo.kuaikan.base.basemvp;
 
 import android.support.annotation.NonNull;
 
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
 import com.example.lenovo.kuaikan.utils.netutil.ReqCommon;
 
 import org.json.JSONObject;

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.business.read.mvp.view.ReadActivity;
+import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
 import com.example.lenovo.kuaikan.home.comicdetails.presenter.ComicDetailPresenter;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;

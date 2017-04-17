@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.community;
+package com.example.lenovo.kuaikan.community.topicdetail.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,82 +12,101 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.community.BeanFeeds;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
-import com.example.lenovo.kuaikan.community.topicdetail.view.TopicDetailActivity;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.SquareImageView;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zhanglibin on 2017/4/1.
+ * Created by Zhanglibin on 2017/4/17.
  */
 
-public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsViewHolder> {
+public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.TopicDetailVH> {
     Context mContext;
-    List<BeanFeeds.DataBean.FeedsBean> mFeedsBeen;
-    ImageClickListener mImageClickListener;
+    List<CommentBean.DataBean.CommentsBean> mComments;
+    BeanFeeds.DataBean.FeedsBean feedsBean;
 
-    public void setImageClickListener(ImageClickListener imageClickListener) {
-        mImageClickListener = imageClickListener;
-    }
-
-    public TopicsAdapter(Context context, List<BeanFeeds.DataBean.FeedsBean> mFeedsBeen) {
+    public TopicDetailAdapter(Context context, List<CommentBean.DataBean.CommentsBean> comments, BeanFeeds.DataBean.FeedsBean feedsBean) {
         mContext = context;
-        this.mFeedsBeen = mFeedsBeen;
+        mComments = comments;
+        this.feedsBean = feedsBean;
     }
 
     @Override
-    public TopicsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.topics_fragment_item, parent, false);
-        TopicsViewHolder topicsViewHolder = new TopicsViewHolder(view);
-        return topicsViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(TopicsViewHolder holder, final int position) {
-        holder.nickName.setText(mFeedsBeen.get(position).getUser().getNickname());
-        holder.mImgeTopicAvatar.setRounImage(mFeedsBeen.get(position).getUser().getAvatar_url());
-        holder.mTvContent.setText(mFeedsBeen.get(position).getContent().getText());
-        String imageBase = mFeedsBeen.get(position).getContent().getImage_base();
-        List<String> images = mFeedsBeen.get(position).getContent().getImages();
-        if (StringUtil.isNotEmpty(imageBase) && ListUtil.isNotEmpty(images)) {
-            updateViewGroup(holder.mGridlayoutPost, imageBase, images);
+    public int getItemViewType(int position) {
+        if (position==0) {
+            return 0;
+        }else {
+            return position;
         }
-        //转化时间格式 MM-dd HH:mm
-        String date = DateUtil.formatLongToDates(mFeedsBeen.get(position).getUpdated_at());
-        holder.mTvUpdateTime.setText(date);
-        holder.mLikesCount.setText(mFeedsBeen.get(position).getLikes_count() + "");
-        holder.mCommentsCount.setText(mFeedsBeen.get(position).getComments_count() + "");
-        holder.mLayoutComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, CommentActivity.class);
-                intent.putExtra("feedId", mFeedsBeen.get(position).getFeed_id() + "");
-                mContext.startActivity(intent);
+    }
+
+    @Override
+    public TopicDetailVH onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType ==0) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.topics_detail_item_top, parent, false);
+            TopicDetailVH vh = new TopicDetailVH(view);
+            return vh;
+        }
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_comment_item, parent, false);
+        TopicDetailVH vh = new TopicDetailVH(view);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(TopicDetailVH holder, int position) {
+        if (position ==0) {
+            holder.nickName.setText(feedsBean.getUser().getNickname());
+            holder.mImgeTopicAvatar.setRounImage(feedsBean.getUser().getAvatar_url());
+            holder.mTvContent.setText(feedsBean.getContent().getText());
+            String imageBase = feedsBean.getContent().getImage_base();
+            List<String> images = feedsBean.getContent().getImages();
+            if (StringUtil.isNotEmpty(imageBase) && ListUtil.isNotEmpty(images)) {
+                updateViewGroup(holder.mGridlayoutPost, imageBase, images);
             }
-        });
-        holder.mLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TopicDetailActivity.toTopDetail(mContext,mFeedsBeen.get(position),mFeedsBeen.get(position).getFeed_id() + "");
-            }
-        });
+            //转化时间格式 MM-dd HH:mm
+            String date = DateUtil.formatLongToDates(feedsBean.getUpdated_at());
+            holder.mTvUpdateTime.setText(date);
+            holder.mLikesCount.setText(feedsBean.getLikes_count() + "");
+            holder.mCommentsCount.setText(feedsBean.getComments_count() + "");
+            holder.mLayoutComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, CommentActivity.class);
+                    intent.putExtra("feedId", feedsBean.getFeed_id() + "");
+                    mContext.startActivity(intent);
+                }
+            });
+        }else {
+            holder.tvUseName.setText(mComments.get(position-1).getUser().getNickname());
+            holder.mImageView.setRounImage(mComments.get(position-1).getUser().getAvatar_url());
+            //转化时间格式 MM-dd HH:mm
+            String date = DateUtil.formatLongToDates(mComments.get(position-1).getCreated_at()*1000);
+            holder.mTvCreatTime.setText(date);
+            holder.mTvCreatDetails.setText(mComments.get(position-1).getContent());
+            holder.mTvLikeNum.setText(mComments.get(position-1).getLikes_count() + "");
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return mFeedsBeen.size();
+        return mComments.size()+1;
     }
 
-    public class TopicsViewHolder extends RecyclerView.ViewHolder {
-
-
+    class TopicDetailVH extends RecyclerView.ViewHolder {
+        private final TextView tvUseName;
+        private final GlideImageView mImageView;
+        private final TextView mTvCreatTime;
+        private final TextView mTvCreatDetails;
+        private final TextView mTvLikeNum;
+        //topView
         private final TextView nickName;
         private final GridLayout mGridlayoutPost;
         private final GlideImageView mImgeTopicAvatar;
@@ -97,11 +116,14 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         private final TextView mCommentsCount;
         private final ImageView mImgCommentNumber;
         private final LinearLayout mLayoutComment;
-        private final LinearLayout mLayout;
-
-        public TopicsViewHolder(View itemView) {
+        public TopicDetailVH(View itemView) {
             super(itemView);
-            //初始化控件
+            tvUseName = (TextView) itemView.findViewById(R.id.tv_user_name);
+            mImageView = (GlideImageView) itemView.findViewById(R.id.head_glideimageview);
+            mTvCreatTime = (TextView) itemView.findViewById(R.id.tv_creat_time);
+            mTvCreatDetails = (TextView) itemView.findViewById(R.id.tv_creat_details);
+            mTvLikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
+            //topView
             nickName = (TextView) itemView.findViewById(R.id.tv_nickName);
             mImgeTopicAvatar = (GlideImageView) itemView.findViewById(R.id.imge_topic_avatar);
             mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
@@ -111,10 +133,8 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             mGridlayoutPost = (GridLayout) itemView.findViewById(R.id.gridlayout_post);
             mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
-            mLayout = (LinearLayout) itemView.findViewById(R.id.layout);
         }
     }
-
     /**
      * 动态添加控件
      *
@@ -134,7 +154,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             layoutParams.setMargins(5, 5, 5, 5);
             mGridlayoutPost.addView(imageView, layoutParams);
             imageView.setImage(imageBase + images.get(0));
-            setListener(imageBase, (ArrayList<String>) images, imageView, 0);
+//            setListener(imageBase, (ArrayList<String>) images, imageView, 0);
         } else if (images.size() == 2 || images.size() == 4) {
             //重新设置mGridlayoutPost的宽高
             ViewGroup.LayoutParams params;
@@ -158,7 +178,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase + images.get(i));
-                setListener(imageBase, (ArrayList<String>) images, imageView, i);
+//                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         } else {
             //遍历集合 动态添加
@@ -175,30 +195,8 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase + images.get(i));
-                setListener(imageBase, (ArrayList<String>) images, imageView, i);
+//                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         }
     }
-
-    private void setListener(final String imageBase, final ArrayList<String> images, SquareImageView imageView, final int finalI) {
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, BrowseImageActivity.class);
-                intent.putExtra("imageBase", imageBase);
-                intent.putStringArrayListExtra("images", images);
-                intent.putExtra("position", finalI);
-                mContext.startActivity(intent);
-//                        if (mImageClickListener != null) {
-//                            mImageClickListener.imageClickListener();
-//                        }
-            }
-        });
-    }
-
-    public interface ImageClickListener {
-        void imageClickListener();
-
-    }
 }
-

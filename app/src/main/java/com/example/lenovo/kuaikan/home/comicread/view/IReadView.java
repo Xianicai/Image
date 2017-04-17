@@ -1,8 +1,8 @@
-package com.example.lenovo.kuaikan.business.read.mvp.view;
+package com.example.lenovo.kuaikan.home.comicread.view;
 
 import com.example.lenovo.kuaikan.base.basemvp.BaseView;
-import com.example.lenovo.kuaikan.business.read.data.BeanComments;
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 
 /**
  * Created by Zhanglibin on 2017/4/8.

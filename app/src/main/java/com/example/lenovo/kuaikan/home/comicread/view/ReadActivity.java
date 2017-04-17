@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.business.read.mvp.view;
+package com.example.lenovo.kuaikan.home.comicread.view;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.business.read.adapter.CommentAdapter;
-import com.example.lenovo.kuaikan.business.read.adapter.ReadAdapter;
-import com.example.lenovo.kuaikan.business.read.data.BeanComments;
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
-import com.example.lenovo.kuaikan.business.read.mvp.presenter.ReadPresenter;
+import com.example.lenovo.kuaikan.home.comicread.view.adapter.CommentAdapter;
+import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
+import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenter;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
 import com.example.lenovo.kuaikan.widget.XRecyclerview;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;

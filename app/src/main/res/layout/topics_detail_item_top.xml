@@ -129,6 +129,26 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/linear_divider"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bg_rounded_corner_topic_list_tag"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最新评论"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/linear_divider"/>
 </LinearLayout>

@@ -41,7 +41,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".business.read.mvp.view.ReadActivity">
+        <activity android:name=".home.comicread.view.ReadActivity">
         </activity>
         <activity android:name=".community.BrowseImageActivity">
         </activity>
@@ -54,6 +54,8 @@
         <activity android:name=".home.comicdetails.view.ComicDetailActivity">
         </activity>
         <activity android:name=".utils.js.OutWebActivity">
+        </activity>
+        <activity android:name=".community.topicdetail.view.TopicDetailActivity">
         </activity>
     </application>
 

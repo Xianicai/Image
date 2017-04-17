@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.business.read.adapter;
+package com.example.lenovo.kuaikan.home.comicread.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import java.util.List;

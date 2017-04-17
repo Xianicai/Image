@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.business.read.data;
+package com.example.lenovo.kuaikan.home.comicread.model.data;
 
 import android.support.annotation.NonNull;
 

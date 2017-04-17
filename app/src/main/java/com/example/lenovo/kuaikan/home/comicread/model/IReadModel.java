@@ -1,7 +1,7 @@
-package com.example.lenovo.kuaikan.business.read.mvp.model;
+package com.example.lenovo.kuaikan.home.comicread.model;
 
-import com.example.lenovo.kuaikan.business.read.data.BeanComments;
-import com.example.lenovo.kuaikan.business.read.data.BeanRead;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.utils.Callback;
 
 /**

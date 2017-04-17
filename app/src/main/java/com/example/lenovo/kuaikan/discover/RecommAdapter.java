@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.business.read.mvp.view.ReadActivity;
+import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.js.OutWebActivity;

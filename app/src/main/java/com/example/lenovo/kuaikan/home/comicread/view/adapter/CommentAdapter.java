@@ -1,4 +1,4 @@
-package com.example.lenovo.kuaikan.business.read.adapter;
+package com.example.lenovo.kuaikan.home.comicread.view.adapter;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.business.read.data.BeanComments;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
