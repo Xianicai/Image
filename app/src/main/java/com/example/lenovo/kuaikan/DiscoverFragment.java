@@ -9,9 +9,12 @@ import android.view.View;
 import com.example.lenovo.kuaikan.base.BaseFragment;
 import com.example.lenovo.kuaikan.discover.ClassifyFragment;
 import com.example.lenovo.kuaikan.discover.RecommendFragment;
+import com.example.lenovo.kuaikan.utils.RxBus;
 import com.example.lenovo.kuaikan.widget.TabAcionBar;
 
 import butterknife.BindView;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 
 /**
@@ -24,6 +27,7 @@ public class DiscoverFragment extends BaseFragment {
     TabAcionBar mTabActionBar;
     @BindView(R.id.dis_viewpager)
     ViewPager mViewpager;
+    public static String CHANGE_CURRENT_ITEM = "CHANGE_CURRENT_ITEM";
 
     public static DiscoverFragment newInstance() {
         return new DiscoverFragment();
@@ -57,7 +61,25 @@ public class DiscoverFragment extends BaseFragment {
 
         mViewpager.setAdapter(fragmentPagerAdapter);
         mViewpager.setCurrentItem(0);
-        mTabActionBar.SetTabActionBarListener(getActivity(),mTabActionBar,mViewpager);
+        mTabActionBar.SetTabActionBarListener(getActivity(), mTabActionBar, mViewpager);
+
+        refreshView();
+    }
+
+    private void refreshView() {
+
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+                        if (s.equals(CHANGE_CURRENT_ITEM)) {
+                            if (mViewpager != null) {
+                                mViewpager.setCurrentItem(1);
+                            }
+                        }
+                    }
+                });
+
 
     }
 }

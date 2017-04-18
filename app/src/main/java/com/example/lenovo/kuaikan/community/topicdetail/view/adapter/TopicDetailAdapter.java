@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.community.BeanFeeds;
+import com.example.lenovo.kuaikan.community.BrowseImageActivity;
 import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.utils.ListUtil;
@@ -21,6 +22,7 @@ import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.SquareImageView;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,17 +42,23 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        if (position==0) {
+        if (position == 0) {
             return 0;
-        }else {
+        } else if (position == mComments.size() + 1) {
+            return -1;
+        } else {
             return position;
         }
     }
 
     @Override
     public TopicDetailVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType ==0) {
+        if (viewType == 0) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.topics_detail_item_top, parent, false);
+            TopicDetailVH vh = new TopicDetailVH(view);
+            return vh;
+        } else if (viewType == -1) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.comic_detail_item_buttom, parent, false);
             TopicDetailVH vh = new TopicDetailVH(view);
             return vh;
         }
@@ -61,7 +69,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
 
     @Override
     public void onBindViewHolder(TopicDetailVH holder, int position) {
-        if (position ==0) {
+        if (position == 0) {
             holder.nickName.setText(feedsBean.getUser().getNickname());
             holder.mImgeTopicAvatar.setRounImage(feedsBean.getUser().getAvatar_url());
             holder.mTvContent.setText(feedsBean.getContent().getText());
@@ -83,21 +91,23 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
                     mContext.startActivity(intent);
                 }
             });
-        }else {
-            holder.tvUseName.setText(mComments.get(position-1).getUser().getNickname());
-            holder.mImageView.setRounImage(mComments.get(position-1).getUser().getAvatar_url());
+        } else if (position == mComments.size() + 1) {
+            return;
+        } else {
+            holder.tvUseName.setText(mComments.get(position - 1).getUser().getNickname());
+            holder.mImageView.setRounImage(mComments.get(position - 1).getUser().getAvatar_url());
             //转化时间格式 MM-dd HH:mm
-            String date = DateUtil.formatLongToDates(mComments.get(position-1).getCreated_at()*1000);
+            String date = DateUtil.formatLongToDates(mComments.get(position - 1).getCreated_at() * 1000);
             holder.mTvCreatTime.setText(date);
-            holder.mTvCreatDetails.setText(mComments.get(position-1).getContent());
-            holder.mTvLikeNum.setText(mComments.get(position-1).getLikes_count() + "");
+            holder.mTvCreatDetails.setText(mComments.get(position - 1).getContent());
+            holder.mTvLikeNum.setText(mComments.get(position - 1).getLikes_count() + "");
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return mComments.size()+1;
+        return mComments.size() + 2;
     }
 
     class TopicDetailVH extends RecyclerView.ViewHolder {
@@ -116,6 +126,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
         private final TextView mCommentsCount;
         private final ImageView mImgCommentNumber;
         private final LinearLayout mLayoutComment;
+
         public TopicDetailVH(View itemView) {
             super(itemView);
             tvUseName = (TextView) itemView.findViewById(R.id.tv_user_name);
@@ -135,6 +146,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
         }
     }
+
     /**
      * 动态添加控件
      *
@@ -154,7 +166,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             layoutParams.setMargins(5, 5, 5, 5);
             mGridlayoutPost.addView(imageView, layoutParams);
             imageView.setImage(imageBase + images.get(0));
-//            setListener(imageBase, (ArrayList<String>) images, imageView, 0);
+            setListener(imageBase, (ArrayList<String>) images, imageView, 0);
         } else if (images.size() == 2 || images.size() == 4) {
             //重新设置mGridlayoutPost的宽高
             ViewGroup.LayoutParams params;
@@ -178,7 +190,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase + images.get(i));
-//                setListener(imageBase, (ArrayList<String>) images, imageView, i);
+                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         } else {
             //遍历集合 动态添加
@@ -195,8 +207,21 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
                 layoutParams.setMargins(5, 5, 5, 5);
                 mGridlayoutPost.addView(imageView, layoutParams);
                 imageView.setImage(imageBase + images.get(i));
-//                setListener(imageBase, (ArrayList<String>) images, imageView, i);
+                setListener(imageBase, (ArrayList<String>) images, imageView, i);
             }
         }
+    }
+
+    private void setListener(final String imageBase, final ArrayList<String> images, SquareImageView imageView, final int finalI) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, BrowseImageActivity.class);
+                intent.putExtra("imageBase", imageBase);
+                intent.putStringArrayListExtra("images", images);
+                intent.putExtra("position", finalI);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

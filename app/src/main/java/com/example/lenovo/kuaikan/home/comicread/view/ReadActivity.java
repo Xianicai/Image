@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.home.comicread.view.adapter.CommentAdapter;
-import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenter;
+import com.example.lenovo.kuaikan.home.comicread.view.adapter.CommentAdapter;
+import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
 import com.example.lenovo.kuaikan.widget.XRecyclerview;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ReadActivity extends BaseActivity implements IReadView {
 
@@ -203,10 +202,4 @@ public class ReadActivity extends BaseActivity implements IReadView {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

@@ -10,10 +10,13 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lenovo.kuaikan.DiscoverFragment;
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
+import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
+import com.example.lenovo.kuaikan.utils.RxBus;
+import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.utils.js.OutWebActivity;
 import com.example.lenovo.kuaikan.widget.AcrossImageTv;
 import com.example.lenovo.kuaikan.widget.ImgTvlayout;
@@ -310,9 +313,10 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onClick(View view) {
                     if (finalI == 3) {
-                        new ClassifyFragment();
+                        RxBus.getDefault().post(DiscoverFragment.CHANGE_CURRENT_ITEM);
+                    }else {
+                        OutWebActivity.toOutWeb(mContext,bannerUrls.get(finalI).getTarget_web_url(),bannerUrls.get(finalI).getTarget_title());
                     }
-                    OutWebActivity.toOutWeb(mContext,bannerUrls.get(finalI).getTarget_web_url(),bannerUrls.get(finalI).getTarget_title());
                 }
             });
         }
@@ -393,12 +397,14 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         banner.setDelegate(new BGABanner.Delegate() {
             @Override
             public void onBannerItemClick(BGABanner bgaBanner, View view, Object o, int i) {
-//                Intent intent = new Intent(mContext, ComicDetailActivity.class);
-//                intent.putExtra("comicId",bannerUrls.get(i).getTarget_id()+ "");
-//                mContext.startActivity(intent);
-                Intent intent = new Intent(mContext, ReadActivity.class);
-                intent.putExtra("comicsId", bannerUrls.get(i).getTarget_id()+ "");
-                mContext.startActivity(intent);
+                if (StringUtil.isNotEmpty(bannerUrls.get(i).getTarget_web_url())) {
+                   OutWebActivity.toOutWeb(mContext,bannerUrls.get(i).getTarget_web_url(),bannerUrls.get(i).getTarget_title());
+                }else {
+                    Intent intent = new Intent(mContext, ReadActivity.class);
+                    intent.putExtra("comicsId", bannerUrls.get(i).getTarget_id()+ "");
+                    mContext.startActivity(intent);
+                }
+
             }
         });
     }
