@@ -17,9 +17,11 @@ public class ComicDetailPresenter extends BasePresenter<ImpComicDatailView> {
         mModel = new ComicDetailModel();
     }
     public void getComicDetaiData(String comicId){
+        getMvpView().showLoadingDialog();
         mModel.getComicsData(comicId,new Callback<ComicDetailBean>() {
             @Override
             public void execute(ComicDetailBean obj) {
+                getMvpView().cancelLoadingDialog();
                 if (obj != null) {
                     getMvpView().getComicsDataSuccess(obj);
                 }

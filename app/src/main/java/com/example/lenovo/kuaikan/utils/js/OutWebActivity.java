@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
-import com.pitt.loadingview.library.LoadingView;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import butterknife.BindView;
 
@@ -24,8 +24,8 @@ public class OutWebActivity extends BaseActivity {
     ReadActionBar mActionBar;
     @BindView(R.id.outweb)
     WebView mOutweb;
-    @BindView(R.id.loadingview)
-    LoadingView mLoadingview;
+    @BindView(R.id.progressBar)
+    CircleProgressBar mProgressBar;
 
     @Override
     public int getlayoutId() {
@@ -66,9 +66,9 @@ public class OutWebActivity extends BaseActivity {
                 super.onProgressChanged(view, newProgress);
                 // newProgress 1-100
                 if (newProgress == 100) {
-                    mLoadingview.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.GONE);
                 } else {
-                    mLoadingview.setVisibility(View.VISIBLE);
+                    mProgressBar.setVisibility(View.VISIBLE);
                 }
             }
         });

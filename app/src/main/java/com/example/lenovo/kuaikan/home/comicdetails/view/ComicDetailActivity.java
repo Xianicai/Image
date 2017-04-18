@@ -13,10 +13,11 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
 import com.example.lenovo.kuaikan.home.comicdetails.presenter.ComicDetailPresenter;
+import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,6 +47,8 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     ImageView mImageRight;
     @BindView(R.id.view_tab)
     View mViewTab;
+    @BindView(R.id.progressBar)
+    CircleProgressBar mProgressBar;
     private String[] mTitles = new String[]{"详情", "选集"};
     private ComicDetailFragment mComicDetailFragment;
     private ComicsListFragment mComicsListFragment;
@@ -112,12 +115,12 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
 
     @Override
     public void showLoadingDialog() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void cancelLoadingDialog() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -164,10 +167,9 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
 
     }
 
-    public static void toDetail(Context context,String comicId ) {
+    public static void toDetail(Context context, String comicId) {
         Intent intent = new Intent(context, ComicDetailActivity.class);
-        intent.putExtra("comicId",comicId);
+        intent.putExtra("comicId", comicId);
         context.startActivity(intent);
     }
-
 }
