@@ -9,7 +9,6 @@ import com.example.lenovo.kuaikan.base.BaseActivity;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenter;
-import com.example.lenovo.kuaikan.home.comicread.view.adapter.CommentAdapter;
 import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
 import com.example.lenovo.kuaikan.widget.XRecyclerview;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ReadActivity extends BaseActivity implements IReadView {
 
@@ -27,7 +25,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     ReadActionBar mReadActionBar;
     @BindView(R.id.read_recyclerview)
     XRecyclerview mReadRecyclerview;
-    @BindView(R.id.comment_recyclerview)
+//    @BindView(R.id.comment_recyclerview)
     XRecyclerview mCommentRecyclerview;
     private ReadPresenter mReadPresenter;
     private List<String> mImages;
@@ -35,7 +33,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     private String mComicsId;
     private List<BeanRead.DataBean.ImageInfosBean> mImageInfos;
     private List<BeanComments.DataBean.CommentsBean> mComments;
-    private CommentAdapter mCommentAdapter;
+//    private CommentAdapter mCommentAdapter;
     private LinearLayoutManager mCommentlayoutManager;
 
 
@@ -57,7 +55,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
         //漫画的Recyclerview
         mImages = new ArrayList<>();
         mImageInfos = new ArrayList<>();
-        mReadAdapter = new ReadAdapter(mImages, this, mImageInfos);
+        mReadAdapter = new ReadAdapter(mImages, this, mImageInfos,mComicsId);
         mReadRecyclerview.setAdapter(mReadAdapter);
         mReadPresenter = new ReadPresenter();
         mReadPresenter.bindView(this);
@@ -72,11 +70,11 @@ public class ReadActivity extends BaseActivity implements IReadView {
 //                return false;
 //            }
 //        };
-        mCommentlayoutManager = new LinearLayoutManager(this);
-        mCommentRecyclerview.setLayoutManager(mCommentlayoutManager);
-        mComments = new ArrayList<>();
-        mCommentAdapter = new CommentAdapter(mComments, this);
-        mCommentRecyclerview.setAdapter(mCommentAdapter);
+//        mCommentlayoutManager = new LinearLayoutManager(this);
+//        mCommentRecyclerview.setLayoutManager(mCommentlayoutManager);
+//        mComments = new ArrayList<>();
+//        mCommentAdapter = new CommentAdapter(mComments, this);
+//        mCommentRecyclerview.setAdapter(mCommentAdapter);
 
         mReadActionBar.setOnReadActionBarListener(new ReadActionBar.OnReadActionBarListener() {
             @Override
@@ -167,8 +165,9 @@ public class ReadActivity extends BaseActivity implements IReadView {
     @Override
     public void getCommentDataSuccss(BeanComments beanComments) {
         if (beanComments != null) {
-            mComments.addAll(beanComments.getData().getComments());
-            mCommentAdapter.notifyDataSetChanged();
+//            mComments.addAll(beanComments.getData().getComments());
+//            mReadAdapter.notifyDataSetChanged();
+//            mCommentAdapter.notifyDataSetChanged();
         }
 
     }
@@ -183,10 +182,4 @@ public class ReadActivity extends BaseActivity implements IReadView {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
