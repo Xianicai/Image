@@ -104,7 +104,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
         mComicTablayout.setupWithViewPager(mComicViewpager);
         mComicViewpager.setCurrentItem(1);
         ComicDetailPresenter presenter = new ComicDetailPresenter();
-        presenter.attachView(this);
+        presenter.bindView(this);
         presenter.getComicDetaiData(mComicId);
     }
 

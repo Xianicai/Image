@@ -105,7 +105,7 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
             }
         });
         mPresenter = new CommentPresenter();
-        mPresenter.attachView(this);
+        mPresenter.bindView(this);
         firstId = 0;
         if (mCommentType == 1) {
             mPresenter.getComicsComment(type, feedId, firstId);

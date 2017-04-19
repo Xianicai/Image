@@ -40,7 +40,7 @@ public class TopicDetailActivity extends BaseActivity implements ImpTopDetailVie
         mFeedsBean = getIntent().getParcelableExtra("mFeedsBean");
         String feedId = getIntent().getStringExtra("feedId");
         TopDetailPresenter presenter = new TopDetailPresenter();
-        presenter.attachView(this);
+        presenter.bindView(this);
         presenter.getTopDetialData(feedId);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerview.setLayoutManager(layoutManager);

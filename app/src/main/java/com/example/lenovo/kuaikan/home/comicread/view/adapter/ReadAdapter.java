@@ -16,9 +16,11 @@ import java.util.List;
  * Created by Zhanglibin on 2017/4/8.
  */
 
-public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder> {
+public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<String> mImages;
     List<BeanRead.DataBean.ImageInfosBean> imageInfos;
+    private Context mContext;
+
 
     public ReadAdapter(List<String> mImages, Context context, List<BeanRead.DataBean.ImageInfosBean> imageInfos) {
         this.mImages = mImages;
@@ -26,33 +28,47 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder
         this.imageInfos = imageInfos;
     }
 
-    private Context mContext;
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mImages.size()) {
+           return -1 ;
+        }
+        return super.getItemViewType(position);
+    }
 
     @Override
-    public ReadViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder  onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == -1) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item_centre, parent, false);
+            ReadButtomVH holder = new ReadButtomVH(view);
+            return holder;
+        }
         View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item, parent, false);
         ReadViewHolder holder = new ReadViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ReadViewHolder holder, int position) {
-        ViewGroup.LayoutParams layoutParams = holder.mImageView.getLayoutParams();
-        if (imageInfos != null) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position != mImages.size()) {
+            ViewGroup.LayoutParams layoutParams = ((ReadViewHolder)holder).mImageView.getLayoutParams();
+            if (imageInfos != null && imageInfos.size()!=0) {
 //            layoutParams.height =  DensityUtil.sp2px(mContext,imageInfos.get(position).getHeight());
 //            layoutParams.width =  DensityUtil.sp2px(mContext,imageInfos.get(position).getWidth());
 //            layoutParams.height =  imageInfos.get(position).getHeight();
-            layoutParams.width =  imageInfos.get(position).getWidth();
-            layoutParams.height = (int) (imageInfos.get(position).getHeight()/1.2);
-            layoutParams.width = (int) (imageInfos.get(position).getWidth()/1.2);
-            holder.mImageView.setLayoutParams(layoutParams);
+                layoutParams.width =  imageInfos.get(position).getWidth();
+                layoutParams.height = (int) (imageInfos.get(position).getHeight()/1.2);
+                layoutParams.width = (int) (imageInfos.get(position).getWidth()/1.2);
+                ((ReadViewHolder)holder).mImageView.setLayoutParams(layoutParams);
+            }
+            ((ReadViewHolder)holder).mImageView.setImage(mImages.get(position));
         }
-        holder.mImageView.setImage(mImages.get(position));
+
     }
 
     @Override
     public int getItemCount() {
-        return mImages.size();
+        return mImages.size()+1;
     }
 
     class ReadViewHolder extends RecyclerView.ViewHolder {
@@ -62,6 +78,11 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.ReadViewHolder
         public ReadViewHolder(View itemView) {
             super(itemView);
             mImageView = (GlideImageView) itemView.findViewById(R.id.glideimageview);
+        }
+    }
+    class ReadButtomVH extends RecyclerView.ViewHolder {
+        public ReadButtomVH(View itemView) {
+            super(itemView);
         }
     }
 }

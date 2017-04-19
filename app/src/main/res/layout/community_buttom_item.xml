@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_contribute"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_community_text"
+        android:drawableLeft="@mipmap/ic_discover_contribute_articles"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="我要投稿"
+        android:textColor="#368df4"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_all_production"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_all_production"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/bg_community_text"
+        android:drawableLeft="@mipmap/ic_discover_all_articles"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="全部作品"
+        android:textColor="#EE675D"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_contribute"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</android.support.constraint.ConstraintLayout>

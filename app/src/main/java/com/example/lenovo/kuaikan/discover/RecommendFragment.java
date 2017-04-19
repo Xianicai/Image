@@ -68,7 +68,9 @@ public class RecommendFragment extends BaseFragment {
 
                     ReqRecomm reqRecomm = new ReqRecomm();
                     reqRecomm.getNetData(ServerData.DISCOVER_RECOMMEND);
+
                     BeanRecomm beanRecomm = reqRecomm.getT();
+                    mInfosBeen.clear();
                     mInfosBeen.addAll(beanRecomm.getData().getInfos());
                     mRecommAdapter.notifyDataSetChanged();
                 }

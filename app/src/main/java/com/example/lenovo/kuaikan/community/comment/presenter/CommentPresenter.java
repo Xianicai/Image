@@ -1,6 +1,6 @@
 package com.example.lenovo.kuaikan.community.comment.presenter;
 
-import com.example.lenovo.kuaikan.base.basemvp.BasePresenter;
+import com.example.lenovo.kuaikan.base.basemvp.BasePresenterImpl;
 import com.example.lenovo.kuaikan.community.comment.model.CommentModel;
 import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.view.ICommentView;
@@ -10,7 +10,7 @@ import com.example.lenovo.kuaikan.utils.Callback;
  * Created by Zhanglibin on 2017/4/13.
  */
 
-public class CommentPresenter extends BasePresenter<ICommentView> {
+public class CommentPresenter extends BasePresenterImpl<ICommentView> {
     CommentModel mModel;
 
     public CommentPresenter() {
@@ -23,7 +23,7 @@ public class CommentPresenter extends BasePresenter<ICommentView> {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
-                    getMvpView().getServerDataSuccess(obj);
+                    getView().getServerDataSuccess(obj);
                 }
             }
         });
@@ -36,7 +36,7 @@ public class CommentPresenter extends BasePresenter<ICommentView> {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
-                    getMvpView().getServerDataSuccess(obj);
+                    getView().getServerDataSuccess(obj);
                 }
             }
         });

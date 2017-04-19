@@ -1,6 +1,6 @@
 package com.example.lenovo.kuaikan.community.topicdetail.presenter;
 
-import com.example.lenovo.kuaikan.base.basemvp.BasePresenter;
+import com.example.lenovo.kuaikan.base.basemvp.BasePresenterImpl;
 import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.topicdetail.model.TopicDetailModel;
 import com.example.lenovo.kuaikan.community.topicdetail.view.ImpTopDetailView;
@@ -10,7 +10,7 @@ import com.example.lenovo.kuaikan.utils.Callback;
  * Created by Zhanglibin on 2017/4/17.
  */
 
-public class TopDetailPresenter extends BasePresenter<ImpTopDetailView> {
+public class TopDetailPresenter extends BasePresenterImpl<ImpTopDetailView> {
 
     private final TopicDetailModel mModel;
 
@@ -22,7 +22,7 @@ public class TopDetailPresenter extends BasePresenter<ImpTopDetailView> {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
-                    getMvpView().getCommentDataSuccess(obj);
+                    getView().getCommentDataSuccess(obj);
                 }
             }
         });

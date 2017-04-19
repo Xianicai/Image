@@ -1,25 +1,13 @@
 package com.example.lenovo.kuaikan.base.basemvp;
 
 /**
- * Created by Zhanglibin on 2017/4/8.
+ * Created by Zhanglibin on 2017/4/19.
  */
 
-public class BasePresenter<T extends BaseView> {
+public interface BasePresenter <T extends BaseView> {
+    void bindView(T view);
 
-    private T view;
+    T getView();
 
-    public void attachView(BaseView view){
-        this.view = (T) view;
-    }
-
-    public T getMvpView(){
-        return view;
-    }
-
-    public void detachView(){
-        if (view!=null){
-            view = null;
-        }
-    }
-
+    void release();
 }

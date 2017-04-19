@@ -35,9 +35,11 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context mContext;
     private List<BeanRecomm.DataBean.InfosBean> mInfosBeen;
 
+    private  int size;
     public RecommAdapter(Context context, List<BeanRecomm.DataBean.InfosBean> mInfosBeen) {
         mContext = context;
         this.mInfosBeen = mInfosBeen;
+        size = mInfosBeen.size();
     }
 
     @Override
@@ -80,6 +82,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case 11:
                 mView = 2;
                 break;
+            case 12:
+                mView = 4;
+                break;
         }
         return mView;
     }
@@ -97,7 +102,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case 3:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recom_item_across_imgtv, parent, false);
                 return new RecommAdapter.RecommAcrossImgTvViewHolder(view);
-
+            case 4:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.community_buttom_item, parent, false);
+                return new RecommAdapter.RecommButtomVH(view);
 
         }
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recomm_fragment_item_imgtv, parent, false);
@@ -107,7 +114,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        if (mInfosBeen.size() == 0) {
+            return;
+        }
         switch (position) {
             case 0: //第一个item
                 initBanner(((RecommBannerViewHolder) holder).mBanner, mInfosBeen.get(position).getBanners());
@@ -132,7 +141,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 break;
             case 6:
                 ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
-                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(),position);
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(), position);
                 break;
             case 7:
                 ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
@@ -148,16 +157,35 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 break;
             case 10:
                 ((RecommAcrossImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
-                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(),position);
+                initAcrossImgTv(((RecommAcrossImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics(), position);
                 break;
             case 11:
                 ((RecommImgTvViewHolder) holder).mTvTitle.setText(mInfosBeen.get(position).getTitle());
                 initImgTvThree(((RecommImgTvViewHolder) holder).mGridlayout, mInfosBeen.get(position).getTopics());
                 break;
+            case 12:
+                initClick((RecommButtomVH) holder);
+                break;
         }
 
 
     }
+
+    private void initClick(RecommButtomVH holder) {
+        holder.mTvContribute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        holder.mTvAllProduction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RxBus.getDefault().post(DiscoverFragment.CHANGE_CURRENT_ITEM);
+            }
+        });
+    }
+
 
     private void initAcrossImgTv(GridLayout gridlayout, final List<BeanRecomm.DataBean.InfosBean.TopicsBean> topics, int position) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
@@ -169,9 +197,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount);//列数 列宽的比例 weight=1
             AcrossImageTv acrossImageTv = new AcrossImageTv(mContext);
             acrossImageTv.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
-            if (position ==10) {
+            if (position == 10) {
                 acrossImageTv.addLayout(2);
-            }else {
+            } else {
                 acrossImageTv.addLayout(1);
             }
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
@@ -182,11 +210,11 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             gridlayout.addView(acrossImageTv, layoutParams);
             acrossImageTv.setImage(topics.get(i).getPic());
 
-            if (position ==10) {
+            if (position == 10) {
                 acrossImageTv.setLayoutCommentTitle(topics.get(i).getRecommended_text());
                 acrossImageTv.setLayoutCommentStyle(topics.get(i).getTitle());
                 acrossImageTv.setLayoutCommentCommentNum(NumberUtil.buildTenThousand(topics.get(i).getLikes_count()));
-            }else {
+            } else {
                 acrossImageTv.setLayoutLabeName(topics.get(i).getTitle());
                 acrossImageTv.setLayoutLabeLable(topics.get(i).getLabel_text());
                 acrossImageTv.setLayoutLabeFrome(topics.get(i).getRecommended_text());
@@ -195,7 +223,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             acrossImageTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ComicDetailActivity.toDetail(mContext,topics.get(finalI).getTarget_id()+"");
+                    ComicDetailActivity.toDetail(mContext, topics.get(finalI).getTarget_id() + "");
                 }
             });
         }
@@ -218,7 +246,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
-            layoutParams.setMargins(0, 20, 0, 0);
+            layoutParams.setMargins(0, 20, 0, 30);
             gridlayout.addView(imgTvlayout, layoutParams);
             imgTvlayout.setImage(beanList.get(i).getPic());
             imgTvlayout.setTextNmae(beanList.get(i).getRecommended_text());
@@ -227,7 +255,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imgTvlayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ComicDetailActivity.toDetail(mContext,beanList.get(finalI).getTarget_id()+"");
+                    ComicDetailActivity.toDetail(mContext, beanList.get(finalI).getTarget_id() + "");
                 }
             });
         }
@@ -242,7 +270,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             GlideImageView imageView = new GlideImageView(mContext);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(320,105));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(320, 105));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
@@ -271,9 +299,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
             if (i == 0 || i == 2) {
-                layoutParams.setMargins(45, 5, 0, 10);
+                layoutParams.setMargins(35, 5, 0, 10);
             } else {
-                layoutParams.setMargins(10, 5, 0, 10);
+                layoutParams.setMargins(0, 5, 35, 10);
             }
 
             gridlayout.addView(imgTvlayout, layoutParams);
@@ -284,7 +312,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imgTvlayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ComicDetailActivity.toDetail(mContext,beanList.get(finalI).getTarget_id()+"");
+                    ComicDetailActivity.toDetail(mContext, beanList.get(finalI).getTarget_id() + "");
                 }
             });
         }
@@ -314,8 +342,8 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 public void onClick(View view) {
                     if (finalI == 3) {
                         RxBus.getDefault().post(DiscoverFragment.CHANGE_CURRENT_ITEM);
-                    }else {
-                        OutWebActivity.toOutWeb(mContext,bannerUrls.get(finalI).getTarget_web_url(),bannerUrls.get(finalI).getTarget_title());
+                    } else {
+                        OutWebActivity.toOutWeb(mContext, bannerUrls.get(finalI).getTarget_web_url(), bannerUrls.get(finalI).getTarget_title());
                     }
                 }
             });
@@ -325,7 +353,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mInfosBeen.size();
+        return mInfosBeen.size()+1;
     }
 
 
@@ -377,6 +405,19 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    class RecommButtomVH extends RecyclerView.ViewHolder {
+
+        private final TextView mTvContribute;
+        private final TextView mTvAllProduction;
+
+        public RecommButtomVH(View itemView) {
+            super(itemView);
+            mTvContribute = (TextView) itemView.findViewById(R.id.tv_contribute);
+            mTvAllProduction =
+                    (TextView) itemView.findViewById(R.id.tv_all_production);
+        }
+    }
+
     private void initBanner(BGABanner banner, final List<BeanRecomm.DataBean.InfosBean.BannersBean> bannerUrls) {
         List<String> mBannerUrls;
         mBannerUrls = new ArrayList<String>();
@@ -398,10 +439,10 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onBannerItemClick(BGABanner bgaBanner, View view, Object o, int i) {
                 if (StringUtil.isNotEmpty(bannerUrls.get(i).getTarget_web_url())) {
-                   OutWebActivity.toOutWeb(mContext,bannerUrls.get(i).getTarget_web_url(),bannerUrls.get(i).getTarget_title());
-                }else {
+                    OutWebActivity.toOutWeb(mContext, bannerUrls.get(i).getTarget_web_url(), bannerUrls.get(i).getTarget_title());
+                } else {
                     Intent intent = new Intent(mContext, ReadActivity.class);
-                    intent.putExtra("comicsId", bannerUrls.get(i).getTarget_id()+ "");
+                    intent.putExtra("comicsId", bannerUrls.get(i).getTarget_id() + "");
                     mContext.startActivity(intent);
                 }
 
