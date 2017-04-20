@@ -1,5 +1,7 @@
 package com.example.lenovo.kuaikan.community.comment.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -82,5 +84,11 @@ public class CommentActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+    public static void toComment(Context context,String feedId,int type){
+        Intent intent = new Intent(context, CommentActivity.class);
+        intent.putExtra(CommentActivity.COMMENT_TYPE, type);
+        intent.putExtra("feedId", feedId);
+        context.startActivity(intent);
     }
 }

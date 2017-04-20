@@ -30,6 +30,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String mComicsId;
     private CommentAdapter mCommentAdapter;
     List<BeanComments.DataBean.CommentsBean> mComments;
+    private XRecyclerview mCommentRecyclerview;
 
     public ReadAdapter(List<String> mImages, Context context, List<BeanRead.DataBean.ImageInfosBean> imageInfos,
                        String mComicsId) {
@@ -41,76 +42,81 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-//        if (position == mImages.size()) {
-//            return -1;
-//        } else if (position == mImages.size() + 1) {
-//            return -2;
-//        }
-//        return super.getItemViewType(position);
-        if (position == 0) {
-           return 0;
-        }else {
-            return 1;
+        if (position == mImages.size()) {
+            return -1;
+        } else if (position == mImages.size() + 1) {
+            return -2;
         }
+        return super.getItemViewType(position);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (viewType == -1) {
-//            View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item_centre, parent, false);
-//            ReadButtomVH holder = new ReadButtomVH(view);
-//            return holder;
-//        } else if (viewType == -2) {
-//            View view = LayoutInflater.from(mContext).inflate(R.layout.read_comment_item, parent, false);
-//            ReadCommentVH holder = new ReadCommentVH(view);
-//            return holder;
-//        }
-//        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item, parent, false);
-//        ReadViewHolder holder = new ReadViewHolder(view);
-//        return holder;
-        if (viewType ==0) {
+        if (viewType == -1) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item_centre, parent, false);
             ReadButtomVH holder = new ReadButtomVH(view);
             return holder;
+        } else if (viewType == -2) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.read_comment_item, parent, false);
+            ReadCommentVH holder = new ReadCommentVH(view);
+            return holder;
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.read_comment_item, parent, false);
-        ReadCommentVH holder = new ReadCommentVH(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_read_item, parent, false);
+        ReadViewHolder holder = new ReadViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        if (holder instanceof ReadViewHolder) {
-//            ViewGroup.LayoutParams layoutParams = ((ReadViewHolder) holder).mImageView.getLayoutParams();
-//            if (imageInfos != null && imageInfos.size() != 0) {
-//                layoutParams.width = imageInfos.get(position).getWidth();
-//                layoutParams.height = (int) (imageInfos.get(position).getHeight() / 1.2);
-//                layoutParams.width = (int) (imageInfos.get(position).getWidth() / 1.2);
-//                ((ReadViewHolder) holder).mImageView.setLayoutParams(layoutParams);
-//            }
-//            ((ReadViewHolder) holder).mImageView.setImage(mImages.get(position));
-//        } else if (holder instanceof ReadButtomVH) {
-//            return;
-//        } else
- if (holder instanceof ReadCommentVH) {
-            XRecyclerview commentRecyclerview = ((ReadCommentVH) holder).mCommentRecyclerview;
-            LinearLayoutManager mCommentlayoutManager =new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
+        if (holder instanceof ReadViewHolder) {
+            ViewGroup.LayoutParams layoutParams = ((ReadViewHolder) holder).mImageView.getLayoutParams();
+            if (imageInfos != null && imageInfos.size() != 0) {
+                layoutParams.width = imageInfos.get(position).getWidth();
+                layoutParams.height = (int) (imageInfos.get(position).getHeight() / 1.2);
+                layoutParams.width = (int) (imageInfos.get(position).getWidth() / 1.2);
+                ((ReadViewHolder) holder).mImageView.setLayoutParams(layoutParams);
             }
-        };
-            commentRecyclerview.setLayoutManager(mCommentlayoutManager);
+            ((ReadViewHolder) holder).mImageView.setImage(mImages.get(position));
+        } else if (holder instanceof ReadButtomVH) {
+            return;
+        } else if (holder instanceof ReadCommentVH) {
+            mCommentRecyclerview = ((ReadCommentVH) holder).mCommentRecyclerview;
+            LinearLayoutManager mCommentlayoutManager = new LinearLayoutManager(mContext,
+                    LinearLayoutManager.VERTICAL, false) {
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+            mCommentRecyclerview.setLayoutManager(mCommentlayoutManager);
             mComments = new ArrayList<>();
             mCommentAdapter = new CommentAdapter(mComments, mContext);
-            commentRecyclerview.setAdapter(mCommentAdapter);
+            mCommentRecyclerview.setAdapter(mCommentAdapter);
             getData();
+//            评论列表的滑动监听
+            RecyclerView reclerView = mCommentRecyclerview.getReclerView();
+            reclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+                    layoutParams.height = (int) (mCommentAdapter.getItemAllHight() / 2);
+                    recyclerView.setLayoutParams(layoutParams);
+                    notifyDataSetChanged();
+                    mCommentAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+//                mLayoutComment.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 
     private void getData() {
         final ReqComments req = new ReqComments();
-
         String url = Urls.parse(Urls.COMICSID_COMMENTS, mComicsId);
         NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
 
@@ -121,7 +127,6 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     BeanComments beanComments = req.getT();
                     mComments.addAll(beanComments.getData().getComments());
                     mCommentAdapter.notifyDataSetChanged();
-
                 }
             }
 
@@ -143,10 +148,8 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-//        return mImages.size() + 2;
-        return 2;
+        return mImages.size() + 2;
     }
-
 
     class ReadViewHolder extends RecyclerView.ViewHolder {
 
@@ -172,9 +175,5 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             mCommentRecyclerview = (XRecyclerview) itemView.findViewById(R.id.comment_recyclerview);
         }
-    }
-
-    public void commentAdapterNotify() {
-        mCommentAdapter.notifyDataSetChanged();
     }
 }

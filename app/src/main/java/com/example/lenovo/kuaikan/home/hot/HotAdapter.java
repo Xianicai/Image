@@ -96,19 +96,13 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         hotViewHolder.mCommentsCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra(CommentActivity.COMMENT_TYPE, 1);
-                intent.putExtra("feedId", mComicsBeen.get(i).getId() + "");
-                context.startActivity(intent);
+                CommentActivity.toComment(context,mComicsBeen.get(i).getId() + "",1);
             }
         });
         hotViewHolder.mImgCommentNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra(CommentActivity.COMMENT_TYPE, 1);
-                intent.putExtra("feedId", mComicsBeen.get(i).getId() + "");
-                context.startActivity(intent);
+                CommentActivity.toComment(context,mComicsBeen.get(i).getId() + "",1);
             }
         });
         hotViewHolder.mLayoutTop.setOnClickListener(new View.OnClickListener() {

@@ -39,10 +39,6 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     TextView mTvComicTitle;
     @BindView(R.id.tv_read)
     TextView mTvRead;
-    @BindView(R.id.image_back)
-    ImageView mImageBack;
-    @BindView(R.id.tv_title)
-    TextView mTvTitle;
     @BindView(R.id.image_right)
     ImageView mImageRight;
     @BindView(R.id.view_tab)
@@ -129,7 +125,6 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
             ComicDetailBean.DataBean data = detailBean.getData();
             mComicsListFragment.setData(data);
             mComicDetailFragment.setData(data);
-            mTvTitle.setText(data.getTitle());
             mTvComicName.setText(data.getTitle());
             mTvLabel.setText(data.getCategory().get(0));
             mImgeCover.setImage(data.getCover_image_url());
@@ -144,12 +139,12 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     }
 
 
-    @OnClick({R.id.image_back, R.id.tv_comic_title, R.id.tv_read})
+    @OnClick({R.id.tv_comic_title, R.id.tv_read})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.image_back:
-                onBackPressed();
-                break;
+//            case R.id.image_back:
+//                onBackPressed();
+//                break;
             case R.id.tv_comic_title:
 //                toRaed();
                 break;

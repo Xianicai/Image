@@ -1,137 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content">
 
-        <android.support.design.widget.AppBarLayout
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.example.lenovo.kuaikan.widget.ReadActionBar
+                android:id="@+id/readActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:rightText="全集"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-                <com.example.lenovo.kuaikan.widget.ReadActionBar
-                    android:id="@+id/readActionBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:rightText="全集"
-                    />
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/read_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_comment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="#f9f5f5"
+        android:visibility="visible"
+        app:layout_behavior="com.example.lenovo.kuaikan.widget.FooterBehavior">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/bg_cemment_buttome"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="5dp"
+            android:text="发表评论"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-                <com.example.lenovo.kuaikan.widget.XRecyclerview
-                    android:id="@+id/read_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="25dp"
+            android:src="@mipmap/ic_commenting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-                <!--<com.example.lenovo.kuaikan.widget.XRecyclerview-->
-                    <!--android:id="@+id/comment_recyclerview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:nestedScrollingEnabled="false"/>-->
+        <ImageView
+            android:id="@+id/image_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:src="@mipmap/ic_home_comment_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/image_share"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:background="@color/linear_divider"/>-->
+        <ImageView
+            android:id="@+id/image_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:src="@mipmap/bg_home_share_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="115dp"-->
-                    <!--android:background="@color/white"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:paddingTop="15dp"-->
-                    <!--android:text="查看更多评论"-->
-                    <!--android:textSize="16sp"/>-->
-
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
-    <!--<android.support.constraint.ConstraintLayout-->
-        <!--android:id="@+id/layout_comment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:background="#f9f5f5"-->
-        <!--android:visibility="gone">-->
-        <!--<TextView-->
-            <!--android:layout_width="180dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/bg_cemment_buttome"-->
-            <!--android:text="发表评论"-->
-            <!--android:paddingLeft="50dp"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:paddingBottom="5dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginStart="15dp"/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_commenting"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--android:layout_marginLeft="35dp"-->
-            <!--android:layout_marginStart="25dp"/>-->
-        <!--<ImageView-->
-            <!--android:id="@+id/image_comment"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_home_comment_normal"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintRight_toLeftOf="@+id/image_share"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--android:layout_marginRight="45dp"/>-->
-        <!--<ImageView-->
-            <!--android:id="@+id/image_share"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/bg_home_share_normal"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--android:layout_marginRight="35dp"/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/tv_comment_num"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/bg_cemment_num"-->
-            <!--android:text="123"-->
-            <!--android:textSize="12sp"-->
-            <!--android:textColor="@color/white"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingLeft="5dp"-->
-            <!--android:paddingRight="5dp"-->
-            <!--app:layout_constraintLeft_toLeftOf="@+id/image_comment"/>-->
-    <!--</android.support.constraint.ConstraintLayout>-->
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_cemment_num"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="123"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/image_comment"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

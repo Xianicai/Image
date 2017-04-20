@@ -1,7 +1,6 @@
 package com.example.lenovo.kuaikan.home.comicread.view;
 
 import com.example.lenovo.kuaikan.base.basemvp.BaseView;
-import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 
 /**
@@ -11,7 +10,6 @@ import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 public interface IReadView extends BaseView{
 
     void getServerDataSuccess(BeanRead data);
-    void getCommentDataSuccss(BeanComments beanComments);
     void getServerDataFail();
 
 }
