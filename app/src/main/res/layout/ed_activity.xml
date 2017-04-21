@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/transparent"
+            app:expandedTitleMarginStart="15dp"
+            app:expandedTitleMarginBottom="50dp"
+            app:collapsedTitleGravity="center"
+            app:collapsedTitleTextAppearance="@style/Toolbar.TitleText"
+            app:expandedTitleTextAppearance="@style/Toolbar.TitleText"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <com.example.lenovo.kuaikan.widget.glide.GlideImageView
+                    android:id="@+id/imge_cover"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:placeholderImage="@mipmap/ic_login_invisible"/>
+
+                <TextView
+                    android:id="@+id/tv_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/bg_comic_detail_labe"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imge_cover"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="有趣"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@mipmap/ic_nav_back_normal"
+                app:titleTextColor="#FFFFFF"
+                app:theme="@style/ToolbarTheme"
+                app:titleTextAppearance="@style/Toolbar.TitleText">
+
+                <ImageView
+                    android:id="@+id/image_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@mipmap/ic_topic_detail_subscribe_button_normal"
+                    />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</android.support.design.widget.CoordinatorLayout>

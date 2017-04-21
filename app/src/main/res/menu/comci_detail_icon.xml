@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/toolbar_action"
+        android:icon="@mipmap/ic_topic_detail_subscribe_button_normal"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="12dp"
+        android:title="Action"
+        app:showAsAction="always"/>
+</menu>

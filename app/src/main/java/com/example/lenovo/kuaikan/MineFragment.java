@@ -1,7 +1,6 @@
 package com.example.lenovo.kuaikan;
 
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,7 +57,6 @@ public class MineFragment extends BaseFragment {
 
     @OnClick(R.id.img_headportrait)
     public void onViewClicked() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
+        LoginActivity.toLogin(getActivity());
     }
 }

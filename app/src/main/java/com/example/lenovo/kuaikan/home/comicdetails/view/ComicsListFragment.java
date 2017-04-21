@@ -31,13 +31,15 @@ public class ComicsListFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),
+//                LinearLayoutManager.VERTICAL, false) {
+//            @Override
+//            public boolean canScrollVertically() {
+//                return false;
+//            }
+//        };
+        mComicListRecyclerview.setNestedScrollingEnabled(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mComicListRecyclerview.setLayoutManager(layoutManager);
         mComics = new ArrayList<>();
         mAdapter = new ComicListAdapter(getActivity(), mComics);

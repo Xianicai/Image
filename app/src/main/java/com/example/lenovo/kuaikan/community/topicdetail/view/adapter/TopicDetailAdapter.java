@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.lenovo.kuaikan.LoginActivity;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.community.BeanFeeds;
 import com.example.lenovo.kuaikan.community.BrowseImageActivity;
@@ -91,6 +92,12 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
                     mContext.startActivity(intent);
                 }
             });
+            holder.mImageAttention.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LoginActivity.toLogin(mContext);
+                }
+            });
         } else if (position == mComments.size() + 1) {
             return;
         } else {
@@ -126,6 +133,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
         private final TextView mCommentsCount;
         private final ImageView mImgCommentNumber;
         private final LinearLayout mLayoutComment;
+        private final ImageView mImageAttention;
 
         public TopicDetailVH(View itemView) {
             super(itemView);
@@ -144,6 +152,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             mGridlayoutPost = (GridLayout) itemView.findViewById(R.id.gridlayout_post);
             mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
+            mImageAttention = (ImageView) itemView.findViewById(R.id.image_attention);
         }
     }
 

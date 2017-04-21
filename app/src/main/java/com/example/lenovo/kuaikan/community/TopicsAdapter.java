@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.lenovo.kuaikan.LoginActivity;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.community.topicdetail.view.TopicDetailActivity;
@@ -77,6 +78,12 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 TopicDetailActivity.toTopDetail(mContext,mFeedsBeen.get(position),mFeedsBeen.get(position).getFeed_id() + "");
             }
         });
+        holder.mImageAttention.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.toLogin(mContext);
+            }
+        });
 
     }
 
@@ -98,6 +105,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         private final ImageView mImgCommentNumber;
         private final LinearLayout mLayoutComment;
         private final LinearLayout mLayout;
+        private final ImageView mImageAttention;
 
         public TopicsViewHolder(View itemView) {
             super(itemView);
@@ -112,6 +120,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
             mLayout = (LinearLayout) itemView.findViewById(R.id.layout);
+            mImageAttention = (ImageView) itemView.findViewById(R.id.image_attention);
         }
     }
 

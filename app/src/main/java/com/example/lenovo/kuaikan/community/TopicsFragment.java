@@ -58,7 +58,6 @@ public class TopicsFragment extends BaseFragment {
                 mFeedsBeen.clear();
                 getServerData(true, false);
             }
-
             @Override
             public void onLoadMore() {
                 if (mPageSize >17) {
@@ -69,16 +68,6 @@ public class TopicsFragment extends BaseFragment {
         });
         mFeedsBeen = new ArrayList<>();
         mTopicsAdapter = new TopicsAdapter(getActivity(),mFeedsBeen);
-//        mTopicsAdapter.setImageClickListener(new TopicsAdapter.ImageClickListener() {
-//            @Override
-//            public void imageClickListener() {
-//                Intent intent = new Intent(getActivity(), BrowseImageActivity.class);
-//                intent.putExtra("imageBase",imageBase)
-//                intent.putStringArrayListExtra("images",images);
-//                intent.putExtra("position",position);
-//                startActivity(intent);
-//            }
-//        });
         mTopicsXRecyclerview.setAdapter(mTopicsAdapter);
         getServerData(false,false);
     }

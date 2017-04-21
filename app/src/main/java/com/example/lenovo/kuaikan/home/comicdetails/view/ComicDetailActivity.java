@@ -3,14 +3,18 @@ package com.example.lenovo.kuaikan.home.comicdetails.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lenovo.kuaikan.LoginActivity;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
@@ -20,17 +24,27 @@ import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ComicDetailActivity extends BaseActivity implements ImpComicDatailView {
+
     @BindView(R.id.imge_cover)
     GlideImageView mImgeCover;
-    @BindView(R.id.tv_comic_name)
-    TextView mTvComicName;
     @BindView(R.id.tv_label)
     TextView mTvLabel;
+    @BindView(R.id.image_right)
+    ImageView mImageRight;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.app_bar)
+    AppBarLayout mAppBar;
     @BindView(R.id.comic_tablayout)
     TabLayout mComicTablayout;
+    @BindView(R.id.view_tab)
+    View mViewTab;
     @BindView(R.id.comic_viewpager)
     ViewPager mComicViewpager;
     @BindView(R.id.view)
@@ -39,10 +53,6 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     TextView mTvComicTitle;
     @BindView(R.id.tv_read)
     TextView mTvRead;
-    @BindView(R.id.image_right)
-    ImageView mImageRight;
-    @BindView(R.id.view_tab)
-    View mViewTab;
     @BindView(R.id.progressBar)
     CircleProgressBar mProgressBar;
     private String[] mTitles = new String[]{"详情", "选集"};
@@ -57,6 +67,25 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+//        mAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+//                if (verticalOffset == 0) {
+//                    mTvTitle.setText("");
+//                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+//                    mTvTitle.setText("有梦想的人不睡觉");
+//                } else {
+//                    mTvTitle.setText("");
+//                }
+//            }
+//        });
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                                                  @Override
+                                                  public void onClick(View v) {
+                                                      onBackPressed();
+                                                  }
+                                              }
+        );
         mComicId = getIntent().getStringExtra("comicId");
         //给TabLayout添加标签
         for (int i = 0; i < mTitles.length; i++) {
@@ -125,7 +154,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
             ComicDetailBean.DataBean data = detailBean.getData();
             mComicsListFragment.setData(data);
             mComicDetailFragment.setData(data);
-            mTvComicName.setText(data.getTitle());
+            mCollapsingToolbarLayout.setTitle(data.getTitle());
             mTvLabel.setText(data.getCategory().get(0));
             mImgeCover.setImage(data.getCover_image_url());
             mTvComicTitle.setText(data.getComics().get(0).getTitle());
@@ -139,12 +168,12 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
     }
 
 
-    @OnClick({R.id.tv_comic_title, R.id.tv_read})
+    @OnClick({R.id.image_right, R.id.tv_comic_title, R.id.tv_read})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-//            case R.id.image_back:
-//                onBackPressed();
-//                break;
+            case R.id.image_right:
+                LoginActivity.toLogin(this);
+                break;
             case R.id.tv_comic_title:
 //                toRaed();
                 break;
@@ -166,5 +195,12 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
         Intent intent = new Intent(context, ComicDetailActivity.class);
         intent.putExtra("comicId", comicId);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
