@@ -158,6 +158,10 @@ public class TabAcionBar extends RelativeLayout {
         switchView.setTabRightSelected(context, tabRightSelected);
     }
 
+    public void setSwitchViewBackgroud(int leftBackgroud, int rightBackgroud) {
+        switchView.setTabBackgroud(leftBackgroud, rightBackgroud);
+    }
+
     // mTabActionBar和mViewpager的监听事件
     public void SetTabActionBarListener(final Context context, final TabAcionBar tabAcionBar, final ViewPager viewPager) {
         tabAcionBar.setOnTabClickListener(new TabAcionBar.OnTabClickListener() {

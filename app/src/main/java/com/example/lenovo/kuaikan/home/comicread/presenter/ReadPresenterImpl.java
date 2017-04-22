@@ -22,10 +22,12 @@ public class ReadPresenterImpl extends BasePresenterImpl<IReadView> implements R
 
     @Override
     public void getSeverData(String comicsId) {
+        getView().showLoadingDialog();
         mModel.getSeverData(new Callback<BeanRead>() {
             @Override
             public void execute(BeanRead beanRead) {
                 if (beanRead != null) {
+                    getView().cancelLoadingDialog();
                     getView().getServerDataSuccess(beanRead);
                 }
             }

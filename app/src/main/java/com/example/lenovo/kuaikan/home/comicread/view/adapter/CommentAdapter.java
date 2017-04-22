@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
@@ -24,7 +25,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<BeanComments.DataBean.CommentsBean> mComments;
     Context mContext;
     private int mHeight;
-
+   private String comicId;
     public CommentAdapter(List<BeanComments.DataBean.CommentsBean> mComments, Context context) {
         this.mComments = mComments;
         mContext = context;
@@ -64,7 +65,12 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((CommentViewHolder) holder).mTvLikeNum.setText(mComments.get(position).getLikes_count() + "");
             mHeight += ((CommentViewHolder) holder).mConstraintLayout.getLayoutParams().height;
         } else if (holder instanceof CommentButtomHV) {
-
+            ((CommentButtomHV) holder).mLayoutItemBottom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CommentActivity.toComment(mContext,comicId,1);
+                }
+            });
         }
 
 
@@ -98,11 +104,17 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     class CommentButtomHV extends RecyclerView.ViewHolder {
+
+        private final ConstraintLayout mLayoutItemBottom;
+
         public CommentButtomHV(View itemView) {
             super(itemView);
+            mLayoutItemBottom = (ConstraintLayout) itemView.findViewById(R.id.layout_item_bottom);
         }
     }
-
+public void setComicId(String comicId ){
+    this.comicId = comicId;
+}
     public int getItemAllHight() {
         return mHeight;
     }

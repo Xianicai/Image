@@ -71,9 +71,18 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof ReadViewHolder) {
             ViewGroup.LayoutParams layoutParams = ((ReadViewHolder) holder).mImageView.getLayoutParams();
             if (imageInfos != null && imageInfos.size() != 0) {
-                layoutParams.width = imageInfos.get(position).getWidth();
-                layoutParams.height = (int) (imageInfos.get(position).getHeight() / 1.2);
-                layoutParams.width = (int) (imageInfos.get(position).getWidth() / 1.2);
+//                if (imageInfos.get(position).getHeight() >= 1400) {
+//                    layoutParams.height = (int) (imageInfos.get(position).getHeight() / 2.25);
+//                    layoutParams.width = (int) (imageInfos.get(position).getWidth() / 2.25);
+//                } else if (imageInfos.get(position).getHeight() >= 1000) {
+//                    layoutParams.height = (int) (imageInfos.get(position).getHeight() / 1.2);
+//                    layoutParams.width = (int) (imageInfos.get(position).getWidth() / 1.2);
+//                } else {
+//                    layoutParams.height = (int) (imageInfos.get(position).getHeight() * 1.7);
+//                    layoutParams.width = (int) (imageInfos.get(position).getWidth() * 1.7);
+//                }
+                layoutParams.height = 834;
+                layoutParams.width = 1067;
                 ((ReadViewHolder) holder).mImageView.setLayoutParams(layoutParams);
             }
             ((ReadViewHolder) holder).mImageView.setImage(mImages.get(position));
@@ -92,6 +101,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mComments = new ArrayList<>();
             mCommentAdapter = new CommentAdapter(mComments, mContext);
             mCommentRecyclerview.setAdapter(mCommentAdapter);
+            mCommentAdapter.setComicId(mComicsId);
             getData();
 //            评论列表的滑动监听
             RecyclerView reclerView = mCommentRecyclerview.getReclerView();

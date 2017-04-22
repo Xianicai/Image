@@ -122,12 +122,12 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
 
     @Override
     public void showLoadingDialog() {
-
+        mHotCommentRecyclerview.showLoading(true);
     }
 
     @Override
     public void cancelLoadingDialog() {
-
+        mHotCommentRecyclerview.showLoading(false);
     }
 
 

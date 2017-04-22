@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -38,11 +40,16 @@ class CentreAdapter extends RecyclerView.Adapter<CentreAdapter.ContentViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ContentViewHolder holder, int position) {
+    public void onBindViewHolder(ContentViewHolder holder, final int position) {
         holder.mImageVertical.setImage(list.get(position).getVertical_image_url());
         holder.mTvTitle.setText(list.get(position).getTitle());
         holder.mTvNickname.setText(list.get(position).getUser().getNickname());
-
+        holder.mLayoutItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ComicDetailActivity.toDetail(mContext,list.get(position).getId()+"");
+            }
+        });
         if (StringUtil.isNotBlank(mSort) && StringUtil.equals("1", mSort)) {
             holder.mRecLayout.setVisibility(View.VISIBLE);
             holder.mLikesContent.setText(NumberUtil.buildTenThousand(list.get(position).getLikes_count()));
@@ -73,6 +80,7 @@ class CentreAdapter extends RecyclerView.Adapter<CentreAdapter.ContentViewHolder
         private final RelativeLayout mHotLayout;
         private final TextView mComicTitle;
         private final TextView mTvViewCount;
+        private final LinearLayout mLayoutItem;
 
         ContentViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +93,7 @@ class CentreAdapter extends RecyclerView.Adapter<CentreAdapter.ContentViewHolder
             mTvViewCount = (TextView) itemView.findViewById(R.id.tv_view_count);
             mHotLayout = (RelativeLayout) itemView.findViewById(R.id.hot_layout);
             mComicTitle = (TextView) itemView.findViewById(R.id.latest_comic_title);
+            mLayoutItem = (LinearLayout) itemView.findViewById(R.id.layout_item);
         }
 
     }

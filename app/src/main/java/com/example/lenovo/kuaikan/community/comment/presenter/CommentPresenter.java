@@ -19,10 +19,12 @@ public class CommentPresenter extends BasePresenterImpl<ICommentView> {
 
     //    获取状态的评论
     public void getServerData(String type, String feedId, int limit) {
+        getView().showLoadingDialog();
         mModel.getServerData(feedId, type, limit, new Callback<CommentBean>() {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
+                    getView().cancelLoadingDialog();
                     getView().getServerDataSuccess(obj);
                 }
             }
@@ -32,10 +34,12 @@ public class CommentPresenter extends BasePresenterImpl<ICommentView> {
 
     //    获取漫画的评论
     public void getComicsComment(String type, String feedId, int limit) {
+        getView().showLoadingDialog();
         mModel.getComicsComment(feedId, type, limit, new Callback<CommentBean>() {
             @Override
             public void execute(CommentBean obj) {
                 if (obj != null) {
+                    getView().cancelLoadingDialog();
                     getView().getServerDataSuccess(obj);
                 }
             }

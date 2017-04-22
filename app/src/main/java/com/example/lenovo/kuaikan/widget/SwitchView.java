@@ -125,12 +125,14 @@ public class SwitchView extends LinearLayout {
         this.selectedRight = selectedRight;
         checkTabSelected(context);
     }
-public  void setTabBackgroud(int leftBackgroud,int rightBackgroud){
-    GradientDrawable leftGrad = (GradientDrawable) mTvLeft.getBackground();
-    leftGrad.setColor(leftBackgroud);
-    GradientDrawable rightGrad = (GradientDrawable) mTvRight.getBackground();
-    rightGrad.setColor(rightBackgroud);
-}
+
+    public void setTabBackgroud(int leftBackgroud, int rightBackgroud) {
+        GradientDrawable leftGrad = (GradientDrawable) mTvLeft.getBackground();
+        leftGrad.setColor(leftBackgroud);
+        GradientDrawable rightGrad = (GradientDrawable) mTvRight.getBackground();
+        rightGrad.setColor(rightBackgroud);
+    }
+
     //设置tab选中的样式
     private void checkTabSelected(Context context) {
         if (selectedLeft) {

@@ -1,7 +1,6 @@
 package com.example.lenovo.kuaikan.home.hot;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +29,7 @@ import java.util.List;
  * Created by Zhanglibin on 2017/3/30.
  */
 
-public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
+public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.HotViewHolder> {
 
 
     private List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen;//要显示的数据
@@ -50,7 +49,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         void onItemLongClick(View view, int position);
     }
 
-    public HotAdapter(List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen, Context context) {
+    public DailyAdapter(List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen, Context context) {
         this.mComicsBeen = mComicsBeen;
         this.context = context;
     }
@@ -108,9 +107,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.HotViewHolder> {
         hotViewHolder.mLayoutTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ComicDetailActivity.class);
-                intent.putExtra("comicId",mComicsBeen.get(i).getTopic().getId() + "");
-                context.startActivity(intent);
+                ComicDetailActivity.toDetail(context,mComicsBeen.get(i).getTopic().getId() + "");
             }
         });
         hotViewHolder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {

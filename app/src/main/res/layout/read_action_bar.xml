@@ -24,13 +24,13 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@+id/image_left"
-        app:layout_constraintRight_toRightOf="@+id/tv_right"
+        app:layout_constraintLeft_toRightOf="@+id/image_left"
+        app:layout_constraintRight_toLeftOf="@+id/tv_right"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="有梦想的人不睡觉"/>
 
     <TextView

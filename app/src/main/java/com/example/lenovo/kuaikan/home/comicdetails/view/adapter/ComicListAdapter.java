@@ -1,6 +1,7 @@
 package com.example.lenovo.kuaikan.home.comicdetails.view.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
+import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -52,21 +54,27 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicListAdapter.Comi
     }
 
     @Override
-    public void onBindViewHolder(ComicListVH holder, int position) {
+    public void onBindViewHolder(ComicListVH holder, final int position) {
         if (position == 0) {
             holder.mTvMsg.setText(topTitle);
         } else {
-            holder.mImageCover.setImage(mComics.get(position).getCover_image_url());
-            holder.mTvTitle.setText(mComics.get(position).getTitle());
-            holder.mTvCreatTime.setText(DateUtil.formatIntToDates(mComics.get(position).getCreated_at()));
-            holder.mTvLikeNum.setText("   "+NumberUtil.buildTenThousand(mComics.get(position).getLikes_count()));
+            holder.mImageCover.setImage(mComics.get(position-1).getCover_image_url());
+            holder.mTvTitle.setText(mComics.get(position-1).getTitle());
+            holder.mTvCreatTime.setText(DateUtil.formatIntToDates(mComics.get(position-1).getCreated_at()*1000));
+            holder.mTvLikeNum.setText("   "+NumberUtil.buildTenThousand(mComics.get(position-1).getLikes_count()));
+            holder.mLayoutItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ReadActivity.toRead(mContext,mComics.get(position-1).getId()+"");
+                }
+            });
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return mComics.size();
+        return mComics.size()+1;
     }
 
     class ComicListVH extends RecyclerView.ViewHolder {
@@ -76,6 +84,7 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicListAdapter.Comi
         private final TextView mTvCreatTime;
         private final TextView mTvLikeNum;
         private final TextView mTvMsg;
+        private final ConstraintLayout mLayoutItem;
 
         public ComicListVH(View itemView) {
             super(itemView);
@@ -84,6 +93,7 @@ public class ComicListAdapter extends RecyclerView.Adapter<ComicListAdapter.Comi
             mTvCreatTime = (TextView) itemView.findViewById(R.id.tv_creat_time);
             mTvLikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
             mTvMsg = (TextView) itemView.findViewById(R.id.tv_msg);
+            mLayoutItem = (ConstraintLayout) itemView.findViewById(R.id.layout_item);
 
         }
     }

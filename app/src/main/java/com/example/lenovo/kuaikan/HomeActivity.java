@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -15,7 +17,9 @@ import butterknife.BindView;
 public class HomeActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
     @BindView(R.id.bottomNavigationBar)
-    BottomNavigationBar mBottomNavigationBar;
+    public BottomNavigationBar mBottomNavigationBar;
+    @BindView(R.id.iamge_splash)
+    public ImageView mIamgeSplash;
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private CommunityFragment mCommunityFragment;
@@ -38,6 +42,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+
         mBottomNavigationBar
                 .setActiveColor(R.color.yellow)
                 .setInActiveColor(R.color.black)
@@ -59,6 +64,8 @@ public class HomeActivity extends BaseActivity implements BottomNavigationBar.On
                 .setFirstSelectedPosition(0)
                 .initialise();
         mBottomNavigationBar.setTabSelectedListener(this);
+        //初始化加载启动页图片
+        mIamgeSplash.setVisibility(View.VISIBLE);
     }
 
     private void setDefaultFragment() {
@@ -70,7 +77,6 @@ public class HomeActivity extends BaseActivity implements BottomNavigationBar.On
         transaction.commit();
 
     }
-
 
 
     /**

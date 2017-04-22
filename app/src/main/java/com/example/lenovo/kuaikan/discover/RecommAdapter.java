@@ -175,7 +175,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder.mTvContribute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ReadActivity.toRead(mContext,"7522");
             }
         });
         holder.mTvAllProduction.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +270,7 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             GlideImageView imageView = new GlideImageView(mContext);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(320, 105));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(320, 90));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setDefaultImage(R.mipmap.ic_common_placeholder_ss);
             //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
@@ -299,9 +299,9 @@ public class RecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
             if (i == 0 || i == 2) {
-                layoutParams.setMargins(35, 5, 0, 10);
+                layoutParams.setMargins(45, 10, 0, 10);
             } else {
-                layoutParams.setMargins(0, 5, 35, 10);
+                layoutParams.setMargins(0, 10, 30, 10);
             }
 
             gridlayout.addView(imgTvlayout, layoutParams);

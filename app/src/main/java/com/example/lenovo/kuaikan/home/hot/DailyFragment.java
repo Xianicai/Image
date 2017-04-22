@@ -1,12 +1,14 @@
 package com.example.lenovo.kuaikan.home.hot;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.lenovo.kuaikan.HomeActivity;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.LazyFragmen;
 import com.example.lenovo.kuaikan.home.comicread.view.ReadActivity;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Zhanglibin on 2017/3/28.
@@ -32,13 +36,14 @@ public class DailyFragment extends LazyFragmen {
     XRecyclerview mXRecyclerview;
     @BindView(R.id.imge_data_null)
     ImageView mImgeDataNull;
+    Unbinder unbinder;
     private List<String> mList;
     private LinearLayoutManager mManager;
     private List<BeanHomeHot.DataBean.ComicsBean> mComicsBeen;
     private int mPageSize;
     private int mPage = 0;
     private String mTabId;
-    private HotAdapter mHotAdapter;
+    private DailyAdapter mDailyAdapter;
     private boolean mIsPrepared;
 
     @Override
@@ -92,26 +97,28 @@ public class DailyFragment extends LazyFragmen {
             }
         });
         mComicsBeen = new ArrayList<>();
-        mHotAdapter = new HotAdapter(mComicsBeen, getActivity());
-        mHotAdapter.setHotAdapterEvent(new HotAdapter.HotAdapterEvent() {
+        mDailyAdapter = new DailyAdapter(mComicsBeen, getActivity());
+        mDailyAdapter.setHotAdapterEvent(new DailyAdapter.HotAdapterEvent() {
             @Override
             public void event() {
-                Intent intent = new Intent(getActivity(), ReadActivity.class);
-                intent.putExtra("comicsId",mHotAdapter.getComicsId());
-                startActivity(intent);
+                ReadActivity.toRead(getActivity(),mDailyAdapter.getComicsId());
             }
         });
-        mXRecyclerview.setAdapter(mHotAdapter);
+        mXRecyclerview.setAdapter(mDailyAdapter);
     }
 
     private void getServerData(final Boolean refresh, final Boolean loadMore) {
-        mXRecyclerview.showLoading(true);
+        if (mXRecyclerview != null) {
+            mXRecyclerview.showLoading(true);
+        }
         final ReqHot req = new ReqHot();
         String url = Urls.parse(Urls.HOME_HOT_SUNDAY, mTabId, mPage);
         NetAsynTask.connectByGet(url, null, req, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (req.code == 200) {
+                    ((HomeActivity)getActivity()).mIamgeSplash.setVisibility(View.GONE);
+                    ((HomeActivity)getActivity()).mBottomNavigationBar.setVisibility(View.VISIBLE);
                     if (refresh) {
                         mComicsBeen.clear();
                         mXRecyclerview.refreshFinish();
@@ -120,7 +127,7 @@ public class DailyFragment extends LazyFragmen {
                         mXRecyclerview.loadMoreFinish();
                     }
                     //初始化一个bean用保存本次请求下来的数据
-                    List<BeanHomeHot.DataBean.ComicsBean> bean ;
+                    List<BeanHomeHot.DataBean.ComicsBean> bean;
                     BeanHomeHot beanHomeHot = req.getT();
                     bean = beanHomeHot.getData()
                             .getComics();
@@ -139,7 +146,7 @@ public class DailyFragment extends LazyFragmen {
                     //清空为下次请求做准备
                     bean.clear();
                     //设置adapter
-                    mHotAdapter.notifyDataSetChanged();
+                    mDailyAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -161,4 +168,17 @@ public class DailyFragment extends LazyFragmen {
     }
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

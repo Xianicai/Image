@@ -33,11 +33,16 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/tv_labe"
             android:text="妖怪新娘"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/tv_all_comic"
+            android:layout_marginRight="10dp"
+            android:lines="1"
+            android:ellipsize="end"
             android:layout_marginLeft="5dp"
             android:textColor="@color/black"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/tv_all_comic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="全集"
@@ -77,6 +82,10 @@
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
             android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/img_likeNumber"
+            android:paddingRight="15dp"
+            android:lines="1"
+            android:ellipsize="end"
             android:text="第57话 可爱的睡颜"
             android:textColor="@color/gray"
             android:textSize="16sp"/>

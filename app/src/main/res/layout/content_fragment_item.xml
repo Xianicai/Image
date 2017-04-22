@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:toos="http://schemas.android.com/tools"
+              android:id="@+id/layout_item"
               android:layout_width="match_parent"
-              android:layout_height="100dp"
+              android:layout_height="90dp"
               android:paddingBottom="10dp"
               android:paddingLeft="15dp"
               android:paddingRight="15dp">
@@ -11,7 +12,7 @@
     <com.example.lenovo.kuaikan.widget.glide.GlideImageView
         android:id="@+id/image_vertical"
         android:layout_width="130dp"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:scaleType="fitXY"
         app:placeholderImage="@mipmap/ic_common_placeholder_l_750"/>
 
@@ -20,7 +21,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="20dp"
         android:paddingTop="5dp">
 
         <TextView
@@ -37,14 +38,14 @@
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:maxLines="1"
             toos:text="有梦想的人不睡觉，夏尼采"/>
 
         <RelativeLayout
             android:id="@+id/rec_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:visibility="gone">
 
             <ImageView
@@ -87,7 +88,7 @@
         <RelativeLayout
             android:id="@+id/hot_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:visibility="gone">
 
             <ImageView
@@ -99,17 +100,17 @@
             <TextView
                 android:id="@+id/tv_view_count"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
+                android:layout_height="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/img_view_count"
+                android:gravity="center_vertical"
                 toos:text="123亿"/>
         </RelativeLayout>
 
         <TextView
             android:id="@+id/latest_comic_title"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:textColor="@color/gray"

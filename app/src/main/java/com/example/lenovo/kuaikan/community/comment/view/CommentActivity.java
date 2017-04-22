@@ -45,6 +45,7 @@ public class CommentActivity extends BaseActivity {
     public void initViews(Bundle savedInstanceState) {
         final String feedId = getIntent().getStringExtra("feedId");
         final int commentType = getIntent().getIntExtra(COMMENT_TYPE, 0);
+//        mTabactionbar.setSwitchViewBackgroud(R.color.commentleft,R.color.commentright);
         mTabactionbar.setTabActionBarBackgroud(R.color.white);
         FragmentPagerAdapter fragmentPagerAdapter =
                 new FragmentPagerAdapter(this.getSupportFragmentManager()) {

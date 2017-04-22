@@ -1,5 +1,7 @@
 package com.example.lenovo.kuaikan.home.comicread.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenterImpl;
 import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
 import com.example.lenovo.kuaikan.widget.ReadActionBar;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class ReadActivity extends BaseActivity implements IReadView {
     TextView mTvCommentNum;
     @BindView(R.id.layout_comment)
     ConstraintLayout mLayoutComment;
+    @BindView(R.id.progressBar)
+    CircleProgressBar mProgressBar;
     private ReadPresenterImpl mReadPresenter;
     private List<String> mImages;
     private ReadAdapter mReadAdapter;
@@ -83,18 +88,18 @@ public class ReadActivity extends BaseActivity implements IReadView {
 
     @Override
     public void showLoadingDialog() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void cancelLoadingDialog() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void getServerDataSuccess(BeanRead data) {
         if (data != null) {
-            comicId = data.getData().getPrevious_comic_id()+"";
+            comicId = data.getData().getPrevious_comic_id() + "";
             mTvCommentNum.setText(data.getData().getComments_count() + "");
             mReadActionBar.setActionBarTitle(data.getData().getTitle());
             mImageInfos.addAll(data.getData().getImage_infos());
@@ -113,12 +118,17 @@ public class ReadActivity extends BaseActivity implements IReadView {
     public void onBackPressed() {
         super.onBackPressed();
     }
+    public static void toRead(Context context,String comicsId){
+        Intent intent = new Intent(context, ReadActivity.class);
+        intent.putExtra("comicsId", comicsId);
+        context.startActivity(intent);
+    }
 
     @OnClick({R.id.image_comment, R.id.image_share, R.id.layout_comment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_comment:
-                CommentActivity.toComment(this,comicId,1);
+                CommentActivity.toComment(this, comicId, 1);
                 break;
             case R.id.image_share:
                 break;
