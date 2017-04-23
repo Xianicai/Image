@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.utils.ThemeManagerUtil;
 
 import butterknife.BindView;
 
@@ -30,9 +29,16 @@ public class HomeActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        //透明状态栏
+//
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+////透明导航栏
+//
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setDefaultFragment();
         //设置状态栏
-        ThemeManagerUtil.smartTintManager(this, R.color.yellow);
+//        ThemeManagerUtil.smartTintManager(this, R.color.yellow);
     }
 
     @Override

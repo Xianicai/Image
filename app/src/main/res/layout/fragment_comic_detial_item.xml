@@ -35,6 +35,16 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="60dp"
         tools:text="2017.04.14"/>
+    <ImageView
+        android:id="@+id/image_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_common_praise_normal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_like_num"
+        android:layout_marginTop="32dp"
+        android:padding="10dp"
+        />
     <TextView
         android:id="@+id/tv_like_num"
         android:layout_width="wrap_content"
@@ -43,8 +53,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="40dp"
         android:layout_marginRight="15dp"
-        android:drawableLeft="@mipmap/ic_common_praise_normal"
-        tools:text="    657"/>
+        tools:text="657"/>
     <TextView
         android:id="@+id/tv_detail"
         android:layout_width="0dp"

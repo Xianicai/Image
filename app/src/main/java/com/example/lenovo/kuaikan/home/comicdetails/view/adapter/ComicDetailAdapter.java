@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicCommentBean;
 import com.example.lenovo.kuaikan.home.comicdetails.model.data.ComicDetailBean;
+import com.example.lenovo.kuaikan.utils.Animators;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -59,7 +61,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ComicDetailHV holder, int position) {
+    public void onBindViewHolder(final ComicDetailHV holder, final int position) {
         if (position == 0) {
             holder.mTvInfo.setText(mDescription);
             holder.mImageAuthorHead.setRounImage(mAvatarUrl);
@@ -70,8 +72,23 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
             holder.mImageAuthor.setRounImage(reviews.get(position).getUser().getAvatar_url());
             holder.mTvName.setText(reviews.get(position).getUser().getNickname());
             holder.mTvCreatTime.setText(DateUtil.formatLongToDates(reviews.get(position).getCreated_at()));
-            holder.mTvlikeNum.setText("   " + reviews.get(position).getLikes_count() + "");
+            holder.mTvlikeNum.setText(reviews.get(position).getLikes_count() + "");
             holder.mTvDetail.setText(reviews.get(position).getContent());
+            holder.mImageLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (reviews.get(position).isIs_liked()) {
+                        holder.mImageLike.setImageResource(R.mipmap.ic_common_praise_normal);
+                        reviews.get(position).setLikes_count(reviews.get(position).getLikes_count() - 1);
+                    } else {
+                        holder.mImageLike.setImageResource(R.mipmap.ic_common_praise_highlighted_like_pressed);
+                        reviews.get(position).setLikes_count(reviews.get(position).getLikes_count() + 1);
+                    }
+                    reviews.get(position).setIs_liked(!reviews.get(position).isIs_liked());
+//                点赞动画
+                    Animators.doLikeAnimator(holder.mImageLike, ComicDetailAdapter.this);
+                }
+            });
         }
 
     }
@@ -93,6 +110,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
         private final TextView mTvAuthorName;
         private final TextView mTvFollow;
         private final TextView mTvHot;
+        private final ImageView mImageLike;
 
         public ComicDetailHV(View itemView) {
             super(itemView);
@@ -101,6 +119,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter<ComicDetailAdapter.
             mTvName = (TextView) itemView.findViewById(R.id.tv_name);
             mTvlikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
             mTvDetail = (TextView) itemView.findViewById(R.id.tv_detail);
+            mImageLike = (ImageView) itemView.findViewById(R.id.image_like);
 //            作者简介
             mTvInfo = (TextView) itemView.findViewById(R.id.tv_info);
             mImageAuthorHead = (GlideImageView) itemView.findViewById(R.id.image_author_head);

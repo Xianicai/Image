@@ -15,6 +15,7 @@ import com.example.lenovo.kuaikan.LoginActivity;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.community.topicdetail.view.TopicDetailActivity;
+import com.example.lenovo.kuaikan.utils.Animators;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
@@ -50,7 +51,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
     }
 
     @Override
-    public void onBindViewHolder(TopicsViewHolder holder, final int position) {
+    public void onBindViewHolder(final TopicsViewHolder holder, final int position) {
         holder.nickName.setText(mFeedsBeen.get(position).getUser().getNickname());
         holder.mImgeTopicAvatar.setRounImage(mFeedsBeen.get(position).getUser().getAvatar_url());
         holder.mTvContent.setText(mFeedsBeen.get(position).getContent().getText());
@@ -84,6 +85,21 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
                 LoginActivity.toLogin(mContext);
             }
         });
+        holder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mFeedsBeen.get(position).isIs_liked()) {
+                    holder.mImgLikeNumber.setImageResource(R.mipmap.ic_common_praise_normal);
+                    mFeedsBeen.get(position).setLikes_count(mFeedsBeen.get(position).getLikes_count() - 1);
+                } else {
+                    holder.mImgLikeNumber.setImageResource(R.mipmap.ic_common_praise_highlighted_like_pressed);
+                    mFeedsBeen.get(position).setLikes_count(mFeedsBeen.get(position).getLikes_count() + 1);
+                }
+                mFeedsBeen.get(position).setIs_liked(!mFeedsBeen.get(position).isIs_liked());
+//                点赞动画
+                Animators.doLikeAnimator(holder.mImgLikeNumber, TopicsAdapter.this);
+            }
+        });
 
     }
 
@@ -106,6 +122,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
         private final LinearLayout mLayoutComment;
         private final LinearLayout mLayout;
         private final ImageView mImageAttention;
+        private final ImageView mImgLikeNumber;
 
         public TopicsViewHolder(View itemView) {
             super(itemView);
@@ -121,6 +138,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
             mLayout = (LinearLayout) itemView.findViewById(R.id.layout);
             mImageAttention = (ImageView) itemView.findViewById(R.id.image_attention);
+            mImgLikeNumber = (ImageView) itemView.findViewById(R.id.img_likeNumber);
         }
     }
 

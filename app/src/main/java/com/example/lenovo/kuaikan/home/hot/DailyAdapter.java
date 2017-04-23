@@ -13,14 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.base.basemvp.BaseReq;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.home.comicdetails.view.ComicDetailActivity;
 import com.example.lenovo.kuaikan.home.hot.bean.BeanHomeHot;
+import com.example.lenovo.kuaikan.utils.Animators;
 import com.example.lenovo.kuaikan.utils.NumberUtil;
-import com.example.lenovo.kuaikan.utils.ToastUtil;
-import com.example.lenovo.kuaikan.utils.Urls;
-import com.example.lenovo.kuaikan.utils.netutil.NetAsynTask;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
 import java.util.List;
@@ -64,7 +61,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.HotViewHolde
     }
 
     @Override
-    public void onBindViewHolder(HotViewHolder hotViewHolder, final int i) {
+    public void onBindViewHolder(final HotViewHolder hotViewHolder, final int i) {
         //获取要填充的值
         String labelText = mComicsBeen.get(i).getLabel_text();
         String coverImageUrl = mComicsBeen.get(i).getCover_image_url();
@@ -95,48 +92,34 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.HotViewHolde
         hotViewHolder.mCommentsCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommentActivity.toComment(context,mComicsBeen.get(i).getId() + "",1);
+                CommentActivity.toComment(context, mComicsBeen.get(i).getId() + "", 1);
             }
         });
         hotViewHolder.mImgCommentNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommentActivity.toComment(context,mComicsBeen.get(i).getId() + "",1);
+                CommentActivity.toComment(context, mComicsBeen.get(i).getId() + "", 1);
             }
         });
         hotViewHolder.mLayoutTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ComicDetailActivity.toDetail(context,mComicsBeen.get(i).getTopic().getId() + "");
+                ComicDetailActivity.toDetail(context, mComicsBeen.get(i).getTopic().getId() + "");
             }
         });
         hotViewHolder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final BaseReq req = new BaseReq();
-                String url = Urls.parse(Urls.COMICSID_LIKE, mComicsBeen.get(i).getId() + "");
-                NetAsynTask.connectByPost(url, null, req, new NetAsynTask.CallBack() {
-                    @Override
-                    public void onGetSucc() {
-                        if (req.code == 200) {
-                            ToastUtil.showMessage("点赞成功n(*≧▽≦*)n");
-                        }
-                    }
-
-                    @Override
-                    public void onGetFinished() {
-                    }
-
-                    @Override
-                    public void onGetFaild() {
-
-                    }
-
-                    @Override
-                    public void onGetError() {
-
-                    }
-                });
+                if (mComicsBeen.get(i).isIs_liked()) {
+                    hotViewHolder.mImgLikeNumber.setImageResource(R.mipmap.ic_home_praise_normal);
+                    mComicsBeen.get(i).setLikes_count(mComicsBeen.get(i).getLikes_count() - 1);
+                } else {
+                    hotViewHolder.mImgLikeNumber.setImageResource(R.mipmap.ic_home_praise_pressed);
+                    mComicsBeen.get(i).setLikes_count(mComicsBeen.get(i).getLikes_count() + 1);
+                }
+                mComicsBeen.get(i).setIs_liked(!mComicsBeen.get(i).isIs_liked());
+//                点赞动画
+                Animators.doLikeAnimator(hotViewHolder.mImgLikeNumber, DailyAdapter.this);
             }
         });
     }
@@ -189,6 +172,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.HotViewHolde
 
         }
     }
+
 
     public interface HotAdapterEvent {
         void event();
