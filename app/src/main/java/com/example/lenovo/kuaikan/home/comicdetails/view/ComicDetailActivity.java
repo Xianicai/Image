@@ -158,7 +158,7 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
             mTvLabel.setText(data.getCategory().get(0));
             mImgeCover.setImage(data.getCover_image_url());
             mTvComicTitle.setText(data.getComics().get(0).getTitle());
-            mComicId = data.getComics().get(0).getId()+"";
+            mComicId = data.getComics().get(0).getId() + "";
         }
 
     }
@@ -176,10 +176,10 @@ public class ComicDetailActivity extends BaseActivity implements ImpComicDatailV
                 LoginActivity.toLogin(this);
                 break;
             case R.id.tv_comic_title:
-                ReadActivity.toRead(this,mComicId);
+                ReadActivity.toRead(this, mComicId);
                 break;
             case R.id.tv_read:
-                ReadActivity.toRead(this,mComicId);
+                ReadActivity.toRead(this, mComicId);
                 break;
         }
     }

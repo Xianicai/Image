@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.example.lenovo.kuaikan.utils.ToastUtil;
 
+import org.xutils.ex.HttpException;
+
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import retrofit2.HttpException;
 
 /**
  * Created by Zhanglibin on 2017/4/24.
@@ -16,9 +17,6 @@ import retrofit2.HttpException;
 public abstract class HttpResultSubscriber<T> implements Observer<HttpResult<T>> {
     private static final String TAG = "Retrofit";
 
-    public HttpResultSubscriber() {
-        super();
-    }
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
@@ -27,12 +25,12 @@ public abstract class HttpResultSubscriber<T> implements Observer<HttpResult<T>>
 
     @Override
     public void onNext(@NonNull HttpResult<T> tHttpResult) {
-        if (tHttpResult.code == 200) {
+        if (tHttpResult.getCode() == 200) {
             Log.d(TAG, "onSuccess() called with: " + "s = [" + tHttpResult + "]");
-            Success(tHttpResult.data);
+            Success(tHttpResult.getData());
         } else {
-            Error(new Throwable("error=" + tHttpResult.code));
-            ToastUtil.showMessage(tHttpResult.message);
+            Error(new Throwable("error=" + tHttpResult.getCode()));
+            ToastUtil.showMessage(tHttpResult.getMessage());
         }
     }
 
@@ -47,26 +45,9 @@ public abstract class HttpResultSubscriber<T> implements Observer<HttpResult<T>>
 
     @Override
     public void onComplete() {
-        Completed()
+        Completed();
     }
 
-    //    public void onError(Throwable e) {
-//        e.printStackTrace();
-//        if (e instanceof HttpException) {
-//            Log.d(TAG, "onError() called with: " + "throwable = [" + e + "], b = [" + e.getMessage() + "]");
-//        }
-//        Error(e);
-//    }
-
-    //    public void onNext(HttpResult<T> tHttpResult) {
-//        if (tHttpResult.code == 200) {
-//            Log.d(TAG, "onSuccess() called with: " + "s = [" + tHttpResult + "]");
-//            Success(tHttpResult.data);
-//        } else {
-//            Error(new Throwable("error=" + tHttpResult.code));
-//            ToastUtil.showMessage(tHttpResult.message);
-//        }
-//    }
     public abstract void Success(T t);
 
     public abstract void Error(Throwable e);
