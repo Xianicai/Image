@@ -34,12 +34,12 @@
         <!-- 测试的EgActivity -->
         <activity android:name=".base.EgActivity">
 
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
 
 
-             <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-             <!--</intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".home.comicread.view.ReadActivity">
         </activity>
@@ -56,6 +56,8 @@
         <activity android:name=".utils.js.OutWebActivity">
         </activity>
         <activity android:name=".community.topicdetail.view.TopicDetailActivity">
+        </activity>
+        <activity android:name=".base.test.TestActivity">
         </activity>
     </application>
 
