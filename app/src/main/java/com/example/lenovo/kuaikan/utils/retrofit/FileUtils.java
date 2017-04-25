@@ -231,23 +231,7 @@ public class FileUtils {
         return cacheDir;
     }
 
-    /**
-     * 得到皮肤目录
-     *
-     * @param context
-     * @return
-     */
-    public static File getSkinDir(Context context) {
-        File skinDir = new File(getCacheDir(context), "skin");
-        if (skinDir.exists()) {
-            skinDir.mkdirs();
-        }
-        return skinDir;
-    }
 
-    public static String getSkinDirPath(Context context) {
-        return getSkinDir(context).getAbsolutePath();
-    }
 
     public static String getSaveImagePath(Context context) {
 
