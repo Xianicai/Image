@@ -16,6 +16,7 @@ import com.example.lenovo.kuaikan.utils.retrofit.HttpResult;
 import com.example.lenovo.kuaikan.utils.retrofit.HttpResultSubscriber;
 import com.example.lenovo.kuaikan.utils.retrofit.RxSchedulers;
 import com.example.lenovo.kuaikan.utils.retrofit.ServiceFactory;
+import com.example.lenovo.kuaikan.widget.SwitchView;
 
 import java.util.Locale;
 
@@ -29,6 +30,12 @@ public class TestActivity extends AppCompatActivity {
     Button mBtn;
     @BindView(R.id.tv_con)
     TextView mTvCon;
+    @BindView(R.id.btn_zh)
+    Button mBtnZh;
+    @BindView(R.id.btn_en)
+    Button mBtnEn;
+    @BindView(R.id.switchView)
+    SwitchView mSwitchView;
     private LanguageSettingUtil languageSetting;
 
     @Override
@@ -38,6 +45,17 @@ public class TestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         LanguageSettingUtil.init(this);// 初始化
         languageSetting = LanguageSettingUtil.get();// 检查是否已经初始化
+        mSwitchView.setOnTabClickListener(new SwitchView.OnTabClickListener() {
+            @Override
+            public void onLeftClicked() {
+
+            }
+
+            @Override
+            public void onRightClicked() {
+
+            }
+        });
     }
 
 

@@ -33,12 +33,12 @@ import java.util.List;
 
 public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.TopicDetailVH> {
     Context mContext;
-    List<CommentBean.DataBean.CommentsBean> mComments;
+    List<CommentBean.CommentsBean> mComments;
     BeanFeeds.DataBean.FeedsBean feedsBean;
 
-    public TopicDetailAdapter(Context context, List<CommentBean.DataBean.CommentsBean> comments, BeanFeeds.DataBean.FeedsBean feedsBean) {
+    public TopicDetailAdapter(Context context, List<CommentBean.CommentsBean> mComments, BeanFeeds.DataBean.FeedsBean feedsBean) {
         mContext = context;
-        mComments = comments;
+        this.mComments = mComments;
         this.feedsBean = feedsBean;
     }
 

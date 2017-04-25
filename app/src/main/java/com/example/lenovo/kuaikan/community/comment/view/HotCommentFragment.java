@@ -27,7 +27,7 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
     @BindView(R.id.hot_comment)
     XRecyclerview mHotCommentRecyclerview;
     private CommentPresenter mPresenter;
-    private List<CommentBean.DataBean.CommentsBean> mComments;
+    private List<CommentBean.CommentsBean> mComments;
     private CommentHotAdapter mCommentAdapter;
     private int firstId;
     private boolean mRefresh;
@@ -86,7 +86,7 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
                     if (mCommentType == 1) {
                         //此处俩个页面是俩中分页方法 （最新评论是每次拿上一次请求的最后一条数据的id）（最热评论是每次+20）
                         if (StringUtil.equals("", type)) {
-                            firstId = mComments.get(mComments.size() - 1).getId();
+                            firstId = (int) mComments.get(mComments.size() - 1).getId();
                         } else {
                             firstId += 20;
                         }
@@ -94,7 +94,7 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
                     } else {
                         //此处俩个页面是俩中分页方法 （最新评论是每次拿上一次请求的最后一条数据的id）（最热评论是每次+20）
                         if (StringUtil.equals("time", type)) {
-                            firstId = mComments.get(mComments.size() - 1).getId();
+                            firstId = (int) mComments.get(mComments.size() - 1).getId();
                         } else {
                             firstId += 20;
                         }
@@ -141,8 +141,8 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
             if (mLoadMore) {
                 mHotCommentRecyclerview.loadMoreFinish();
             }
-            mPageSize = data.getData().getComments().size();
-            mComments.addAll(data.getData().getComments());
+            mPageSize = data.getComments().size();
+            mComments.addAll(data.getComments());
             mCommentAdapter.notifyDataSetChanged();
         }
     }
@@ -157,8 +157,8 @@ public class HotCommentFragment extends BaseFragment implements ICommentView {
             if (mLoadMore) {
                 mHotCommentRecyclerview.loadMoreFinish();
             }
-            mPageSize = data.getData().getComments().size();
-            mComments.addAll(data.getData().getComments());
+            mPageSize = data.getComments().size();
+            mComments.addAll(data.getComments());
             mCommentAdapter.notifyDataSetChanged();
         }
     }

@@ -22,10 +22,10 @@ import java.util.List;
  */
 
 public class CommentHotAdapter extends RecyclerView.Adapter<CommentHotAdapter.CommenterViewHolder> {
-    List<CommentBean.DataBean.CommentsBean> mComments;
+    List<CommentBean.CommentsBean> mComments;
 
-    public CommentHotAdapter(List<CommentBean.DataBean.CommentsBean> comments, Context context) {
-        mComments = comments;
+    public CommentHotAdapter(List<CommentBean.CommentsBean> mComments, Context context) {
+        this.mComments = mComments;
         mContext = context;
     }
 

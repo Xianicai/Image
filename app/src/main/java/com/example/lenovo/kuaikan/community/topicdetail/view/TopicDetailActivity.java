@@ -30,7 +30,7 @@ public class TopicDetailActivity extends BaseActivity implements ImpTopDetailVie
     RecyclerView mRecyclerview;
     @BindView(R.id.tv_comment_num)
     TextView mTvCommentNum;
-    private List<CommentBean.DataBean.CommentsBean> mComments;
+    private List<CommentBean.CommentsBean> mComments;
     private TopicDetailAdapter mAdapter;
     private BeanFeeds.DataBean.FeedsBean mFeedsBean;
 
@@ -83,7 +83,7 @@ public class TopicDetailActivity extends BaseActivity implements ImpTopDetailVie
     @Override
     public void getCommentDataSuccess(CommentBean bean) {
         if (bean != null) {
-            mComments.addAll(bean.getData().getComments());
+            mComments.addAll(bean.getComments());
             mAdapter.notifyDataSetChanged();
         }
     }

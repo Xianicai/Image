@@ -6,6 +6,8 @@
         <attr name="tvRight" format="string" />
         <attr name="selectLeft" format="boolean" />
         <attr name="selectRight" format="boolean" />
+        <attr name="bgRight" format="color" />
+        <attr name="bgLeft" format="color" />
     </declare-styleable>
     <!--TabAcionBar-->
     <declare-styleable name="TabAcionBar">
