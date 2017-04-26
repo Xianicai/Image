@@ -17,7 +17,6 @@ import com.example.lenovo.kuaikan.community.BeanFeeds;
 import com.example.lenovo.kuaikan.community.BrowseImageActivity;
 import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
-import com.example.lenovo.kuaikan.utils.Animators;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.StringUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
@@ -33,12 +32,12 @@ import java.util.List;
 
 public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.TopicDetailVH> {
     Context mContext;
-    List<CommentBean.CommentsBean> mComments;
+    List<CommentBean.DataBean.CommentsBean> mComments;
     BeanFeeds.DataBean.FeedsBean feedsBean;
 
-    public TopicDetailAdapter(Context context, List<CommentBean.CommentsBean> mComments, BeanFeeds.DataBean.FeedsBean feedsBean) {
+    public TopicDetailAdapter(Context context, List<CommentBean.DataBean.CommentsBean> comments, BeanFeeds.DataBean.FeedsBean feedsBean) {
         mContext = context;
-        this.mComments = mComments;
+        mComments = comments;
         this.feedsBean = feedsBean;
     }
 
@@ -70,7 +69,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final TopicDetailVH holder, final int position) {
+    public void onBindViewHolder(TopicDetailVH holder, int position) {
         if (position == 0) {
             holder.nickName.setText(feedsBean.getUser().getNickname());
             holder.mImgeTopicAvatar.setRounImage(feedsBean.getUser().getAvatar_url());
@@ -99,21 +98,6 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
                     LoginActivity.toLogin(mContext);
                 }
             });
-            holder.mImgLikeNumber.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (feedsBean.isIs_liked()) {
-                        holder.mImgLikeNumber.setImageResource(R.mipmap.ic_common_praise_normal);
-                        feedsBean.setLikes_count(feedsBean.getLikes_count() - 1);
-                    } else {
-                        holder.mImgLikeNumber.setImageResource(R.mipmap.ic_common_praise_highlighted_like_pressed);
-                        feedsBean.setLikes_count(feedsBean.getLikes_count() + 1);
-                    }
-                    feedsBean.setIs_liked(!feedsBean.isIs_liked());
-//                点赞动画
-                    Animators.doLikeAnimator(holder.mImgLikeNumber, TopicDetailAdapter.this);
-                }
-            });
         } else if (position == mComments.size() + 1) {
             return;
         } else {
@@ -124,21 +108,6 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             holder.mTvCreatTime.setText(date);
             holder.mTvCreatDetails.setText(mComments.get(position - 1).getContent());
             holder.mTvLikeNum.setText(mComments.get(position - 1).getLikes_count() + "");
-            holder.mImageCommentLike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mComments.get(position - 1).isIs_liked()) {
-                        holder.mImageCommentLike.setImageResource(R.mipmap.ic_common_praise_normal);
-                        mComments.get(position - 1).setLikes_count(mComments.get(position - 1).getLikes_count() - 1);
-                    } else {
-                        holder.mImageCommentLike.setImageResource(R.mipmap.ic_common_praise_highlighted_like_pressed);
-                        mComments.get(position - 1).setLikes_count(mComments.get(position - 1).getLikes_count() + 1);
-                    }
-                    mComments.get(position - 1).setIs_liked(!mComments.get(position - 1).isIs_liked());
-//                点赞动画
-                    Animators.doLikeAnimator(holder.mImageCommentLike, TopicDetailAdapter.this);
-                }
-            });
         }
 
     }
@@ -165,8 +134,6 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
         private final ImageView mImgCommentNumber;
         private final LinearLayout mLayoutComment;
         private final ImageView mImageAttention;
-        private final ImageView mImgLikeNumber;
-        private final ImageView mImageCommentLike;
 
         public TopicDetailVH(View itemView) {
             super(itemView);
@@ -175,7 +142,6 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             mTvCreatTime = (TextView) itemView.findViewById(R.id.tv_creat_time);
             mTvCreatDetails = (TextView) itemView.findViewById(R.id.tv_creat_details);
             mTvLikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
-            mImageCommentLike = (ImageView) itemView.findViewById(R.id.image_comment_like);
             //topView
             nickName = (TextView) itemView.findViewById(R.id.tv_nickName);
             mImgeTopicAvatar = (GlideImageView) itemView.findViewById(R.id.imge_topic_avatar);
@@ -187,7 +153,6 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
             mImgCommentNumber = (ImageView) itemView.findViewById(R.id.img_commentNumber);
             mLayoutComment = (LinearLayout) itemView.findViewById(R.id.layout_comment);
             mImageAttention = (ImageView) itemView.findViewById(R.id.image_attention);
-            mImgLikeNumber = (ImageView) itemView.findViewById(R.id.img_likeNumber);
         }
     }
 
