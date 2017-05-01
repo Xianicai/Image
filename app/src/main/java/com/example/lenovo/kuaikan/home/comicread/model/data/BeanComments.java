@@ -74,7 +74,7 @@ public class BeanComments {
             private int comment_type;
             private int target_type;
             private int created_at;
-            private int id;
+            private String id;
             private UserBean user;
             private String content;
             private int replied_user_id;
@@ -128,11 +128,11 @@ public class BeanComments {
                 this.created_at = created_at;
             }
 
-            public int getId() {
+            public String getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 

@@ -94,7 +94,7 @@ public class CommentBean {
 
             private String replied_comment_id;
             private int likes_count;
-            private int comic_id;
+            private String comic_id;
             private int comment_type;
             private int target_type;
             private int created_at;
@@ -120,11 +120,11 @@ public class CommentBean {
                 this.likes_count = likes_count;
             }
 
-            public int getComic_id() {
+            public String getComic_id() {
                 return comic_id;
             }
 
-            public void setComic_id(int comic_id) {
+            public void setComic_id(String comic_id) {
                 this.comic_id = comic_id;
             }
 

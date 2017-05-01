@@ -1,62 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.lenovo.kuaikan.base.test.TestActivity">
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开始请求"/>
-
-    <Button
-        android:id="@+id/btn_zh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="中文"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/btn_en"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="英语"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_con"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="150dp"
-        android:text="@string/dream"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <com.example.lenovo.kuaikan.widget.SwitchView
-        android:id="@+id/switchView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tvLeft="小米"
-        app:tvRight="大米"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="180dp"
-        android:text="@string/dream"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:selectLeft="false"
-        app:selectRight="true"
-        app:bgLeft="@color/commentright"
-        app:bgRight="@color/blue"/>
-</android.support.constraint.ConstraintLayout>
+        android:id="@+id/tv_left"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="top|left"
+        android:text="王二狗"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/brown"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="top|right"
+        app:layout_behavior="com.example.lenovo.kuaikan.base.test.CustomBehavior"
+        android:text="老王"/>
+
+</android.support.design.widget.CoordinatorLayout>

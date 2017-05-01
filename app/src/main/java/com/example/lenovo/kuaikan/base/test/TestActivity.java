@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
@@ -16,7 +15,6 @@ import com.example.lenovo.kuaikan.utils.retrofit.HttpResult;
 import com.example.lenovo.kuaikan.utils.retrofit.HttpResultSubscriber;
 import com.example.lenovo.kuaikan.utils.retrofit.RxSchedulers;
 import com.example.lenovo.kuaikan.utils.retrofit.ServiceFactory;
-import com.example.lenovo.kuaikan.widget.SwitchView;
 
 import java.util.Locale;
 
@@ -26,16 +24,9 @@ import butterknife.OnClick;
 
 public class TestActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn)
-    Button mBtn;
-    @BindView(R.id.tv_con)
-    TextView mTvCon;
-    @BindView(R.id.btn_zh)
-    Button mBtnZh;
-    @BindView(R.id.btn_en)
-    Button mBtnEn;
-    @BindView(R.id.switchView)
-    SwitchView mSwitchView;
+
+    @BindView(R.id.tv_left)
+    TextView mTvLeft;
     private LanguageSettingUtil languageSetting;
 
     @Override
@@ -45,17 +36,7 @@ public class TestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         LanguageSettingUtil.init(this);// 初始化
         languageSetting = LanguageSettingUtil.get();// 检查是否已经初始化
-        mSwitchView.setOnTabClickListener(new SwitchView.OnTabClickListener() {
-            @Override
-            public void onLeftClicked() {
 
-            }
-
-            @Override
-            public void onRightClicked() {
-
-            }
-        });
     }
 
 
@@ -130,20 +111,8 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btn, R.id.btn_zh, R.id.btn_en})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn:
-                getServerData();
-                break;
-            case R.id.btn_zh:
-                switchLanguage("zh_simple");
-                break;
-            case R.id.btn_en:
-                languageSetting.saveLanguage("en");// 设置为"en"语言
-                LanguageSettingUtil.get().refreshLanguage();// 刷新
-                mTvCon.setText(R.string.dream);
-                break;
-        }
+    @OnClick(R.id.tv_left)
+    public void onViewClicked() {
+        ViewCompat.offsetTopAndBottom(mTvLeft,5);
     }
 }
