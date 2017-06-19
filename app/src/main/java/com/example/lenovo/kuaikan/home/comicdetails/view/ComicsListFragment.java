@@ -38,7 +38,7 @@ public class ComicsListFragment extends BaseFragment {
 //                return false;
 //            }
 //        };
-        mComicListRecyclerview.setNestedScrollingEnabled(false);
+//        mComicListRecyclerview.setNestedScrollingEnabled(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mComicListRecyclerview.setLayoutManager(layoutManager);
         mComics = new ArrayList<>();

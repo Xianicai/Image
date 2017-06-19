@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentService;
 import com.example.lenovo.kuaikan.utils.retrofit.HttpResult;
 import com.example.lenovo.kuaikan.utils.retrofit.HttpResultSubscriber;
 import com.example.lenovo.kuaikan.utils.retrofit.RxSchedulers;
@@ -41,16 +42,13 @@ public class TestActivity extends AppCompatActivity {
 
 
     private void getServerData() {
-        ServiceFactory.getInstance()
-                .createService(ComicService.class)
-                .getComicDetialData("1055")
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxSchedulers.<HttpResult<TestBean>>applySchedulers())
-                .subscribe(new HttpResultSubscriber<TestBean>() {
+        ServiceFactory.getInstance().createService(CommentService.class)
+                .getCommentsData("119925681408208896","time","0")
+                .compose(RxSchedulers.<HttpResult<CommentBean>>applySchedulers())
+                .subscribe(new HttpResultSubscriber<CommentBean>() {
                     @Override
-                    public void Success(TestBean detailBean) {
-                        Log.d("detailBean", detailBean.toString());
+                    public void Success(CommentBean testBean) {
+
                     }
 
                     @Override

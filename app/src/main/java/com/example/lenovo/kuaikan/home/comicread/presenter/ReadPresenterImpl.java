@@ -40,7 +40,7 @@ public class ReadPresenterImpl extends BasePresenterImpl<IReadView> implements R
             @Override
             public void execute(BeanComments beanComments) {
                 if (beanComments != null) {
-
+                    getView().getCommentDataSuccess(beanComments);
                 }
             }
         }, comicsId);

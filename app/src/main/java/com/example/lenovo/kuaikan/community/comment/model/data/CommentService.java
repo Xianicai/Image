@@ -13,5 +13,6 @@ import retrofit2.http.Query;
 
 public interface CommentService {
     @GET("http://api.kuaikanmanhua.com/v1/comments/feed/{feedId}/order/{type}?offset={firstId}&limit=20")
-    Observable<HttpResult<CommentBean>> getCommentsData(@Path("feedId" ) String feedId,@Path("type")String type,@Query("firstId") String firstId);
+    Observable<HttpResult<CommentBean>> getCommentsData(@Path("feedId") String feedId, @Path("type") String type, @Query("firstId") String firstId);
+
 }

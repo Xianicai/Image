@@ -28,7 +28,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<BeanRead.DataBean.ImageInfosBean> imageInfos;
     private Context mContext;
     private String mComicsId;
-    private CommentAdapter mCommentAdapter;
+    public CommentAdapter mCommentAdapter;
     List<BeanComments.DataBean.CommentsBean> mComments;
     private XRecyclerview mCommentRecyclerview;
 
@@ -98,11 +98,14 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             };
             mCommentRecyclerview.setLayoutManager(mCommentlayoutManager);
-            mComments = new ArrayList<>();
+            if (mComments == null) {
+               mComments = new ArrayList<>();
+            }
             mCommentAdapter = new CommentAdapter(mComments, mContext);
-            mCommentRecyclerview.setAdapter(mCommentAdapter);
             mCommentAdapter.setComicId(mComicsId);
-            getData();
+            mCommentRecyclerview.setAdapter(mCommentAdapter);
+
+//            getData();
 //            评论列表的滑动监听
             RecyclerView reclerView = mCommentRecyclerview.getReclerView();
             reclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -185,5 +188,9 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             mCommentRecyclerview = (XRecyclerview) itemView.findViewById(R.id.comment_recyclerview);
         }
+    }
+
+    public void setComments(List<BeanComments.DataBean.CommentsBean> mComments ){
+        this.mComments = mComments;
     }
 }

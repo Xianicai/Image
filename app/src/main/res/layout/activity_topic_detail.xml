@@ -38,7 +38,7 @@
         android:id="@+id/layout_comment"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/commentright"
+        android:background="#f5f4f4"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

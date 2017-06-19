@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
+import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenterImpl;
 import com.example.lenovo.kuaikan.home.comicread.view.adapter.ReadAdapter;
@@ -48,6 +49,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
     private String mComicsId;
     private List<BeanRead.DataBean.ImageInfosBean> mImageInfos;
     private String comicId;
+    private List<BeanComments.DataBean.CommentsBean> mComments;
 
     @Override
     public int getlayoutId() {
@@ -66,6 +68,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
         mReadPresenter = new ReadPresenterImpl();
         mReadPresenter.bindView(this);
         mReadPresenter.getSeverData(mComicsId);
+        mReadPresenter.getCommentData(mComicsId);
         mReadRecyclerview.setLayoutManager(linearLayoutManager);
         mReadActionBar.setOnReadActionBarListener(new ReadActionBar.OnReadActionBarListener() {
             @Override
@@ -115,10 +118,18 @@ public class ReadActivity extends BaseActivity implements IReadView {
     }
 
     @Override
+    public void getCommentDataSuccess(BeanComments beanComments) {
+        mReadAdapter.setComments(beanComments.getData().getComments());
+        mReadAdapter.notifyDataSetChanged();
+        mReadAdapter.mCommentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
-    public static void toRead(Context context,String comicsId){
+
+    public static void toRead(Context context, String comicsId) {
         Intent intent = new Intent(context, ReadActivity.class);
         intent.putExtra("comicsId", comicsId);
         context.startActivity(intent);
@@ -136,4 +147,10 @@ public class ReadActivity extends BaseActivity implements IReadView {
                 break;
         }
     }
+
+
+    @OnClick(R.id.ed_comment)
+    public void onViewClicked() {
+    }
+
 }

@@ -17,7 +17,7 @@ import com.example.lenovo.kuaikan.widget.TabAcionBar;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CommentActivity extends BaseActivity {
+public class CommentActivity extends BaseActivity  {
 
     @BindView(R.id.tabactionbar)
     TabAcionBar mTabactionbar;
