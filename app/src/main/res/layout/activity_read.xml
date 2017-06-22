@@ -47,27 +47,25 @@
 
             <EditText
                 android:id="@+id/ed_comment"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_cemment_buttome"
                 android:gravity="center_vertical"
+                android:hint="         来发弹幕一起嗨~"
                 android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
                 android:paddingTop="5dp"
-                android:hint="      发表评论"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/image_comment"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginLeft="15dp"
                 android:src="@mipmap/ic_commenting"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/ed_comment"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
@@ -75,13 +73,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="45dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="45dp"
-                android:src="@mipmap/ic_home_comment_normal"
+                android:src="@mipmap/ic_comic_share_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/image_share"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/ed_comment"
-                android:layout_marginLeft="15dp"/>
+                app:layout_constraintRight_toLeftOf="@+id/image_share"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:id="@+id/image_share"
@@ -89,11 +87,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="35dp"
                 android:layout_marginRight="35dp"
-                android:src="@mipmap/bg_home_share_normal"
+                android:src="@mipmap/live_screen_barrage_on_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
-
+            <!--显示评论的红点-->
             <TextView
                 android:id="@+id/tv_comment_num"
                 android:layout_width="wrap_content"
@@ -107,11 +105,13 @@
                 android:paddingRight="5dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="@+id/image_comment"
                 app:layout_constraintTop_toTopOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.design.widget.CoordinatorLayout>
+
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
         android:id="@+id/progressBar"
         android:layout_width="40dp"
@@ -125,4 +125,17 @@
         app:mlpb_progress_stoke_width="3dp"
         app:mlpb_progress_text_visibility="invisible"
         />
+
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmaku_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"/>
 </android.support.constraint.ConstraintLayout>
