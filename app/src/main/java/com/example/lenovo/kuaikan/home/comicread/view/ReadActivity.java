@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
-import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenterImpl;
@@ -44,20 +44,20 @@ public class ReadActivity extends BaseActivity implements IReadView {
     ReadActionBar mReadActionBar;
     @BindView(R.id.read_recyclerview)
     RecyclerView mReadRecyclerview;
-    @BindView(R.id.image_comment)
-    ImageView mImageComment;
-    @BindView(R.id.image_share)
-    ImageView mImageShare;
     @BindView(R.id.tv_comment_num)
     TextView mTvCommentNum;
     @BindView(R.id.layout_comment)
     ConstraintLayout mLayoutComment;
     @BindView(R.id.progressBar)
     CircleProgressBar mProgressBar;
-    @BindView(R.id.ed_comment)
-    EditText mEdComment;
     @BindView(R.id.danmaku_view)
     DanmakuView mDanmakuView;
+    @BindView(R.id.ed_danmaku)
+    EditText mEdDanmaku;
+    @BindView(R.id.image_send_danmaku)
+    ImageView mImageSendDanmaku;
+    @BindView(R.id.image_danmaku_switch)
+    ImageView mImageDanmakuSwitch;
     private ReadPresenterImpl mReadPresenter;
     private List<String> mImages;
     private ReadAdapter mReadAdapter;
@@ -189,31 +189,36 @@ public class ReadActivity extends BaseActivity implements IReadView {
         context.startActivity(intent);
     }
 
-    @OnClick({R.id.image_comment, R.id.image_share, R.id.layout_comment})
+    @OnClick({R.id.image_danmaku_switch, R.id.image_send_danmaku, R.id.ed_danmaku})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.image_comment:
-                CommentActivity.toComment(this, comicId, 1);
+            case R.id.ed_danmaku:
                 break;
-            case R.id.image_share:
+            case R.id.image_danmaku_switch:
+                if (mDanmakuView.getVisibility() == View.GONE) {
+                    mDanmakuView.setVisibility(View.VISIBLE);
+                    mImageDanmakuSwitch.setImageResource(R.mipmap.live_screen_barrage_on_normal);
+                } else {
+                    mDanmakuView.setVisibility(View.GONE);
+                    mImageDanmakuSwitch.setImageResource(R.mipmap.live_screen_barrage_off_normal);
+                }
                 break;
-            case R.id.layout_comment:
+            case R.id.image_send_danmaku:
+                String content = mEdDanmaku.getText().toString();
+                if (!TextUtils.isEmpty(content)) {
+                    addDanmaku(content, true);
+                    mEdDanmaku.setText("");
+                }
                 break;
         }
     }
 
 
-    @OnClick(R.id.ed_comment)
-    public void onViewClicked() {
-    }
-
-
     /**
      * 向弹幕View中添加一条弹幕
-     * @param content
-     *          弹幕的具体内容
-     * @param  withBorder
-     *          弹幕是否有边框
+     *
+     * @param content    弹幕的具体内容
+     * @param withBorder 弹幕是否有边框
      */
     private void addDanmaku(String content, boolean withBorder) {
         BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
@@ -235,7 +240,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(showDanmaku) {
+                while (showDanmaku) {
                     int time = new Random().nextInt(300);
                     String content = "" + time + time;
                     addDanmaku(content, false);
@@ -255,5 +260,31 @@ public class ReadActivity extends BaseActivity implements IReadView {
     public int sp2px(float spValue) {
         final float fontScale = getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mDanmakuView != null && mDanmakuView.isPrepared()) {
+            mDanmakuView.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mDanmakuView != null && mDanmakuView.isPrepared() && mDanmakuView.isPaused()) {
+            mDanmakuView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        showDanmaku = false;
+        if (mDanmakuView != null) {
+            mDanmakuView.release();
+            mDanmakuView = null;
+        }
     }
 }

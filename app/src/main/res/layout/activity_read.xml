@@ -46,47 +46,51 @@
             app:layout_behavior="com.example.lenovo.kuaikan.widget.FooterBehavior">
 
             <EditText
-                android:id="@+id/ed_comment"
-                android:layout_width="wrap_content"
+                android:id="@+id/ed_danmaku"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_cemment_buttome"
                 android:gravity="center_vertical"
-                android:hint="         来发弹幕一起嗨~"
+                android:hint="    骚年来发弹幕一起嗨~"
+                android:singleLine="true"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/image_comment"
+                app:layout_constraintRight_toLeftOf="@+id/image_send_danmaku"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_commenting"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/ed_comment"
-                app:layout_constraintTop_toTopOf="parent"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:src="@mipmap/ic_commenting"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="@+id/ed_danmaku"-->
+                <!--app:layout_constraintTop_toTopOf="parent"/>-->
 
             <ImageView
-                android:id="@+id/image_comment"
+                android:id="@+id/image_send_danmaku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="45dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="45dp"
+                android:layout_marginRight="15dp"
                 android:src="@mipmap/ic_comic_share_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/ed_comment"
-                app:layout_constraintRight_toLeftOf="@+id/image_share"
+                app:layout_constraintRight_toLeftOf="@+id/image_danmaku_switch"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
-                android:id="@+id/image_share"
+                android:id="@+id/image_danmaku_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="35dp"
-                android:layout_marginRight="35dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
                 android:src="@mipmap/live_screen_barrage_on_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -106,7 +110,7 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="@+id/image_comment"
+                app:layout_constraintLeft_toLeftOf="@+id/image_danmaku_switch"
                 app:layout_constraintTop_toTopOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
