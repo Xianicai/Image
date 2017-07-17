@@ -44,23 +44,23 @@ public class HotFragment extends BaseFragment {
                         switch (position) {
                             case 0:
 //                                fragment = new MondayFragment();
-                                tabId = "1490371200";
+                                tabId = "1499702400";
                                 break;
                             case 1:
 //                                fragment = new TuesdayFragment();
-                                tabId = "1490457600";
+                                tabId = "1499788800";
                                 break;
                             case 2:
 //                                fragment = new ThursdayFragment();
-                                tabId = "1490544000";
+                                tabId = "1499875200";
                                 break;
                             case 3:
 //                                fragment = new WednesdayFragment();
-                                tabId = "1490630400";
+                                tabId = "1499961600";
                                 break;
                             case 4:
 //                                fragment = new FridayFragment();
-                                tabId = "1490716800";
+                                tabId = "1500048000";
                                 break;
                             case 5:
 //                                fragment = new SaturdayFragment();
