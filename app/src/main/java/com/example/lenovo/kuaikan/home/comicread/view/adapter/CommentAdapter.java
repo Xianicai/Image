@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.community.comment.view.CommentActivity;
-import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.utils.ListUtil;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
@@ -22,11 +22,12 @@ import java.util.List;
  */
 
 public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<BeanComments.DataBean.CommentsBean> mComments;
+    List<CommentBean.DataBean.CommentFloorsBean> mComments;
     Context mContext;
     private int mHeight;
-   private String comicId;
-    public CommentAdapter(List<BeanComments.DataBean.CommentsBean> mComments, Context context) {
+    private String comicId;
+
+    public CommentAdapter(List<CommentBean.DataBean.CommentFloorsBean> mComments, Context context) {
         this.mComments = mComments;
         mContext = context;
     }
@@ -35,7 +36,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemViewType(int position) {
         if (position == mComments.size()) {
             return -1;
-        }else {
+        } else {
             return 1;
         }
     }
@@ -55,22 +56,24 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof CommentViewHolder && ListUtil.isNotEmpty(mComments)) {
-            ((CommentViewHolder) holder).tvUseName.setText(mComments.get(position).getUser().getNickname());
-            ((CommentViewHolder) holder).mImageView.setRounImage(mComments.get(position).getUser().getAvatar_url());
-            //转化时间格式 MM-dd HH:mm
-            String date = DateUtil.formatLongToDates(mComments.get(position).getCreated_at() * 1000);
-            ((CommentViewHolder) holder).mTvCreatTime.setText(date);
-            ((CommentViewHolder) holder).mTvCreatDetails.setText(mComments.get(position).getContent());
-            ((CommentViewHolder) holder).mTvLikeNum.setText(mComments.get(position).getLikes_count() + "");
-            mHeight += ((CommentViewHolder) holder).mConstraintLayout.getLayoutParams().height;
-        } else if (holder instanceof CommentButtomHV) {
-            ((CommentButtomHV) holder).mLayoutItemBottom.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CommentActivity.toComment(mContext,comicId,1);
-                }
-            });
+        if (position < 10) {
+            if (holder instanceof CommentViewHolder && ListUtil.isNotEmpty(mComments)) {
+                ((CommentViewHolder) holder).tvUseName.setText(mComments.get(position).getRoot().getUser().getNickname());
+                ((CommentViewHolder) holder).mImageView.setRounImage(mComments.get(position).getRoot().getUser().getAvatar_url());
+                //转化时间格式 MM-dd HH:mm
+                String date = DateUtil.formatLongToDates(mComments.get(position).getRoot().getCreated_at() * 1000);
+                ((CommentViewHolder) holder).mTvCreatTime.setText(date);
+                ((CommentViewHolder) holder).mTvCreatDetails.setText(mComments.get(position).getRoot().getContent());
+                ((CommentViewHolder) holder).mTvLikeNum.setText(mComments.get(position).getRoot().getLikes_count() + "");
+                mHeight += ((CommentViewHolder) holder).mConstraintLayout.getLayoutParams().height;
+            } else if (holder instanceof CommentButtomHV) {
+                ((CommentButtomHV) holder).mLayoutItemBottom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        CommentActivity.toComment(mContext, comicId, 1);
+                    }
+                });
+            }
         }
 
 
@@ -112,9 +115,11 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mLayoutItemBottom = (ConstraintLayout) itemView.findViewById(R.id.layout_item_bottom);
         }
     }
-public void setComicId(String comicId ){
-    this.comicId = comicId;
-}
+
+    public void setComicId(String comicId) {
+        this.comicId = comicId;
+    }
+
     public int getItemAllHight() {
         return mHeight;
     }

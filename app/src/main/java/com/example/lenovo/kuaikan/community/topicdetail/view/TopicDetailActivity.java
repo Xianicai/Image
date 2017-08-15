@@ -32,7 +32,7 @@ public class TopicDetailActivity extends BaseActivity implements ImpTopDetailVie
     TextView mTvCommentNum;
     @BindView(R.id.layout_comment)
     ConstraintLayout mLayoutComment;
-    private List<CommentBean.DataBean.CommentsBean> mComments;
+    private List<CommentBean.DataBean.CommentFloorsBean> mComments;
     private TopicDetailAdapter mAdapter;
     private BeanFeeds.DataBean.FeedsBean mFeedsBean;
 
@@ -85,7 +85,7 @@ public class TopicDetailActivity extends BaseActivity implements ImpTopDetailVie
     @Override
     public void getCommentDataSuccess(CommentBean bean) {
         if (bean != null) {
-            mComments.addAll(bean.getData().getComments());
+            mComments.addAll(bean.getData().getComment_floors());
             mAdapter.notifyDataSetChanged();
         }
     }

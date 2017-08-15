@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lenovo.kuaikan.R;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.model.data.ReqComments;
@@ -29,7 +30,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private String mComicsId;
     public CommentAdapter mCommentAdapter;
-    List<BeanComments.DataBean.CommentsBean> mComments;
+    List<CommentBean.DataBean.CommentFloorsBean> mComments;
     private XRecyclerview mCommentRecyclerview;
 
     public ReadAdapter(List<String> mImages, Context context, List<BeanRead.DataBean.ImageInfosBean> imageInfos,
@@ -138,7 +139,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (req.code == 200) {
                     //初始化一个bean用保存本次请求下来的数据
                     BeanComments beanComments = req.getT();
-                    mComments.addAll(beanComments.getData().getComments());
+//                    mComments.addAll(beanComments.getData().getComments());
                     mCommentAdapter.notifyDataSetChanged();
                 }
             }
@@ -190,7 +191,7 @@ public class ReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void setComments(List<BeanComments.DataBean.CommentsBean> mComments ){
+    public void setComments(List<CommentBean.DataBean.CommentFloorsBean> mComments ){
         this.mComments = mComments;
     }
 }

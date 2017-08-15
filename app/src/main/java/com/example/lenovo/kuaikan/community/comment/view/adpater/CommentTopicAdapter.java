@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
-import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentTopicBean;
 import com.example.lenovo.kuaikan.utils.dateutil.DateUtil;
 import com.example.lenovo.kuaikan.widget.glide.GlideImageView;
 
@@ -20,11 +20,11 @@ import java.util.List;
  * Created by Zhanglibin on 2017/4/13.
  */
 
-public class CommentHotAdapter extends RecyclerView.Adapter<CommentHotAdapter.CommenterViewHolder> {
-    List<CommentBean.DataBean.CommentFloorsBean> mComments;
+public class CommentTopicAdapter extends RecyclerView.Adapter<CommentTopicAdapter.CommenterViewHolder> {
+    List<CommentTopicBean.DataBean.CommentFloorsBean> mComments;
 
-    public CommentHotAdapter(List<CommentBean.DataBean.CommentFloorsBean> comments, Context context) {
-        mComments = comments;
+    public CommentTopicAdapter(List<CommentTopicBean.DataBean.CommentFloorsBean> mComments, Context context) {
+        this.mComments = mComments;
         mContext = context;
     }
 

@@ -40,10 +40,12 @@ public class CommentPresenter extends BasePresenterImpl<ICommentView> {
             public void execute(CommentBean obj) {
                 if (obj != null) {
                     getView().cancelLoadingDialog();
-                    getView().getServerDataSuccess(obj);
+
+
                 }
             }
         });
+
 
     }
 }

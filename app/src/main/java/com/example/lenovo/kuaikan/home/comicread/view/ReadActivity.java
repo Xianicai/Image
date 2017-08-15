@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.example.lenovo.kuaikan.R;
 import com.example.lenovo.kuaikan.base.BaseActivity;
+import com.example.lenovo.kuaikan.base.ServerData;
+import com.example.lenovo.kuaikan.community.comment.model.data.CommentBean;
+import com.example.lenovo.kuaikan.community.comment.model.data.ReqComment;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanComments;
 import com.example.lenovo.kuaikan.home.comicread.model.data.BeanRead;
 import com.example.lenovo.kuaikan.home.comicread.presenter.ReadPresenterImpl;
@@ -94,8 +97,10 @@ public class ReadActivity extends BaseActivity implements IReadView {
         mReadPresenter = new ReadPresenterImpl();
         mReadPresenter.bindView(this);
         mReadPresenter.getSeverData(mComicsId);
-        mReadPresenter.getCommentData(mComicsId);
+//        mReadPresenter.getCommentData(mComicsId);
         mReadRecyclerview.setLayoutManager(linearLayoutManager);
+        // FIXME: 2017/8/15 
+
         mReadActionBar.setOnReadActionBarListener(new ReadActionBar.OnReadActionBarListener() {
             @Override
             public void setLeftClickListener() {
@@ -137,6 +142,14 @@ public class ReadActivity extends BaseActivity implements IReadView {
         mDanmakuView.prepare(parser, danmakuContext);
     }
 
+    private void getComicsCommentData(String data) {
+        ReqComment req = new ReqComment();
+        req.getNetData(data);
+        List<CommentBean.DataBean.CommentFloorsBean> comments = req.getT().getData().getComment_floors();
+        mReadAdapter.setComments(comments);
+        mReadAdapter.notifyDataSetChanged();
+        mReadAdapter.mCommentAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public void showMsg(String str) {
@@ -162,6 +175,9 @@ public class ReadActivity extends BaseActivity implements IReadView {
             mImageInfos.addAll(data.getData().getImage_infos());
             mImages.addAll(data.getData().getImages());
             mReadAdapter.notifyDataSetChanged();
+            // FIXME: 2017/8/15
+            getComicsCommentData(ServerData.COMMIC_COMMENT_HOT);
+
         }
 
     }
@@ -173,7 +189,7 @@ public class ReadActivity extends BaseActivity implements IReadView {
 
     @Override
     public void getCommentDataSuccess(BeanComments beanComments) {
-        mReadAdapter.setComments(beanComments.getData().getComments());
+//        mReadAdapter.setComments(beanComments.getData().getComments());
         mReadAdapter.notifyDataSetChanged();
         mReadAdapter.mCommentAdapter.notifyDataSetChanged();
     }

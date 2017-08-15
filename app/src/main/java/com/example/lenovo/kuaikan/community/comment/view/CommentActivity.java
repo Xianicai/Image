@@ -58,15 +58,19 @@ public class CommentActivity extends BaseActivity  {
                     public Fragment getItem(int position) {
                         if (commentType == 1) {
                             if (position == 0) {
-                                return HotCommentFragment.newInstantac("", feedId, commentType);
+//                                return HotCommentFragment.newInstantac("", feedId, commentType);
+                                return HotCommentFragment.newInstantac("1", feedId, commentType);
                             } else {
-                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+//                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+                                return HotCommentFragment.newInstantac("2", feedId, commentType);
                             }
                         } else {
                             if (position == 0) {
-                                return HotCommentFragment.newInstantac("time", feedId, commentType);
+//                                return HotCommentFragment.newInstantac("time", feedId, commentType);
+                                return HotCommentFragment.newInstantac("3", feedId, commentType);
                             } else {
-                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+//                                return HotCommentFragment.newInstantac("score", feedId, commentType);
+                                return HotCommentFragment.newInstantac("4", feedId, commentType);
                             }
                         }
                     }

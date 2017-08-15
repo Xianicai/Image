@@ -32,10 +32,10 @@ import java.util.List;
 
 public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.TopicDetailVH> {
     Context mContext;
-    List<CommentBean.DataBean.CommentsBean> mComments;
+    List<CommentBean.DataBean.CommentFloorsBean> mComments;
     BeanFeeds.DataBean.FeedsBean feedsBean;
 
-    public TopicDetailAdapter(Context context, List<CommentBean.DataBean.CommentsBean> comments, BeanFeeds.DataBean.FeedsBean feedsBean) {
+    public TopicDetailAdapter(Context context, List<CommentBean.DataBean.CommentFloorsBean> comments, BeanFeeds.DataBean.FeedsBean feedsBean) {
         mContext = context;
         mComments = comments;
         this.feedsBean = feedsBean;
@@ -101,13 +101,13 @@ public class TopicDetailAdapter extends RecyclerView.Adapter<TopicDetailAdapter.
         } else if (position == mComments.size() + 1) {
             return;
         } else {
-            holder.tvUseName.setText(mComments.get(position - 1).getUser().getNickname());
-            holder.mImageView.setRounImage(mComments.get(position - 1).getUser().getAvatar_url());
+            holder.tvUseName.setText(mComments.get(position - 1).getRoot().getUser().getNickname());
+            holder.mImageView.setRounImage(mComments.get(position - 1).getRoot().getUser().getAvatar_url());
             //转化时间格式 MM-dd HH:mm
-            String date = DateUtil.formatLongToDates(mComments.get(position - 1).getCreated_at() * 1000);
+            String date = DateUtil.formatLongToDates(mComments.get(position - 1).getRoot().getCreated_at() * 1000);
             holder.mTvCreatTime.setText(date);
-            holder.mTvCreatDetails.setText(mComments.get(position - 1).getContent());
-            holder.mTvLikeNum.setText(mComments.get(position - 1).getLikes_count() + "");
+            holder.mTvCreatDetails.setText(mComments.get(position - 1).getRoot().getContent());
+            holder.mTvLikeNum.setText(mComments.get(position - 1).getRoot().getLikes_count() + "");
         }
 
     }
